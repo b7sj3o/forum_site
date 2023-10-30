@@ -1,0 +1,129 @@
+.advertisments{
+    max-height: 200px;
+    max-width: 60%;
+    margin-top: 20px;
+    margin-right: 40px;
+    overflow-y: scroll;
+ }
+.advert{
+     display: flex;
+     gap: 20px;
+     min-height: 50px;
+     &__kind{
+        background-color: yellow;
+        display: block;
+        height: 25px;
+        min-width: 120px;
+        border-radius: 10%;
+     }
+     &__link{
+        color: rgb(3, 23, 78);
+        font-weight: 700;
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease; 
+        &:hover{
+            color: rgb(99, 2, 145);
+        }
+     }
+}
+.first__advertisment{
+    min-height: 100px;
+    &-link{
+        color: rgb(3, 23, 78);
+        font-weight: 700;
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease; 
+        &:hover{
+            color: rgb(99, 2, 145);
+        }
+    }
+}
+.first__banner{
+    margin-top: 20px;
+    &-img{
+        display: block;
+        margin: 0 auto;
+    }
+}
+.blocks{
+    margin-top: 20px;
+}
+.block{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    &-title{
+        font-size: 20px;
+        color: rgb(3, 23, 78);
+        font-weight: 700;
+    }
+}
+.inner__block-photo{
+    width: 50px;
+}
+.block__section{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    &-img{
+        width: 50px;
+        margin-right: 10px;
+    }
+    &-title{
+        color: rgb(3, 23, 78);
+        font-weight: 700;
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease; 
+        &:hover{
+            color: rgb(99, 2, 145);
+        }
+    }
+    &-1inner{
+        display: flex;
+        align-items: center;
+    }
+    &-2inner{
+        display: flex;
+        align-items: center;
+    }
+    
+}
+.inner__block{
+    display: flex;
+    &-photo{
+        margin-right: 5px;
+    }
+    &-time{
+        margin-right: 10px;
+    }
+    &-name{
+        color: rgb(3, 23, 78);
+        font-weight: 700;
+    }
+    &-link{
+        color: rgb(3, 23, 78);
+        font-weight: 700;
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease; 
+        &:hover{
+            color: rgb(99, 2, 145);
+        }
+    }
+    
+}
+.inner__wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.block__wrapper{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.inner__themes,.inner__count{
+    margin-right: 25px;
+}
+.content__inner{
+    max-width: 80%;
+}

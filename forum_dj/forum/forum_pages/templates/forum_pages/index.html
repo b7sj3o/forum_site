@@ -1,11 +1,453 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>hello</h1>
-</body>
-</html>
+{% extends 'forum_pages/base.html' %}
+{% load sass_tags %}
+{% load static %}
+{% block style %}{% sass_src 'forum_pages/CSS/index.min.css' %}{% endblock %}
+
+{% block title %} Головна сторінка {% endblock %}
+<link rel="stylesheet" href="{% sass_src 'forum_pages/css/index.min.css' %}">
+
+{% block content %}
+
+<div class="first__advertisment">
+    {% for i in data %}
+    <div class="first__advertisment-title"><a href="#" class="first__advertisment-link">xcvbxcvbxcvbxcv</a></div> <!-- {{i.title}} -->
+    <div class="first__advertisment-text">cvbxbxcvbxcvb</div> <!--{{i.text}}-->
+    {% endfor %}
+    <div class="divider"></div>
+</div>
+
+<div class="first__banner">
+    {% for i in data %}
+    <a class="first__banner-link" href="#">
+        <img src="{% static 'forum_pages/img/only.jpg' %}" alt="#" class="first__banner-img">
+    </a>
+    {% endfor %}
+</div>
+<div class="divider"></div>
+<div class="content__inner">
+    <div class="advertisments">
+        {% for i in data %}
+            <ul class="advert">
+                <div class="advert__kind">{{i.kind}}</div> <!--тут треба зробити цикл який буде вибирати колір якого буде реклама -->
+                <li class="text"><a href="#" class="advert__link">{{ i.text }}</a></li>
+            </ul>
+        {% endfor %}
+    </div>
+    <div class="divider"></div>
+    <div class="blocks">
+        <div class="block">
+            <div class="block-title">OnlyFans - просування, моделі, заробіток</div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+            <div class="block-title">OnlyFans - просування, моделі, заробіток</div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+            <div class="block-title">OnlyFans - просування, моделі, заробіток</div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+            <div class="block-title">OnlyFans - просування, моделі, заробіток</div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+            <div class="block-title">OnlyFans - просування, моделі, заробіток</div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="block">
+            <div class="block-title">OnlyFans - просування, моделі, заробіток</div>
+            <div class="block__section">
+                <div class="block__section-1inner">
+                    <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="block__section-img">
+                    <a href="" class="block__section-title">bcxbxcbxcvb</a>
+                </div>
+                <div class="block__section-2inner">
+                    <div class="inner__themes">
+                        <div class="inner__themes-title">Теми</div>
+                        <div class="inner__themes-count">4353</div>
+                    </div>
+                    <div class="inner__count">
+                        <div class="inner__count-title">Повідомлення</div>
+                        <div class="inner__count-subtitle">3.9K</div>
+                    </div>
+                    <div class="inner__block">
+                        <img src="{% static 'forum_pages/img/chat.jpg' %}" alt="" class="inner__block-photo">
+                        <div class="inner__wrapper">
+                            <div class="inner__block-title"><a href="#" class="inner__block-link">xjkcvnxcjkvn</a></div>
+                            <div class="block__wrapper">
+                                <div class="inner__block-time">Пост зроблений:21:01</div>
+                                <div class="inner__block-name">Андрій</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
