@@ -1,4 +1,5 @@
 {% load static %}
+{% load sass_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Roboto:wght@300;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'forum_pages/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'forum_pages/css/base.css' %}">
+    <link rel="stylesheet" href="{% sass_src 'forum_pages/CSS/style.css' %}">
+    <link rel="stylesheet" href="{% sass_src 'forum_pages/CSS/base.css' %}">
 </head>
 <body>
     <header class="header__inner">
@@ -36,7 +37,6 @@
         </nav>
     </header>
 
-
     <div class="container">
         {% block content %} {% endblock %}
     </div>
@@ -44,7 +44,7 @@
 
     <footer class="footer__inner">
         <nav class="footer__menu">
-            <li class="footer__links"><a href="#" class="footer__link">Зворотній зв'язок</a></li>
+            <li class="footer__links"><a href="" class="footer__link">Зворотній зв'язок</a></li>
             <li class="footer__links"><a href="#" class="footer__link">Умови та правила</a></li>
             <li class="footer__links"><a href="#" class="footer__link">Политика конфіденційності</a></li>
             <li class="footer__links"><a href="#" class="footer__link">Допомога</a></li>
