@@ -1,8 +1,9 @@
 from django.shortcuts import render
-
+from .models import Advertisements
 
 def index(request):
-    return render(request, 'forum_pages/base.html')
+    data = Advertisements.objects.all()
+    return render(request, 'forum_pages/index.html', {'data': data})
 
-def sass_page_handler(request):
-    return render(request, 'forum_pages/base.html')
+# def sass_page_handler(request):
+#     return render(request, 'forum_pages/index.html')

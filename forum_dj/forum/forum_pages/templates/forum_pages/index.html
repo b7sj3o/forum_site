@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>hello</h1>
-</body>
-</html>
+{% extends 'forum_pages/base.html' %}
+{% load sass_tags %}
+{% block style %}{% sass_src 'forum_pages/CSS/index.css' %}{% endblock %}
+
+{% block title %} Головна сторінка {% endblock %}
+
+{% block content %}
+<!-- <div class="advertisments">
+    {% for i in data %}
+        <ul class="advert">
+            <li class="title">{{ i.title }}</li>
+            <li class="text">{{ i.text }}</li>
+        </ul>
+    {% endfor %}
+</div> -->
+{{ text }}
+{% endblock %}
