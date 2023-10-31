@@ -13,48 +13,43 @@
     <link rel="stylesheet" href="{% block style %}{% endblock %}">
 </head>
 <body>
-    <header class="header__inner">
-        <a href="#" class="header__logo">
-            <img src="{% static 'forum_pages/img/forum_logo.png' %}" alt="#" class="header__img">
-        </a>
-        <nav class="header__menu">
-            <ul class="header__menu">
-                <li class="header__link"><a href="#" class="header__link">Головна</a></li>
-                <li class="header__link"><a href="" class="header__link">Форум</a></li>
-                <li class="header__link"><a href="#" class="header__link">Що нового</a></li>
-                <li class="header__link"><a href="#" class="header__link">Статті</a></li>
-                <li class="header__link"><a href="#" class="header__link">Користувачі</a></li>
-                <li class="header__link"><a href="#" class="header__link">Vip status</a></li>
-            </ul>
-        </nav>
-        <nav class="header__reg">
-            <a href="#" class="header__block">
-                <span class="header__logIN">Вхід</span>
-            </a>
-            <a href="#" class="header__block">
-                <span href="#" class="header__signIn">Регістрація</span>
-            </a>
-        </nav>
+    <header class="header">
+        <div class="container">
+            <div class="header__logo">
+                <img src="{% static 'forum_pages/img/forum_logo.png'%}" alt="">
+            </div>
+            <nav class="header__links">
+                <a href="#">Теми</a>
+                <a href="#">Реклама</a>
+                <a href="#">Правила</a>
+            </nav>
+            <div class="header__auth">
+                <a href="#">Ввійти</a>
+                <a href="#">Зареєструватись</a>
+            </div>
+        </div>
     </header>
+    {% block content %} {% endblock %}
 
-    <div class="divider"></div>
-
-    <div class="container">
-        {% block content %} {% endblock %}
-    </div>
-
-
-    <footer class="footer__inner">
-        <nav class="footer__menu">
-            <li class="footer__links"><a href="" class="footer__link">Зворотній зв'язок</a></li>
-            <li class="footer__links"><a href="#" class="footer__link">Умови та правила</a></li>
-            <li class="footer__links"><a href="#" class="footer__link">Политика конфіденційності</a></li>
-            <li class="footer__links"><a href="#" class="footer__link">Допомога</a></li>
-            <li class="footer__links"><a href="#" class="footer__link">Головна</a></li>
-            <a href="#">
-                <img src="{% static 'forum_pages/img/forum_logo.png' %}" alt="#" class="footer__logo">
-            </a>
-        </nav>
-    </footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__logo">
+                <a href="#">
+                    <img src="{% static 'forum_pages/img/forum_logo.png'%}" alt="">
+                </a>
+            </div>
+            <div class="footer__links">
+                <a href="#">Теми</a>
+                <a href="#">Реклама</a>
+                <a href="#">Правила</a>
+            </div>
+            <div class="footer__contactus">
+                <a href="#">Інстаграм</a>
+                <a href="#">Телеграм</a>
+                <a href="#">Фейсбук</a>
+            </div>
+        </footer>
+        </div>
+        
 </body>
 </html>
