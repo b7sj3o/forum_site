@@ -1,7 +1,7 @@
 {% extends 'forum_pages/base.html' %}
 {% load sass_tags %}
 {% load static %}
-{% block style %}{% sass_src 'forum_pages/CSS/index.min.css' %}{% endblock %}
+{% block style %}{% sass_src 'forum_pages/css/index.min.css' %}{% endblock %}
 
 {% block title %} Головна сторінка {% endblock %}
 <link rel="stylesheet" href="{% sass_src 'forum_pages/css/index.min.css' %}">
@@ -9,32 +9,30 @@
 {% block content %}
 
 <div class="first__advertisment">
-    {% for i in data %}
-    <div class="first__advertisment-title"><a href="#" class="first__advertisment-link">xcvbxcvbxcvbxcv</a></div> <!-- {{i.title}} -->
-    <div class="first__advertisment-text">cvbxbxcvbxcvb</div> <!--{{i.text}}-->
-    {% endfor %}
+        <div class="first__advertisment-title"><a href="#" class="first__advertisment-link">{{ chosen_product.title }}</a></div>
+        <div class="first__advertisment-text">{{ chosen_product.text }}</div>
     <div class="divider"></div>
 </div>
 
 <div class="first__banner">
-    {% for i in data %}
     <a class="first__banner-link" href="#">
-        <img src="{% static 'forum_pages/img/only.jpg' %}" alt="#" class="first__banner-img">
+        <img src="{{ main_banner.image.url }}" alt="Banner">
     </a>
-    {% endfor %}
 </div>
 <div class="divider"></div>
 <div class="content__inner">
     <div class="advertisments">
-        {% for i in data %}
+        {% for i in advertisements %}
             <ul class="advert">
-                <div class="advert__kind">{{i.kind}}</div> <!--тут треба зробити цикл який буде вибирати колір якого буде реклама -->
-                <li class="text"><a href="#" class="advert__link">{{ i.text }}</a></li>
+                <li class="advert__kind">{{ i.title }}</li>
+                <li class="advert__text"><a href="#">{{ i.text }}</a></li>
+                <li class="advert__time">{{ i.time }}</li>
+                <li class="advert__name"><a href="">{{ i.name }}</a></li>
             </ul>
         {% endfor %}
     </div>
     <div class="divider"></div>
-    <div class="blocks">
+    <!-- <div class="blocks">
         <div class="block">
             <div class="block-title">OnlyFans - просування, моделі, заробіток</div>
             <div class="block__section">
@@ -447,7 +445,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 {% endblock %}

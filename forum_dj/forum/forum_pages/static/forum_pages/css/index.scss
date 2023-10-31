@@ -1,21 +1,21 @@
 .advertisments{
     max-height: 200px;
-    max-width: 60%;
-    margin-top: 20px;
-    margin-right: 40px;
     overflow-y: scroll;
  }
 .advert{
      display: flex;
      gap: 20px;
+     align-items: center;
      min-height: 50px;
+     border: 1px solid #000;
      &__kind{
         background-color: yellow;
-        display: block;
-        height: 25px;
-        min-width: 120px;
+        display: flex;
+        padding: 3px 10px;
         border-radius: 10%;
-     }
+        justify-content: center;
+        align-items: center;
+    }
      &__link{
         color: rgb(3, 23, 78);
         font-weight: 700;
@@ -125,5 +125,4 @@
     margin-right: 25px;
 }
 .content__inner{
-    max-width: 80%;
 }
