@@ -1,4 +1,5 @@
 {% extends 'forum_pages/base.html' %}
+
 {% load sass_tags %}
 {% load static %}
 {% block style %}{% sass_src 'forum_pages/css/index.min.css' %}{% endblock %}
@@ -10,32 +11,114 @@
         <div class="container">
                 <div class="content">
                     <div class="main__panel">
-                        <div class="first__advertisment">
+                        <section class="first__advertisment">
                             <div class="first__advertisment-title"><a href="#">{{ chosen_product.title }}</a></div>
                             <div class="first__advertisment-text">{{ chosen_product.text }}</div>
-                        </div>
+                        </section>
                         <div class="divider"></div>
-                        <div class="first__banner">
+
+                        <section class="first__banner">
                             <a href="#">
                                 <img src="{{ main_banner.image.url }}" alt="Banner">
                             </a>
-                        </div>
+                        </section>
                         <div class="divider"></div>
-                        <div class="content__inner">
-                            <div class="advertisments">
-                                {% for i in advertisements %}
-                                    <ul class="advert">
-                                        <li class="advert__kind">{{ i.title }}</li>
-                                        <li class="advert__text"><a href="#">{{ i.text }}</a></li>
-                                        <li class="advert__time">{{ i.time }}</li>
-                                        <li class="advert__name"><a href="">{{ i.name }}</a></li>
-                                    </ul>
-                                {% endfor %}
+
+                        <section class="advertisments">
+                            {% for i in advertisements %}
+                                <ul class="advert">
+                                    <li class="advert__kind">{{ i.title }}</li>
+                                    <li class="advert__text"><a href="#">{{ i.text }}</a></li>
+                                    <li class="advert__time">{{ i.time }}</li>
+                                    <li class="advert__name"><a href="">{{ i.name }}</a></li>
+                                </ul>
+                            {% endfor %}
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Все про Adult трафік</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Пошук трафіку</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Продаж трафіку</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Пропозиції по співпраці</a></div>
                             </div>
-                        </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Пісочниця</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'sandbox' %}">Пісочниця - про все та ні про що</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Корисна інформація</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Корисна інформація</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Організація роботи агенства</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Dream Singles</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Prime Date</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Anastasia</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Natashaclub</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Charm Date</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Love me</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Jump4love</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Файндбрайд</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Лададейт</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Голден</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Арабиан</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Юдейт</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Бот-програми, розсилки</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Бот-програми, розсилки. Готові і під замовлення</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Чорний список</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Чорний список скаутів</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Чорний список брачних агенств</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Чорний список перекладачів</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Перекладачі і скаути</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Скаути, пропоную роботу для скаутів</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Скаути, пропоную роботу для скаутів</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Скаути, пропоную роботу для скаутів</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Запрос на добавлення розділу та категорії</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Запросити</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
                     </div>
                     <div class="side__panel">
-                        <div class="side__panel-title">Останнє повідомлення</div>
+                        <div class="side__panel-title main-title-text">Останні повідомлення</div>
                         <div class="side__panel-body">
                             <div class="side__panel-message">
                                 <div class="side__panel-userinfo">
@@ -52,10 +135,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="divider"></div>
                             </div>
-                            <div class="divider"></div>
-                        </div>
-                        <div class="side__panel-body">
                             <div class="side__panel-message">
                                 <div class="side__panel-userinfo">
                                     <a href="#"><img src="{% static 'forum_pages/img/forum_logo.png'%}" class="side__panel-photo" alt=""></a>
@@ -71,27 +152,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="divider"></div>
                             </div>
-                            <div class="divider"></div>
-                        </div>
-                        <div class="side__panel-body">
-                            <div class="side__panel-message">
-                                <div class="side__panel-userinfo">
-                                    <a href="#"><img src="{% static 'forum_pages/img/forum_logo.png'%}" class="side__panel-photo" alt=""></a>
-                                    <div class="side__panel-userData">
-                                        <div class="side__panel-author">Vitlik</div>
-                                        <div class="side__panel-time">Опубліковано: 14:03</div>
-                                        <div class="side__panel-text">
-                                            ncvbncvbndygfnnbviufnihjfsdgjdfgjnxcjvbnrnbhxcvkjbnrthb
-                                            ncvbncvbndygfnnbviufnihjfsdgjdfgjnxcjvbnrnbhxcvkjbnrthb
-                                            ncvbncvbndygfnnbviufnihjfsdgjdfgjnxcjvbnrnbhxcvkjbnrthb
-                                            ncvbncvbndygfnnbviufnihjfsdgjdfgjnxcjvbnrnbhxcvkjbnrthb
-                                            ncvbncvbndygfnnbviufnihjfsdgjdfgjnxcjvbnrnbhxcvkjbnrthb
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
                         </div>
                     </div>
                 </div>

@@ -105,99 +105,10 @@ h1,h2,h3,h4,h5,h6 {
         }
     }
 }
-.content{
-    display: flex;
-    margin-top: 30px;
-}
-.main__panel{
-    width: 75%;
-}
-.first__advertisment{
-    border: 1px solid #000;
-    &-title{
-        a{
-            color:#003fee;
-            font-weight:700;
-            -webkit-transition:all .5s ease;
-            transition:all .5s ease;
-            &:hover{
-                color:#ea00ff;
-            }
-        }
-    }
-    &-text{
-    }
-}
 
-.first__banner{
-    img{
-        width: 100%;
-    }
-}
-.content__inner{
-
-}
-
-.side__panel{
-    box-shadow: 10px 10px 5px 0 rgba(0.2, 0.2, 0.2, 0.2);
-    padding-left: 20px;
-    &-title{
-        text-align: left;
-        padding-left: 20px;
-        padding-top: 5px;
-        font-size: 24px;
-        min-height: 40px;
-        color: wheat;
-        background-color: rgb(76, 76, 150);
-        border-top-left-radius: 10px; 
-        border-top-right-radius: 10px;
-    }
-    &-body{
-        padding: 20px 10px 0px 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    &-message{
-        margin-bottom: 20px;
-    }
-    &-userinfo{
-        display: flex;
-        gap: 20px;
-        a{
-            width: 30px;
-            height: 30px;
-        }
-    }
-    &-userData{
-    
-    }
-    &-author{
-        color: rgb(76, 76, 150);
-    }
-    &-time{
-        color: rgb(76, 76, 150);
-    }
-    &-text{
-        width: 300px;
-        margin-top: 10px;
-        word-wrap: break-word;
-        font-size: 15px;
-        
-    }
-    &-photo{
-        width: 30px;
-        
-    }
-    .divider{
-        margin-top: 10px;
-        margin-bottom: 0px;
-    }
-}
 
 .divider{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
     width: 100%;
     height: 1px;
     background: grey;

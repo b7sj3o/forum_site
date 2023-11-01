@@ -33,3 +33,10 @@ class MainBanner(models.Model):
         verbose_name = 'Головний банер'
         verbose_name_plural = 'Головні банери'
 
+class UserData(models.Model):
+    name = models.CharField(max_length=100)
+    main_text = models.TextField()
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name}"

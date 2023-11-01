@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from .models import Advertisements, MainBanner, ChosenProduct
+from django.shortcuts import render, redirect
+from .models import Advertisements, MainBanner, ChosenProduct, UserData
 import random
+
+# -------------- RENDER -------------- 
 
 def index(request):
     advertisements = Advertisements.objects.all()
@@ -14,7 +16,24 @@ def index(request):
         'main_banner': main_banner
     })
 
+def sandbox(request):
+    users = UserData.objects.all()
+    return render(request, 'forum_pages/sandbox.html', {'users': users})
 
+# -------------- NOT RENDER -------------- 
 
-# def sass_page_handler(request):
-#     return render(request, 'forum_pages/index.html')
+def save_data(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        main_text = request.POST.get('main_text')
+        
+        existing_user = UserData.objects.filter(name=name, main_text=main_text).first()
+        if not existing_user:
+            UserData.objects.create(name=name, main_text=main_text)
+        
+        users = UserData.objects.all()
+        return render(request, 'forum_pages/sandbox.html', {'users': users})
+    
+def clear_data(request):
+    UserData.objects.all().delete()
+    return render(request, 'forum_pages/sandbox.html', {'users': None})
