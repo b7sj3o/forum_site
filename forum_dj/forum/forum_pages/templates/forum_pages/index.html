@@ -23,14 +23,19 @@
                             </a>
                         </section>
                         <div class="divider"></div>
-
+                        
+                        <div class="advertisments__title">Оголошення</div>
                         <section class="advertisments">
                             {% for i in advertisements %}
                                 <ul class="advert">
-                                    <li class="advert__kind">{{ i.title }}</li>
-                                    <li class="advert__text"><a href="#">{{ i.text }}</a></li>
-                                    <li class="advert__time">{{ i.time }}</li>
-                                    <li class="advert__name"><a href="">{{ i.name }}</a></li>
+                                    <div class="advert__first">
+                                        <li class="advert__kind">{{ i.title }}</li>
+                                        <li class="advert__text"><a href="#">{{ i.text }}</a></li>
+                                    </div>
+                                    <div class="advert__second">
+                                        <li class="advert__time">{{ i.time }}</li>
+                                        <li class="advert__name"><a href="">{{ i.name }}</a></li>
+                                    </div>
                                 </ul>
                             {% endfor %}
                         </section>
@@ -142,5 +147,5 @@
         </div>
     </div>
 
-
+<script src="{% static 'forum_pages/js/script.js'%}"></script>
 {% endblock %}

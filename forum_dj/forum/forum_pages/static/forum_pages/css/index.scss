@@ -1,9 +1,11 @@
+@import 'base';
+
 .main-title-text {
     text-align: center;
     font-size: 24px;
     padding: 10px 0;
     color: wheat;
-    background-color: rgb(76, 76, 150);
+    background-color: $mainColor;
     border-top-left-radius: 10px; 
     border-top-right-radius: 10px;
 }
@@ -49,6 +51,7 @@
 .side__panel{
     box-shadow: 1px -5px 10px 0 rgba(0.2, 0.2, 0.2, 0.2);
     border-radius: 10px;
+    align-self: start;
 
     &-body{
         padding: 20px 10px 0px 10px;
@@ -74,6 +77,8 @@
         color: rgb(0, 0, 0);
     }
     &-text{
+        max-height: 100px;
+        overflow: hidden;
         width: 300px;
         margin-top: 10px;
         word-wrap: break-word;
@@ -86,24 +91,45 @@
         border-radius: 100%;
         
     }
-    .divider{
-        margin: 10px 0;
+    .divider {
+        margin: 30px 0;
     }
-
+    
 }
-
 .advertisments{
     max-height: 200px;
     overflow-y: scroll;
-    border: #000 1px solid;
+    border: 3px solid $mainColor; 
+    border-bottom-left-radius: 10px; 
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    &__title{
+        text-align: center;
+        font-size: 24px;
+        padding: 10px 0;
+        color: wheat;
+        background-color: $mainColor;
+        border-top-left-radius: 10px; 
+        border-top-right-radius: 10px;
+    }
  }
 .advert{
      display: flex;
-     gap: 20px;
+     gap: 0px;
      align-items: center;
      min-height: 50px;
      border-bottom: 1px solid #000;
-     
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+     &__first{
+        width: 60%;
+        display: inline-flex;
+     }
+     &__second{
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+     }
      &__name{
         a{
             color: rgb(3, 23, 78);
@@ -116,18 +142,20 @@
         }
      }
      &__kind{
-        background-color: yellow;
         display: flex;
         padding: 3px 10px;
-        border-radius: 10%;
         justify-content: center;
         align-items: center;
+        margin-right: 10px;
+        width: 110px;
+        border-right: solid 1px rgba(0, 0, 0, 0.5);
+        
     }
      &__link{
 
      }
      &__text{
-        width: 30%;
+        width: 50%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -162,3 +190,19 @@
         }
     }
 }
+    /* Style for WebKit scrollbars */
+    .advertisments::-webkit-scrollbar {
+        width: 10px; /* Set the width of the scrollbar */
+    }
+
+    .advertisments::-webkit-scrollbar-track {
+        background: #f0f0f0; /* Track color */
+    }
+
+    .advertisments::-webkit-scrollbar-thumb {
+        background-color: rgb(59, 59, 112); /* Thumb color */ /* Rounded corners for the thumb */
+    }
+
+    .advertisments::-webkit-scrollbar-thumb:hover {
+        background-color: $mainColor; /* Thumb color on hover */
+    }
