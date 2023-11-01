@@ -1,0 +1,42 @@
+{% extends 'forum_pages/base.html' %}
+
+{% load sass_tags %}
+{% load static %}
+{% block style %}{% sass_src 'forum_pages/css/sandbox.min.css' %}{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+
+{% block content %}
+    <h1>Ввійти в акаунт:</h1>
+    
+
+    {% if messages %}
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label for="username">Нікнейм:</label>
+            <input type="text" id="username" name="username" required autocomplete="off">
+            <br>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required autocomplete="off">
+            <br>
+            <input type="submit" value="Ввійти" class="submit-inp">
+        </form>
+        <!-- тут форма, якщо є помилка -->
+    {% else %}
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label for="username">Нікнейм:</label>
+            <input type="text" id="username" name="username" required autocomplete="off">
+            <br>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required autocomplete="off">
+            <br>
+            <input type="submit" value="Ввійти" class="submit-inp">
+        </form>
+        <!-- тут початкова форма -->
+    {% endif %}
+
+{% endblock %}
+
+

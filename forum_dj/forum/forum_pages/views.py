@@ -5,20 +5,29 @@ import random
 # -------------- RENDER -------------- 
 
 def index(request):
-    advertisements = Advertisements.objects.all()
+    advertisements = Advertisements.objects.all().order_by('-time')
     chosen_product = ChosenProduct.objects.get()
     main_banners = MainBanner.objects.all()
     main_banner = random.choice(main_banners)
 
+    sandbox = UserData.objects.all().order_by('-id')[:5]
+
     return render(request, 'forum_pages/index.html',{
         'advertisements': advertisements,
         'chosen_product': chosen_product,
-        'main_banner': main_banner
+        'main_banner': main_banner,
+        'sandbox': sandbox
     })
 
 def sandbox(request):
     users = UserData.objects.all()
     return render(request, 'forum_pages/sandbox.html', {'users': users})
+
+def signup(request):
+    return render(request, '')
+
+def login(request):
+    pass
 
 # -------------- NOT RENDER -------------- 
 

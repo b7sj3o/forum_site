@@ -16,7 +16,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# AUTH_USER_MODEL = 'users.User'
+# AUTH_USER_MODEL = 'forum_pages.User'
 
 
 # Application definition
@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'forum_pages',
-    'sass_processor'
+    'forum_members',
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
