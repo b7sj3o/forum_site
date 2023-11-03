@@ -111,27 +111,33 @@
 }
 .advert {
     display: flex;
-    gap: 0px;
     align-items: center;
     min-height: 50px;
     border-bottom: 1px solid #000;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     &__first {
-        width: 60%;
+        width: 50%;
         display: inline-flex;
     }
     &__second {
-        width: 40%;
+        width: 50%;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
+        margin-right: 10px;
     }
     &__name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 40%;
         a {
             color: rgb(3, 23, 78);
             font-weight: 700;
             -webkit-transition: all 0.5s ease;
             transition: all 0.5s ease;
+
+            
             &:hover {
                 color: rgb(99, 2, 145);
             }

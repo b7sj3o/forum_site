@@ -8,32 +8,54 @@
 
 
 {% block content %}
-    <h1>Ввійти в акаунт:</h1>
-    
-
+    <h1 class="text-center fw-medium mt-3 fs-1">Увійти в акаунт</h1>
     {% if messages %}
-        <form method="POST" action="">
-            {% csrf_token %}
-            <label for="username">Нікнейм:</label>
-            <input type="text" id="username" name="username" required autocomplete="off">
-            <br>
-            <label for="password">Пароль:</label>
-            <input type="password" id="password" name="password" required autocomplete="off">
-            <br>
-            <input type="submit" value="Ввійти" class="submit-inp">
-        </form>
+        {% for message in messages %}
+        
+            <div class="container_login">
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                    <label for="username" class="form-label">Email address</label>
+                    <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
+                    </div>
+                    <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Ввійти">
+                </form>
+            </div>
+        {% endfor %}
+        
         <!-- тут форма, якщо є помилка -->
     {% else %}
-        <form method="POST" action="">
-            {% csrf_token %}
-            <label for="username">Нікнейм:</label>
-            <input type="text" id="username" name="username" required autocomplete="off">
-            <br>
-            <label for="password">Пароль:</label>
-            <input type="password" id="password" name="password" required autocomplete="off">
-            <br>
-            <input type="submit" value="Ввійти" class="submit-inp">
-        </form>
+        <div class="container_login">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="username" class="form-label">Email address</label>
+                  <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password">
+                </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Ввійти">
+            </form>
+        </div>
+        
         <!-- тут початкова форма -->
     {% endif %}
 

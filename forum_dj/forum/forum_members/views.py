@@ -11,7 +11,7 @@ def login_user(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.success(request, ('Сталася помилка, спробуйте знову'))
+            messages.success(request, ('Неправильний логін чи пароль. Спробуйте знову'))
             return redirect('login')
     else:
         return render(request, 'forum_members/login.html', {})
