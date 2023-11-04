@@ -1,7 +1,3 @@
-input {
-    border: 2px solid red;
-}
-
 .submit-inp {
     margin: 10px 0;
     border: 1px solid #000;
@@ -14,3 +10,17 @@ input {
     background-color: red;
     margin-left: 20%;
 }
+
+.form_register {
+    span {
+        display: none;
+    }
+    ul {
+        display: none;
+    }
+    input {
+        width: 100%;
+        border: 1px solid #000;
+    }
+}
+    

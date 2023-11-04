@@ -23,12 +23,6 @@ def sandbox(request):
     users = UserData.objects.all()
     return render(request, 'forum_pages/sandbox.html', {'users': users})
 
-def signup(request):
-    return render(request, '')
-
-def login(request):
-    pass
-
 # -------------- NOT RENDER -------------- 
 
 def save_data(request):
