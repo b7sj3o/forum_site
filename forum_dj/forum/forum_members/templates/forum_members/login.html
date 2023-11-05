@@ -1,8 +1,8 @@
-{% extends 'forum_pages/base.html' %}
+{% extends 'base.html' %}
 
 {% load sass_tags %}
 {% load static %}
-{% block style %}{% sass_src 'forum_pages/css/sandbox.min.css' %}{% endblock %}
+{% block style %}{% sass_src 'forum_members/css/login.min.css' %}{% endblock %}
 
 {% block title %}Login{% endblock %}
 
@@ -11,32 +11,54 @@
     <h1 class="text-center fw-medium mt-3 fs-1">Увійти в акаунт</h1>
     {% if messages %}
         {% for message in messages %}
+        
             <div class="container_login">
-                <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
+                <div class="alert alert-warning" role="alert">
                     {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                    <label for="username" class="form-label">Email address</label>
+                    <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
+                    </div>
+                    <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Ввійти">
+                </form>
             </div>
         {% endfor %}
+        
+        <!-- тут форма, якщо є помилка -->
+    {% else %}
+        <div class="container_login">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="username" class="form-label">Email address</label>
+                  <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password">
+                </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Ввійти">
+            </form>
+        </div>
+        
+        <!-- тут початкова форма -->
     {% endif %}
-    <div class="container_login">
-        <form method="POST" action="">
-            {% csrf_token %}
-            <div class="mb-3">
-            <label for="username" class="form-label">Email address</label>
-            <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" name="password">
-            </div>
-            <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Ввійти">
-        </form>
-    </div>
+
 {% endblock %}
 
 
