@@ -15,6 +15,7 @@ class Advertisements(models.Model):
     class Meta:
         verbose_name = 'Реклама'
         verbose_name_plural = 'Реклами'
+
 class ChosenProduct(models.Model):
     title = models.CharField('Тайтл', max_length=100)
     text = models.TextField('Повідомлення')
@@ -25,12 +26,14 @@ class ChosenProduct(models.Model):
     class Meta:
         verbose_name = 'Вибраний продукт'
         verbose_name_plural = 'Вибрані продукти'
+
 class MainBanner(models.Model):
     image = models.ImageField('Фото', upload_to='')
 
     class Meta:
         verbose_name = 'Головний банер'
         verbose_name_plural = 'Головні банери'
+        
 class UserData(models.Model):
     name = models.CharField(max_length=100)
     main_text = models.TextField()
