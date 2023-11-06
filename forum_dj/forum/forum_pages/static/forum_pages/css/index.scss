@@ -164,7 +164,7 @@
             font-weight: 700;
             transition: all 0.5s ease;
             &:hover {
-                color: rgb(99, 2, 145);
+                color: rgb(145, 2, 69);
             }
         }
     }
@@ -198,7 +198,7 @@
 }
 
 .advertisments::-webkit-scrollbar-thumb {
-    background-color: rgb(59, 59, 112); /* Thumb color */ /* Rounded corners for the thumb */
+    background-color: rgb(53, 53, 53); /* Thumb color */ /* Rounded corners for the thumb */
 }
 
 .advertisments::-webkit-scrollbar-thumb:hover {

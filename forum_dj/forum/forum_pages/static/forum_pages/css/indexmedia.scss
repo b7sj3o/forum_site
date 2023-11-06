@@ -1,0 +1,284 @@
+@media screen and (max-width: 1200px) {
+    .container{
+        max-width: 90%;
+    }
+    .header{
+        .container{
+            max-width: 90%;
+        }
+        &__logo {
+            img {
+                width: 40px;
+            }
+        }
+        &__links {
+            a {
+                font-size: 18px;
+            }
+        }
+        &__auth{
+            a{
+                font-size: 18px;
+            }
+        }
+    }
+    .main-title-text{
+        font-size: 22px;
+    }
+    .first__advertisment{
+        &-title{
+            a{
+                font-size: 16px;
+            }
+        }
+        &-text{
+            font-size: 15px;
+        }
+    }
+    .divider{
+        margin: 10px 0;
+    }
+    .footer__logo img {
+        width: 40px;
+    }
+    .advert{
+        &__time{
+            font-size: 14px;
+        }
+    }
+    .content{
+        gap: 24px;
+    }
+}    
+@media screen and (max-width: 980px) {
+    .content{
+        flex-direction: column;
+        align-items: center;
+    }
+    .main__panel{
+        width: 100%;
+    }
+    .side__panel{
+        align-self: center;
+    }
+    .header{
+        &__logo {
+            img {
+                width: 30px;
+            }
+        }
+        &__auth{
+            gap: 10px;
+            a{
+                font-size: 14px;
+                padding: 5px 5px;
+            }
+        }
+        &__links{
+            a{
+                font-size: 14px;
+            }
+        }
+        
+    }
+    .adult__trafic-theme{
+        font-size: 14px;
+    }
+    .main-title-text{
+        font-size: 18px;
+    }
+    .first__advertisment{
+        &-title{
+            font-size: 13px;
+            text-align: center;
+        }
+        &-text{
+            font-size: 12px;
+            text-align: center;
+        }
+    }
+    .advertisments__title {
+        font-size: 18px;
+    }
+    .side__panel{
+        width: 100%;
+        &-message{
+            width: 100%;
+        }
+        &-text{
+            width: 100%;
+        }
+        .divider{
+            margin: 20px 0;
+        }
+        
+    }
+    .footer{
+        margin-top: 20px;
+        &__links{
+            a{
+                font-size: 14px;
+            }
+        }
+        &__logo {
+            img {
+                width: 30px;
+            }
+        }
+        &__contactus{
+            a{
+                img{
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 640px) {
+    .content{
+        gap: 15px;
+    }
+    .side__panel{
+        &-userinfo{
+            gap: 15px;
+        }
+        &-author{
+            font-size: 13px;
+        }
+        &-time{
+            font-size: 13px;
+        }
+        &-text{
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        .divider{
+            margin: 10px 0;
+
+        }
+    }
+    .advert{
+        &__kind{
+            font-size: 14px;
+        }
+        &__name{
+            font-size: 14px;
+        }
+        &__time{
+            font-size: 13px;
+        }
+        &__text{
+            font-size: 14px;
+        }
+    }
+    .first__advertisment{
+        &-title{
+            a{
+                font-size: 14px;
+            }
+        }
+        &-text{
+            font-size: 12px;
+        }
+    }
+    .header{
+        &__logo {
+            img {
+                width: 50px;
+            }
+        }
+        &__auth{
+            a{
+                border-radius: 5px;
+                padding: 8px 14px;
+            }
+        }
+        &__links{
+            display: none;
+        }
+    }
+    .footer{
+        &__contactus{
+            gap: 20px;
+        }
+        .container{
+            justify-content: space-evenly;
+            gap: 30px;
+        }
+        &__links{
+            display: none;
+        }
+    }
+    .dropdown__menu{
+        display: block;
+    }
+
+    
+}
+@media screen and (max-width: 480px)  {
+    .first__advertisment{
+        &-title{
+            a{
+                font-size: 13px;
+            }
+            margin-bottom: 5px;
+        }
+        &-text{
+            font-size: 11px;
+        }
+    }
+    .advert{
+        &__name{
+            font-size: 12px;
+        }
+        &__text{
+            font-size: 12px;
+        }
+        &__time{
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        &__kind{
+            width: 50%;
+            margin-right: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+    .adult__trafic-theme{
+        font-size: 13px;
+    }
+    .advertisments__title{
+        font-size: 15px;
+    }
+    .main-title-text {
+        font-size: 15px;
+    }
+    .header{
+        &__logo{
+            img{
+                width: 30px;
+            }
+        }
+        &__auth{
+            flex-direction: column;
+            a{
+                font-size: 11px;
+                padding: 4px 2px;
+                text-align: center;
+            }
+        }
+    }
+    .footer{
+        &__logo{
+            img{
+                width: 30px;
+            }
+        }
+        &__contactus{
+            gap: 20px;
+        }
+    }
+    
+}

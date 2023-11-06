@@ -1,26 +1,111 @@
-.submit-inp {
-    margin: 10px 0;
-    border: 1px solid #000;
-    padding: 10px 15px;
-}
-
-.delete-data {
-    margin: 10px 0;
-    padding: 10px 15px;
-    background-color: red;
-    margin-left: 20%;
-}
-
-.form_register {
-    span {
-        display: none;
+.sandbox{
+    &__inner{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
     }
-    ul {
-        display: none;
+    &__title {
+        font-size: 44px;
+        color: black;
+        font-weight: 700;
     }
-    input {
-        width: 100%;
-        border: 1px solid #000;
+    &__list{
+        margin-top: 15px;
     }
-}
+    &__form{
+        width: 55%;
+        input{
+            margin-top: 15px;
     
+        }
+        textarea{
+            resize: none;
+            padding: 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #4c4c96;
+            height: 170px;
+        }
+    }
+    &__text{
+        margin-top: 5px;
+        width: 100%;
+        resize: none;
+        padding: 20px;
+        font-size: 12px;
+        border: 1px solid #4c4c96;
+    }
+    &__button{
+        padding: 15px 25px;
+        color: wheat;
+        background-color: #4c4c96;
+        transition: all 0.3s ease-in-out;
+        
+    }
+    &__info{
+        width: 100%;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.form__name{
+    font-size:28px;
+    color: #4c4c96;
+    font-weight: 700;
+}
+.divider{
+    margin: 20px;
+}
+.title__container{
+    text-align: center;
+}
+.user{
+    &__title{
+        font-size: 44px;
+        color: black;
+        font-weight: 700;
+    }
+    &__wrapper{
+        width: 60%;
+        height: 200px;
+        background-color: #cbcbcb;
+        padding: 25px;
+        margin-top: 10px;
+    }
+    &__data{
+        display: flex;
+        align-items: center;
+        &::before{
+            content: "";
+            width: 2px;
+            background-color: #4c4c96;
+            height: 40px;
+            margin-right: 8px;
+            border-radius: 5px;
+
+        }
+       
+    }
+    &__time{
+        margin-left: 15px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    &__photo{
+        img{
+            width: 30px;
+            border-radius: 100%;
+        }
+    }
+    &__text{
+        margin-top: 10px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #4c4c96;
+    }
+}
+
