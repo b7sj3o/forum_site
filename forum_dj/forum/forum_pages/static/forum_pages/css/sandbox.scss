@@ -1,5 +1,5 @@
-.sandbox{
-    &__inner{
+.sandbox {
+    &__inner {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -10,16 +10,15 @@
         color: black;
         font-weight: 700;
     }
-    &__list{
+    &__list {
         margin-top: 15px;
     }
-    &__form{
-        width: 55%;
-        input{
+    &__form {
+        width: 60%;
+        input {
             margin-top: 15px;
-    
         }
-        textarea{
+        textarea {
             resize: none;
             padding: 20px;
             font-size: 15px;
@@ -28,7 +27,7 @@
             height: 170px;
         }
     }
-    &__text{
+    &__text {
         margin-top: 5px;
         width: 100%;
         resize: none;
@@ -36,14 +35,13 @@
         font-size: 12px;
         border: 1px solid #4c4c96;
     }
-    &__button{
+    &__button {
         padding: 15px 25px;
         color: wheat;
         background-color: #4c4c96;
         transition: all 0.3s ease-in-out;
-        
     }
-    &__info{
+    &__info {
         width: 100%;
         margin-top: 10px;
         display: flex;
@@ -52,60 +50,55 @@
     }
 }
 
-.form__name{
-    font-size:28px;
+.form__name {
+    font-size: 28px;
     color: #4c4c96;
     font-weight: 700;
 }
-.divider{
+.divider {
     margin: 20px;
 }
-.title__container{
+.title__container {
     text-align: center;
 }
-.user{
-    &__title{
+.user {
+    &__line {
+        background-color: rgb(80, 79, 79, 0.5);
+        height: 100%;
+        width: 2px;
+        float: left;
+        margin: 0 10px 0 0;
+    }
+    &__title {
         font-size: 44px;
         color: black;
         font-weight: 700;
     }
-    &__wrapper{
-        width: 60%;
-        height: 200px;
-        background-color: #cbcbcb;
+    &__wrapper {
+        width: 100%;
+        background-color: rgba(203, 203, 203, 0.297);
         padding: 25px;
-        margin-top: 10px;
+        margin-top: 20px;
     }
-    &__data{
+    &__data {
         display: flex;
         align-items: center;
-        &::before{
-            content: "";
-            width: 2px;
-            background-color: #4c4c96;
-            height: 40px;
-            margin-right: 8px;
-            border-radius: 5px;
-
-        }
-       
+        gap: 10px;
     }
-    &__time{
-        margin-left: 15px;
+    &__time {
         font-size: 18px;
         font-weight: 700;
     }
-    &__photo{
-        img{
+    &__photo {
+        img {
             width: 30px;
             border-radius: 100%;
         }
     }
-    &__text{
+    &__text {
         margin-top: 10px;
         font-size: 20px;
         font-weight: 700;
         color: #4c4c96;
     }
 }
-

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Advertisements, MainBanner, ChosenProduct, UserData
+from .models import Advertisements, MainBanner, ChosenProduct, UserData, Message
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 import random
 
 # -------------- RENDER -------------- 
@@ -20,8 +22,19 @@ def index(request):
     })
 
 def sandbox(request):
-    users = UserData.objects.all()
-    return render(request, 'forum_pages/sandbox.html', {'users': users})
+    
+    messages = Message.objects.all().order_by('-created')
+
+    if request.method == 'POST':
+        message = Message.objects.create(
+            user = request.user,
+            main_text = request.POST.get('main_text')
+        )
+
+        return redirect('sandbox')
+    
+    context = {'messages': messages}
+    return render(request, 'forum_pages/sandbox.html', context)
 
 # -------------- NOT RENDER -------------- 
 

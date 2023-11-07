@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 
 class Advertisements(models.Model):
     title = models.CharField('Тайтл', max_length=50)
@@ -41,4 +42,13 @@ class UserData(models.Model):
 
     def __str__(self):
         return f"{self.name}"
-# 
+
+
+class Message(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    main_text = models.TextField()
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.main_text[0:500]
