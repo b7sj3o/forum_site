@@ -31,7 +31,7 @@
                             </a>
                         </section>
                         <div class="divider"></div>
-                        
+                        <a href="{% url 'themes' %}"><button class="btn btn-primary w-50 mb-3">Створити тему</button></a>
                         <div class="advertisments__title">Оголошення</div>
                         <section class="advertisments">
                             {% for i in advertisements %}
@@ -41,7 +41,7 @@
                                         <li class="advert__text"><a href="#">{{ i.text }}</a></li>
                                     </div>
                                     <div class="advert__second">
-                                        <li class="advert__time">{{ i.time }}</li>
+                                        <li class="advert__time">{{ i.time|timesince }} тому</li>
                                         <li class="advert__name"><a href="">{{ i.name }}</a></li>
                                     </div>
                                 </ul>
@@ -131,18 +131,16 @@
                         <div class="divider"></div>
                     </div>
                     <div class="side__panel">
-                        <div class="side__panel-title main-title-text">Останні повідомлення</div>
+                        <div class="side__panel-title main-title-text"><a href="{% url 'sandbox' %}">Останні повідомлення</a></div>
                         <div class="side__panel-body">
                             <div class="side__panel-message">
-                                {% for i in sandbox %}
+                                {% for i in last_messages %}
                                     <div class="side__panel-userinfo">
                                         <a href="#"><img src="{% static 'forum_pages/img/forum_logo.png'%}" class="side__panel-photo" alt=""></a>
                                         <div class="side__panel-userData">
-                                            <div class="side__panel-author">{{ i.name }}</div>
-                                            <div class="side__panel-time">{{ i.time }}</div>
-                                            <div class="side__panel-text">
-                                                {{ i.main_text }}
-                                            </div>
+                                            <div class="side__panel-author">{{ i.user }}</div>
+                                            <div class="side__panel-time">{{ i.created|timesince }} тому</div>
+                                            <div class="side__panel-text">{{ i.main_text }}</div>
                                         </div>
                                     </div>
                                     <div class="divider"></div>

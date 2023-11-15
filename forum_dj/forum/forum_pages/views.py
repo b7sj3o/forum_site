@@ -1,55 +1,84 @@
 from django.shortcuts import render, redirect
-from .models import Advertisements, MainBanner, ChosenProduct, UserData, Message
-from django.contrib.auth.models import User
+from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, ThemeMessage, Themes, SandboxMessage
 from django.contrib.auth.decorators import login_required
 import random
 
-# -------------- RENDER -------------- 
+# -------------- RENDER --------------
+
 
 def index(request):
-    advertisements = Advertisements.objects.all().order_by('-time')
-    chosen_product = ChosenProduct.objects.get()
-    main_banners = MainBanner.objects.all()
+    advertisements = Advertisements.objects.all().order_by('-id')
+    chosen_product = MainTextBanner.objects.get()
+
+    main_banners = MainPictureBanner.objects.all()
     main_banner = random.choice(main_banners)
 
-    sandbox = UserData.objects.all().order_by('-id')[:5]
-
-    return render(request, 'forum_pages/index.html',{
+    last_messages = SandboxMessage.objects.all().order_by('-id')[:5]
+    return render(request, 'forum_pages/index.html', {
         'advertisements': advertisements,
         'chosen_product': chosen_product,
         'main_banner': main_banner,
-        'sandbox': sandbox
+        'last_messages': last_messages
     })
 
+
 def sandbox(request):
-    
-    messages = Message.objects.all().order_by('-created')
+    messages = SandboxMessage.objects.all().order_by('-created')
 
     if request.method == 'POST':
-        message = Message.objects.create(
-            user = request.user,
-            main_text = request.POST.get('main_text')
+        message = SandboxMessage.objects.create(
+            user=request.user,
+            main_text=request.POST.get('main_text')
         )
-
         return redirect('sandbox')
-    
+
     context = {'messages': messages}
     return render(request, 'forum_pages/sandbox.html', context)
 
-# -------------- NOT RENDER -------------- 
 
-def save_data(request):
+def themes(request):
+    themes = Themes.objects.all().order_by('-created')
+
     if request.method == 'POST':
-        name = request.POST.get('name')
-        main_text = request.POST.get('main_text')
-        
-        existing_user = UserData.objects.filter(name=name, main_text=main_text).first()
-        if not existing_user:
-            UserData.objects.create(name=name, main_text=main_text)
-        
-        users = UserData.objects.all()
-        return render(request, 'forum_pages/sandbox.html', {'users': users})
+        theme = Themes.objects.create(
+            user=request.user,
+            title=request.POST.get('title'),
+            main_text=request.POST.get('main_text')
+        )
+        return redirect('themes')
+
+    context = {'themes': themes}
+    return render(request, 'forum_pages/themes.html', context)
+
+
+def theme(request, pk):
+    room = Themes.objects.get(id=pk)
+    room_messages = room.thememessage_set.all().order_by('-id')
+
+    if request.method == 'POST':
+        theme = ThemeMessage.objects.create(
+            user=request.user,
+            theme=room,
+            main_text=request.POST.get('main_text')
+        )
+        return redirect('theme', pk=room.id)
+
+    context = {'room_messages': room_messages, 'room': room}
+    return render(request, 'forum_pages/theme.html', context)
+
+
+def deleteMessage(request, pk):   
+    referer = request.META.get('HTTP_REFERER', None)
+    if 'sandbox' in referer:
+        message = SandboxMessage.objects.get(id=pk)
+    else:
+        message = ThemeMessage.objects.get(id=pk)
+    message.delete()
     
-def clear_data(request):
-    UserData.objects.all().delete()
-    return render(request, 'forum_pages/sandbox.html', {'users': None})
+    return redirect(referer)
+
+def deleteTheme(request, pk):
+    theme = Themes.objects.get(id=pk)
+    theme.delete()
+    
+    return redirect('themes')

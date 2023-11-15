@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load sass_tags %}
+{% load static %}
+{% block style %}{% sass_src 'forum_pages/css/sandbox.min.css' %}{% endblock %}
+
+{% block title %}Themes{% endblock %}
+
+{% block content %}
+
+<div class="sandbox__info container">
+    <div class="sandbox__title">Теми</div>
+    <div class="divider"></div>
+    {% if request.user.is_authenticated %}
+    <form class="sandbox__form" method="POST" action="">
+        {% csrf_token %}
+        <div class="sandbox__title">Створити тему</div>
+        <div class="title__container">
+            <label for="title" class="form__name">Заголовок</label>
+            <input type="text" id="title" class="sandbox__text" name="title" required />
+            <label for="main_text" class="form__name">Основне питання</label>
+            <textarea type="text" id="main_text" class="sandbox__text" name="main_text" required ></textarea>
+        </div>
+        <input type="submit" class="sandbox__button" value="Зберегти дані" class="submit-inp">
+    </form>
+    <div class="divider"></div> 
+    {% else %}
+    <div class="alert alert-warning w-100 fs-4" role="alert">Щоб залишати повідомлення ви повинні <a href="{% url 'login' %}">увійти в акаунт</a></div>
+    
+    {% endif %}
+    {% for theme in themes %}
+        <div class="user__wrapper">
+            <div class="user__line"></div>
+            <div class="user__data">
+                <div class="user__photo"><a href="#"><img src="{% static 'forum_pages/img/forum_logo.png'%}" class="side__panel-photo" alt=""></a></div>
+                <div class="user__name">@{{ theme.user }}</div>
+                <div class="user__time">{{ theme.created|timesince }} тому</div>
+                {% if request.user == theme.user %}
+                    <a href="{% url 'delete-theme' theme.id %}">Delete theme</a>
+                {% endif %}
+            </div>
+            <div class="user__text"><a href="{% url 'theme' theme.id %}">{{ theme.title }}</a></div>
+            <div class="user__name">{{ theme.main_text }}</div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+

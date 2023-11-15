@@ -4,7 +4,9 @@ from . import views
 urlpatterns = [
     path('', views.index, name='home'),
     path('sandbox', views.sandbox, name='sandbox'),
+    path('themes', views.themes, name='themes'),
+    path('theme<str:pk>', views.theme, name='theme'),
 
-    path('save_data/', views.save_data, name='save_data'),
-    path('clear_data/', views.clear_data, name='clear_data'),      
+    path('delete-message<str:pk>', views.deleteMessage, name='delete-message'),
+    path('delete-theme<str:pk>', views.deleteTheme, name='delete-theme'),
 ]

@@ -2,7 +2,7 @@
 
 {% load sass_tags %}
 {% load static %}
-{% block style %}{% sass_src 'forum_pages/css/sandbox.min.css' %}{% endblock %}
+{% block style %}{% sass_src 'forum_members/css/register.min.css' %}{% endblock %}
 
 {% block title %}Login{% endblock %}
 
@@ -34,12 +34,13 @@
         {% endfor %}
     {% endif %}
     <div class="container_login">
-        <form method="POST" action="{% url 'register' %}" class="form_register">
+        <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
 
-            {{ form.as_p }}
-            <br><br>
-            <input type="submit" class="btn btn-primary w-100" value="Ввійти">
+            <div class="form_register">
+                {{ form.as_p }}
+            </div>
+            <input type="submit" class="btn btn-primary w-100" value="Зареєструватись">
         </form>
     </div>
     

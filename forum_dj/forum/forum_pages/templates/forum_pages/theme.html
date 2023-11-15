@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load sass_tags %}
+{% load static %}
+{% block style %}{% sass_src 'forum_pages/css/sandbox.min.css' %}{% endblock %}
+
+{% block title %}messages{% endblock %}
+
+{% block content %}
+<style>
+    footer {
+        display: none;
+    }
+</style>
+
+<div class="sandbox__info container">
+    <div class="sandbox__title">{{ room.title }}</div>
+    <div class="divider"></div>
+    {% if request.user.is_authenticated %}
+    <form class="sandbox__form" method="POST" action="">
+        {% csrf_token %}
+        <div class="sandbox__title">Залишити повідомлення</div>
+        <div class="title__container">
+            <label for="main_text" class="form__name">Повідомлення</label>
+            <textarea type="text" id="main_text" class="sandbox__text" name="main_text" required ></textarea>
+        </div>
+        <input type="submit" class="sandbox__button" value="Зберегти дані" class="submit-inp">
+    </form>
+    <div class="divider"></div> 
+    {% else %}
+    <div class="alert alert-warning w-100 fs-4" role="alert">Щоб залишати повідомлення ви повинні <a href="{% url 'login' %}">увійти в акаунт</a></div>
+    {% endif %}
+
+    
+    {% for message in room_messages %}
+        <div class="user__wrapper">
+            <div class="user__line"></div>
+            <div class="user__data">
+                <div class="user__photo"><a href="#"><img src="{% static 'forum_pages/img/forum_logo.png'%}" class="side__panel-photo" alt=""></a></div>
+                <div class="user__name">@{{ message.user }}</div>
+                <div class="user__time">{{ message.created|timesince }} тому</div>
+                {% if request.user == message.user %}
+                    <a href="{% url 'delete-message' message.id %}">Delete</a>
+                {% endif %}
+            </div>
+            <div class="user__name">{{ message.main_text }}</div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
