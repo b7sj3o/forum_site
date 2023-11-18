@@ -39,7 +39,7 @@
                     <a href="{% url 'delete-theme' theme.id %}">Delete theme</a>
                 {% endif %}
             </div>
-            <div class="user__text"><a href="{% url 'theme' theme.id %}">{{ theme.title }}</a></div>
+            <div class="user__text"><a href="{% url 'theme'  theme.id %}">{{ theme.title }}</a></div>
             <div class="user__name">{{ theme.main_text }}</div>
         </div>
     {% endfor %}
