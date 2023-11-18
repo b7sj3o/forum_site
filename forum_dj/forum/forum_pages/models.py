@@ -66,7 +66,7 @@ class BaseMessage(models.Model):
         abstract = True 
 
 class ThemeMessage(BaseMessage):
-    theme = models.ForeignKey('Themes', on_delete=models.CASCADE, null=True)
+    theme = models.ForeignKey(Themes, on_delete=models.CASCADE, null=True)
 
 class SandboxMessage(BaseMessage):
     pass

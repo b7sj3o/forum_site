@@ -51,7 +51,7 @@ def themes(request):
     return render(request, 'forum_pages/themes.html', context)
 
 
-def theme(request, pk):
+def theme(request, user, pk):
     room = Themes.objects.get(id=pk)
     room_messages = room.thememessage_set.all().order_by('-id')
 
@@ -61,7 +61,7 @@ def theme(request, pk):
             theme=room,
             main_text=request.POST.get('main_text')
         )
-        return redirect('theme', pk=room.id)
+        return redirect('theme', user=request.user, pk=room.id)
 
     context = {'room_messages': room_messages, 'room': room}
     return render(request, 'forum_pages/theme.html', context)
