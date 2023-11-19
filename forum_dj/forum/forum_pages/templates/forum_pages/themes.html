@@ -17,13 +17,13 @@
             <div class="user__line"></div>
             <div class="user__data">
                 <div class="user__photo"><a href="#"><img src="{% static 'forum_pages/img/forum_logo.png'%}" class="side__panel-photo" alt=""></a></div>
-                <div class="user__name">@{{ theme.user }}</div>
+                <div class="user__name">@{{ theme.user.username }}</div>
                 <div class="user__time">{{ theme.created|timesince }} тому</div>
                 {% if request.user == theme.user %}
                     <a href="{% url 'delete-theme' theme.id %}">Delete theme</a>
                 {% endif %}
             </div>
-            <div class="user__text"><a href="{% url 'theme' theme.user theme.id %}">{{ theme.title }}</a></div>
+            <div class="user__text"><a href="{% url 'theme' theme.user.username theme.id %}">{{ theme.title }}</a></div>
             <div class="user__name">{{ theme.main_text }}</div>
         </div>
     {% endfor %}

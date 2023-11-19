@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, ThemeMessage, Themes, SandboxMessage
+from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, ThemeMessage, Themes, SandboxMessage, User
 from django.contrib.auth.decorators import login_required
 import random
-from django.contrib.auth.models import User
 from .forms import UserForm
 
 # -------------- RENDER --------------
@@ -89,6 +88,7 @@ def deleteTheme(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(username=pk)
+    print(user)
     user_messages  = len(Themes.objects.filter(user=user))
 
     user_forms = UserForm(instance=request.user)
@@ -97,7 +97,7 @@ def userProfile(request, pk):
         form = UserForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('user-profile', pk=request.user)
+            return redirect('user-profile', pk=request.user.username)
         # else:
             # return redirect('home')        
 

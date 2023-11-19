@@ -38,10 +38,10 @@
                         <img src="{% static 'forum_pages/img/forum_logo.png'%}" alt="Аватар користувача">
             
                         <!-- Ім'я користувача -->
-                        <a href="#" class="user__name">{{request.user}}</a>
+                        <a href="#" class="user__name">{{request.user.username}}</a>
                     </button>
                     <div class="dropdown-content">
-                        <a href="{% url 'user-profile' request.user %}">Профіль</a>
+                        <a href="{% url 'user-profile' request.user.username %}">Профіль</a>
                         <a href="{% url 'logout' %}">Вийти</a>
                     </div>
                 </div>

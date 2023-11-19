@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 ]
 
+AUTH_USER_MODEL = 'forum_pages.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

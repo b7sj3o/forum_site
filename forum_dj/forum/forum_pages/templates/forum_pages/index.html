@@ -138,7 +138,7 @@
                                     <div class="side__panel-userinfo">
                                         <a href="#"><img src="{% static 'forum_pages/img/forum_logo.png'%}" class="side__panel-photo" alt=""></a>
                                         <div class="side__panel-userData">
-                                            <div class="side__panel-author">{{ i.user }}</div>
+                                            <div class="side__panel-author">{{ i.user.username }}</div>
                                             <div class="side__panel-time">{{ i.created|timesince }} тому</div>
                                             <div class="side__panel-text">{{ i.main_text }}</div>
                                         </div>

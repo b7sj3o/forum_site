@@ -1,7 +1,14 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import User
+
+class User(AbstractUser):
+    name = models.CharField(max_length=100, null=True, unique=True)
+    email = models.EmailField(null=True, unique=True)
+    telegram = models.CharField(max_length=200, null=True, blank=True)
+    # avatar = 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
 class Advertisements(models.Model):
     title = models.CharField('Тайтл', max_length=50)
@@ -25,22 +32,20 @@ class MainTextBanner(models.Model):
         return self.title
     
     class Meta:
-        verbose_name = 'Вибраний продукт'
-        verbose_name_plural = 'Вибрані продукти'
+        verbose_name = 'Головний текст зверху'
+        verbose_name_plural = 'Головний текст зверху'
 
 class MainPictureBanner(models.Model):
     image = models.ImageField('Фото', upload_to='')
 
     class Meta:
-        verbose_name = 'Головний банер'
-        verbose_name_plural = 'Головні банери'
-
+        verbose_name = 'Головний банер зверху'
+        verbose_name_plural = 'Головний банер зверху'
 
 class UserData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     main_text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-
 
 class Themes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -50,7 +55,6 @@ class Themes(models.Model):
 
     def __str__(self) -> str:
         return self.title
-    
 
 class BaseMessage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)

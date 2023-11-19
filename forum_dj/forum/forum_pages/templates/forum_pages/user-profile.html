@@ -10,7 +10,7 @@
     }
 </style>
 
-<h1 class="fs-1 text-center">{{request.user}}</h1>
+<h1 class="fs-1 text-center">{{request.user.username}}</h1>
 <hr>
 <!-- {% if messages %}
     <div class="alert alert-success mt-3" role="alert">
@@ -24,7 +24,7 @@
     </div>
 {% endif %} -->
 
-<h3>Нікнейм: {{request.user}}</h3>
+<h3>Нікнейм: {{ request.user.username }}</h3>
 <h3>Дата приєднання: {{ request.user.date_joined|date:"d.m.Y" }}</h3>
 <h3>Кількість створених тем: {{ user_messages }}</h3>
 

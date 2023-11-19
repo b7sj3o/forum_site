@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Advertisements, MainPictureBanner, MainTextBanner, ThemeMessage, Themes
+from .models import Advertisements, MainPictureBanner, MainTextBanner, ThemeMessage, Themes, User
 
 admin.site.register(Advertisements)
 admin.site.register(MainTextBanner)
 admin.site.register(MainPictureBanner)
 admin.site.register(ThemeMessage)
 admin.site.register(Themes)
+admin.site.register(User)
