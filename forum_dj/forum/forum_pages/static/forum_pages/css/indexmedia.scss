@@ -6,17 +6,22 @@
         .container{
             max-width: 90%;
         }
+        &__search{
+            width: 120px;
+        }
         &__logo {
             img {
                 width: 40px;
             }
         }
         &__links {
+            gap: 20px;
             a {
-                font-size: 18px;
+                font-size: 16px;
             }
         }
         &__auth{
+            gap: 20px;
             a{
                 font-size: 18px;
             }
@@ -58,8 +63,74 @@
     .main__panel{
         width: 100%;
     }
+    #logOut{
+        padding: 10px 35px;
+        font-size: 14px;
+    }
     .side__panel{
         align-self: center;
+    }
+    .header__links {
+        position: fixed;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        z-index: 3;
+        left: -100%;
+        width: 50%;
+        height: 100vh;
+        padding: 20px 15px;
+        background-color: rgba(0, 0, 0, 0.8);
+        transition: 0.6s all;
+    
+        &._active {
+            left: 0;
+        }
+    
+        .header__link {
+            padding-right: 0;
+            border: none;
+            margin: 10px 0;
+            font-size: 20px;
+        }
+    }
+    
+    .hamburger {
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 5%;
+        transform: translateY(-50%);
+        width: 26px;
+        height: 12px;
+        margin-left: 5px;
+        span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: #fff;
+            margin-bottom: 2px;
+            transition: 0.5s all;
+        }
+    
+        &._active {
+            span {
+                margin-bottom: -2px;
+    
+                &:nth-child(1) {
+                    transform: translateY(0px) rotate(-45deg);
+                }
+    
+                &:nth-child(2) {
+                    display: none;
+                }
+    
+                &:nth-child(3) {
+                    transform: translateY(0px) rotate(45deg);
+                }
+            }
+        }
     }
     .header{
         &__logo {
@@ -74,7 +145,11 @@
                 padding: 5px 5px;
             }
         }
+        &__search{
+            width: 160px;
+        }
         &__links{
+            gap: 35px;
             a{
                 font-size: 14px;
             }
@@ -116,6 +191,7 @@
     .footer{
         margin-top: 20px;
         &__links{
+            display: none;
             a{
                 font-size: 14px;
             }
@@ -130,7 +206,8 @@
                 img{
                     width: 30px;
                     height: 30px;
-                }
+
+}
             }
         }
     }
@@ -189,14 +266,20 @@
             }
         }
         &__auth{
+            margin-right: 5px;
             a{
-                border-radius: 5px;
-                padding: 8px 14px;
+                padding: 8px 10px;
+                font-size: 14px;
             }
         }
-        &__links{
-            display: none;
+        &__search{
+            width: 120px;
         }
+    }
+    #logOut{
+        padding: 5px 15px;
+        border-radius: 0;
+        font-size: 14px;
     }
     .footer{
         &__contactus{
@@ -206,14 +289,7 @@
             justify-content: space-evenly;
             gap: 30px;
         }
-        &__links{
-            display: none;
-        }
     }
-    .dropdown__menu{
-        display: block;
-    }
-
     
 }
 @media screen and (max-width: 480px)  {
@@ -256,10 +332,17 @@
         font-size: 15px;
     }
     .header{
+        &__search{
+            width: 100px;
+            height: 25px;
+        }
         &__logo{
             img{
                 width: 30px;
             }
+        }
+        &__search{
+            width: 100px;
         }
         &__auth{
             flex-direction: column;

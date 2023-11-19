@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+
+
+<style>
+    footer {
+        display: none;
+    }
+</style>
+
+<h1 class="fs-1 text-center">{{request.user}}</h1>
+<hr>
+<!-- {% if messages %}
+    <div class="alert alert-success mt-3" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-success mt-3" role="alert">
+        A simple success alert—check it out!
+    </div>
+{% endif %} -->
+
+<h3>Нікнейм: {{request.user}}</h3>
+<h3>Дата приєднання: {{ request.user.date_joined|date:"d.m.Y" }}</h3>
+<h3>Кількість створених тем: {{ user_messages }}</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {% for forms in user_forms %}
+        <h1>{{ form.errors }}</h1>
+        <label for="">{{ forms.label}}</label>
+        {{ forms }}
+    {% endfor %}
+    <input type="submit" value="Update" class="btn btn-primary mt-2">
+</form>
+
+
+
+{% endblock %}

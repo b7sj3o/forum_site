@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'forum_pages',
     'forum_members',
     'sass_processor',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

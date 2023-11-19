@@ -6,7 +6,11 @@ urlpatterns = [
     path('sandbox', views.sandbox, name='sandbox'),
     path('themes', views.themes, name='themes'),
     path('theme/<str:user>/<str:pk>/', views.theme, name='theme'),
+    path('create-theme', views.createTheme, name='create-theme'),
+
 
     path('delete-message/<str:pk>/', views.deleteMessage, name='delete-message'),
     path('delete-theme/<str:pk>/', views.deleteTheme, name='delete-theme'),
+
+    path('user-profile/<str:pk>/', views.userProfile, name='user-profile'),
 ]

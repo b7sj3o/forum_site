@@ -36,4 +36,22 @@ for (var i = 0; i < dropdowns.length; i++) {
         }
     });
 }
+window.addEventListener('DOMContentLoaded', () => {
+    const menu = document.querySelector('.header__links'),
+        menuItem = document.querySelectorAll('.header__link'),
+        hamburger = document.querySelector('.hamburger');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('_active');
+        menu.classList.toggle('_active');
+    });
+
+    menuItem.forEach(item => {
+        item.addEventListener('click', () => {
+            hamburger.classList.toggle('_active');
+            menu.classList.toggle('_active');
+        });
+    });
+});
+
 

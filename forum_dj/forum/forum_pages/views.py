@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, ThemeMessage, Themes, SandboxMessage
 from django.contrib.auth.decorators import login_required
 import random
+from django.contrib.auth.models import User
+from .forms import UserForm
 
 # -------------- RENDER --------------
 
@@ -38,15 +40,6 @@ def sandbox(request):
 
 def themes(request):
     themes = Themes.objects.all().order_by('-created')
-
-    if request.method == 'POST':
-        theme = Themes.objects.create(
-            user=request.user,
-            title=request.POST.get('title'),
-            main_text=request.POST.get('main_text')
-        )
-        return redirect('themes')
-
     context = {'themes': themes}
     return render(request, 'forum_pages/themes.html', context)
 
@@ -66,6 +59,17 @@ def theme(request, user, pk):
     context = {'room_messages': room_messages, 'room': room}
     return render(request, 'forum_pages/theme.html', context)
 
+def createTheme(request):
+    if request.method == "POST":
+        theme = Themes.objects.create(
+            user = request.user,
+            title = request.POST.get('title'),
+            main_text = request.POST.get('main_text')
+        )
+        return redirect('themes')
+    context = {}
+    return render(request, 'forum_pages/create-theme.html', context)
+
 
 def deleteMessage(request, pk):   
     referer = request.META.get('HTTP_REFERER', None)
@@ -82,3 +86,23 @@ def deleteTheme(request, pk):
     theme.delete()
     
     return redirect('themes')
+
+def userProfile(request, pk):
+    user = User.objects.get(username=pk)
+    user_messages  = len(Themes.objects.filter(user=user))
+
+    user_forms = UserForm(instance=request.user)
+
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile', pk=request.user)
+        # else:
+            # return redirect('home')        
+
+    context = {
+        'user_messages': user_messages,
+        'user_forms': user_forms
+               }
+    return render(request, 'forum_pages/user-profile.html', context)
