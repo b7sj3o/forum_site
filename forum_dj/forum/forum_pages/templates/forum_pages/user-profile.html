@@ -23,20 +23,43 @@
         A simple success alert—check it out!
     </div>
 {% endif %} -->
-
+<img src="{{ request.user.avatar.url }}" alt="" style="width: 100px; border-radius: 100%;">
 <h3>Нікнейм: {{ request.user.username }}</h3>
 <h3>Дата приєднання: {{ request.user.date_joined|date:"d.m.Y" }}</h3>
 <h3>Кількість створених тем: {{ user_messages }}</h3>
+<h3>Кількість написаних повідомлень: {{ messages_amount }}</h3>
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+
     {% for forms in user_forms %}
         <h1>{{ form.errors }}</h1>
         <label for="">{{ forms.label}}</label>
-        {{ forms }}
+        {% if 'Telegram' in forms.label %}
+        <input type="text" name="telegram" value="@{{forms.value}}" maxlength="200" class="form-control w-25" id="id_telegram">
+        {% else %}
+            {{ forms }}
+        {% endif %}
+   
     {% endfor %}
     <input type="submit" value="Update" class="btn btn-primary mt-2">
 </form>
+<hr>
+<br>
+<h1>Останні повідомлення</h1>
+{% for theme in last_themes %}  
+<div class="user__wrapper">
+    <div class="user__line"></div>
+    <div class="user__data">
+        <div class="user__named">Нікнейм - @{{ theme.user.username }}</div>
+        <div class="user__time">{{ theme.created|timesince }} тому</div>
+        <br>
+    </div>
+    <div class="user__text"><a href="#">Тема - {{ theme.theme }}</a></div>
+    <div class="user__name">Повідомлення - {{ theme.main_text }}</div>
+    <hr>
+</div>
+{% endfor %}
 
 
 

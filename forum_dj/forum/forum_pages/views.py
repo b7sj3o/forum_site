@@ -58,51 +58,59 @@ def theme(request, user, pk):
     context = {'room_messages': room_messages, 'room': room}
     return render(request, 'forum_pages/theme.html', context)
 
+
 def createTheme(request):
     if request.method == "POST":
         theme = Themes.objects.create(
-            user = request.user,
-            title = request.POST.get('title'),
-            main_text = request.POST.get('main_text')
+            user=request.user,
+            title=request.POST.get('title'),
+            main_text=request.POST.get('main_text')
         )
         return redirect('themes')
     context = {}
     return render(request, 'forum_pages/create-theme.html', context)
 
 
-def deleteMessage(request, pk):   
+def deleteMessage(request, pk):
     referer = request.META.get('HTTP_REFERER', None)
     if 'sandbox' in referer:
         message = SandboxMessage.objects.get(id=pk)
     else:
         message = ThemeMessage.objects.get(id=pk)
     message.delete()
-    
+
     return redirect(referer)
+
 
 def deleteTheme(request, pk):
     theme = Themes.objects.get(id=pk)
     theme.delete()
-    
+
     return redirect('themes')
+
 
 def userProfile(request, pk):
     user = User.objects.get(username=pk)
-    print(user)
-    user_messages  = len(Themes.objects.filter(user=user))
+    user_messages = len(Themes.objects.filter(user=user))
+
+    last_themes = ThemeMessage.objects.filter(user=user).order_by('-created')
+    messages_amount = len(last_themes)
 
     user_forms = UserForm(instance=request.user)
-
+    for forms in user_forms:
+        print(forms.value())
     if request.method == 'POST':
-        form = UserForm(request.POST, instance=request.user)
+        form = UserForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('user-profile', pk=request.user.username)
         # else:
-            # return redirect('home')        
+            # return redirect('home')
 
     context = {
         'user_messages': user_messages,
-        'user_forms': user_forms
-               }
+        'user_forms': user_forms,
+        'last_themes': last_themes,
+        'messages_amount': messages_amount
+    }
     return render(request, 'forum_pages/user-profile.html', context)

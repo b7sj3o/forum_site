@@ -5,8 +5,10 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     name = models.CharField(max_length=100, null=True, unique=True)
     email = models.EmailField(null=True, unique=True)
-    telegram = models.CharField(max_length=200, null=True, blank=True)
-    # avatar = 
+    telegram = models.CharField(max_length=200, null=True, blank=True)  
+
+    avatar = models.ImageField(null=True, default='avatars/default_avatar.png', upload_to='avatars')
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -36,7 +38,7 @@ class MainTextBanner(models.Model):
         verbose_name_plural = 'Головний текст зверху'
 
 class MainPictureBanner(models.Model):
-    image = models.ImageField('Фото', upload_to='')
+    image = models.ImageField('Фото', upload_to='banners')
 
     class Meta:
         verbose_name = 'Головний банер зверху'
