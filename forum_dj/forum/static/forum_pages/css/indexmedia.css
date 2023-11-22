@@ -28,7 +28,7 @@
   .advert__time {
     font-size: 14px; }
   .content {
-    gap: 24px; } }
+    gap: 26px; } }
 
 @media screen and (max-width: 980px) {
   .content {
@@ -59,13 +59,15 @@
     .header__links .header__link {
       padding-right: 0;
       border: none;
-      margin: 10px 0;
+      margin: 0;
       font-size: 20px; }
+  .dropdown__menu {
+    display: none; }
   .hamburger {
     display: block;
     position: absolute;
-    right: 10px;
-    top: 5%;
+    right: 15px;
+    top: 30px;
     transform: translateY(-50%);
     width: 26px;
     height: 12px;
@@ -88,16 +90,17 @@
   .header__logo img {
     width: 30px; }
   .header__auth {
-    gap: 10px; }
+    gap: 10px;
+    margin-left: 40px; }
     .header__auth a {
       font-size: 14px;
       padding: 5px 5px; }
-  .header__search {
-    width: 160px; }
   .header__links {
-    gap: 35px; }
+    gap: 24px; }
     .header__links a {
       font-size: 14px; }
+  .searchBox {
+    margin-right: 40px; }
   .adult__trafic-theme {
     font-size: 14px; }
   .main-title-text {
@@ -128,7 +131,16 @@
       width: 30px; }
     .footer__contactus a img {
       width: 30px;
-      height: 30px; } }
+      height: 30px; }
+  .dropdown-button {
+    background-color: rgba(0, 0, 0, 0);
+    transition: 0.6s all; }
+  .dropdown-content {
+    background-color: rgba(0, 0, 0, 0);
+    transition: 0.6s all; }
+    .dropdown-content a {
+      color: wheat;
+      background-color: #474747; } }
 
 @media screen and (max-width: 640px) {
   .content {
@@ -157,12 +169,15 @@
   .first__advertisment-text {
     font-size: 12px; }
   .header__logo img {
-    width: 50px; }
+    width: 40px; }
   .header__auth {
-    margin-right: 5px; }
+    margin: 0;
+    text-align: center; }
     .header__auth a {
-      padding: 8px 10px;
-      font-size: 14px; }
+      font-size: 16px;
+      color: #c7bd82;
+      background-color: rgba(0, 0, 0, 0);
+      transition: 0.6s all; }
   .header__search {
     width: 120px; }
   #logOut {
@@ -173,7 +188,12 @@
     gap: 20px; }
   .footer .container {
     justify-content: space-evenly;
-    gap: 30px; } }
+    gap: 30px; }
+  .searchBox:hover > .searchInput {
+    width: 80px;
+    padding: 0 6px; }
+  .searchButton img {
+    width: 20px; } }
 
 @media screen and (max-width: 480px) {
   .first__advertisment-title {
@@ -209,10 +229,6 @@
     width: 100px; }
   .header__auth {
     flex-direction: column; }
-    .header__auth a {
-      font-size: 11px;
-      padding: 4px 2px;
-      text-align: center; }
   .footer__logo img {
     width: 30px; }
   .footer__contactus {

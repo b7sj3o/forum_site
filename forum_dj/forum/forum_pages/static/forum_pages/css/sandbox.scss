@@ -1,3 +1,20 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Мінімальна висота для 100% висоти вікна браузера */
+}
+
+.container{
+    flex: 1; /* Робимо основну частину гнучкою, щоб вона займала залишок висоти */
+}
+
+footer {
+    padding: 10px;
+    margin-top: auto; /* Підняти футер внизу */
+    width: 100%;
+}
 .sandbox {
     &__inner {
         display: flex;
@@ -6,6 +23,7 @@
         margin-top: 40px;
     }
     &__title {
+        text-align: center;
         font-size: 44px;
         color: black;
         font-weight: 700;
@@ -17,13 +35,16 @@
         width: 60%;
         input {
             margin-top: 15px;
+            font-size: 18px;
+            font-weight: 700;
         }
         textarea {
+            font-weight: 700;
             resize: none;
             padding: 20px;
             font-size: 15px;
             font-weight: 700;
-            color: #4c4c96;
+            color: #0d6efd;;
             height: 170px;
         }
     }
@@ -33,12 +54,12 @@
         resize: none;
         padding: 20px;
         font-size: 12px;
-        border: 1px solid #4c4c96;
+        border: 1px solid #0d6efd;;
     }
     &__button {
         padding: 15px 25px;
         color: wheat;
-        background-color: #4c4c96;
+        background-color: #0d6efd;;
         transition: all 0.3s ease-in-out;
     }
     &__info {
@@ -52,11 +73,11 @@
 
 .form__name {
     font-size: 28px;
-    color: #4c4c96;
+    color: #0d6efd;;
     font-weight: 700;
 }
 .divider {
-    margin: 20px;
+        margin: 10px;
 }
 .title__container {
     text-align: center;
@@ -68,6 +89,12 @@
         width: 2px;
         float: left;
         margin: 0 10px 0 0;
+    }
+    &__name{
+        word-wrap: break-word;
+        &:hover{
+            color: #257580;
+        }
     }
     &__title {
         font-size: 44px;
@@ -84,10 +111,18 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        img{
+            width: 20px;
+        }
+        
     }
     &__time {
         font-size: 18px;
         font-weight: 700;
+    }
+    &__delete{
+        margin-left: auto;
+        order: 1; 
     }
     &__photo {
         img {
@@ -96,9 +131,10 @@
         }
     }
     &__text {
+        word-wrap: break-word;
         margin-top: 10px;
         font-size: 20px;
         font-weight: 700;
-        color: #4c4c96;
+        color: #0d6efd;
     }
 }
