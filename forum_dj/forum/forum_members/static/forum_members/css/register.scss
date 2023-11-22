@@ -3,3 +3,20 @@
         display: none;
     }
 }
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Мінімальна висота для 100% висоти вікна браузера */
+}
+
+.container{
+    flex: 1; /* Робимо основну частину гнучкою, щоб вона займала залишок висоти */
+}
+
+.footer__login {
+    padding: 10px;
+    margin-top: auto; /* Підняти футер внизу */
+    width: 100%;
+}

@@ -19,7 +19,7 @@
     <header class="header">
         <div class="container">
             <div class="header__logo">
-                <a href="{% url 'home' %}"><img src="{% static 'forum_pages/img/forum_logo.png'%}" alt=""></a>
+                <a href="{% url 'home' %}"><img src="{% static 'forum_pages/img/icons/forum_logo.png'%}" alt=""></a>
             </div>
             <nav class="header__links">
                 <a href="{% url 'themes' %}" class="header__link">Теми</a>
@@ -27,15 +27,23 @@
                 <a href="#" class="header__link">Реклама</a>
                 <a href="#" class="header__link">Правила</a>
             </nav>
-            <form action="/search" method="get" class="header__search">
-                <input type="text" name="search" placeholder="Пошук">
-            </form>
+            <div class="form__wrapper">
+                <form method="POST" class="header__search">
+                    {% csrf_token %}
+                    <div class="search-container">
+                        <input type="text" name="q" placeholder="Пошук" autocomplete="off">
+                        <button type="submit">
+                            <img src="{% static 'forum_pages/img/icons/search.svg'%}" alt="Search">
+                        </button>
+                    </div>
+                </form>  
+            </div>        
             {% if request.user.is_authenticated %}
             <nav class="dropdown__menu">
                 <div class="dropdown">
                     <button class="dropdown-button">
                         <!-- Зображення користувача -->
-                        <img src="{% static 'forum_pages/img/forum_logo.png'%}" alt="Аватар користувача">
+                        <img src="{{request.user.avatar.url}}" alt="Аватар користувача">
             
                         <!-- Ім'я користувача -->
                         <a href="#" class="user__name">{{request.user.username}}</a>
@@ -52,22 +60,19 @@
                     <a href="{% url 'register' %}">Зареєструватись</a>
                 </div>
             {% endif %}
-            <div class="hamburger__wrapper">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div> 
-            </div>
-        </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div> 
     </header>
     {% block content %}{% endblock %}
 
-    <footer class="footer footer__login">
+    <footer class="footer">
         <div class="container">
             <div class="footer__logo">
                 <a href="#">
-                    <img src="{% static 'forum_pages/img/forum_logo.png'%}" alt="">
+                    <img src="{% static 'forum_pages/img/icons/forum_logo.png'%}" alt="">
                 </a>
             </div>
 
@@ -77,12 +82,11 @@
                 <a href="#">Правила</a>
             </div>
             <div class="footer__contactus">
-                <a href="#"><img src="{% static 'forum_pages/img/facebook.svg'%}" alt=""></a>
-                <a href="#"><img src="{% static 'forum_pages/img/instagram.svg'%}" alt=""></a>
-                <a href="#"><img src="{% static 'forum_pages/img/telegram.svg'%}" alt=""></a>
+                <a href="#"><img src="{% static 'forum_pages/img/icons/facebook.svg'%}" alt=""></a>
+                <a href="#"><img src="{% static 'forum_pages/img/icons/instagram.svg'%}" alt=""></a>
+                <a href="#"><img src="{% static 'forum_pages/img/icons/telegram.svg'%}" alt=""></a>
             </div>
-        </footer>
-        </div>
+    </footer>
     <script src="{% static 'forum_pages/js/script.js'%}"></script>    
 </body>
 </html>

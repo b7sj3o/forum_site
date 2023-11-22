@@ -39,19 +39,75 @@ for (var i = 0; i < dropdowns.length; i++) {
 window.addEventListener('DOMContentLoaded', () => {
     const menu = document.querySelector('.header__links'),
         menuItem = document.querySelectorAll('.header__link'),
-        hamburger = document.querySelector('.hamburger');
+        logoItem = document.querySelector('.header__logo'),
+        hamburger = document.querySelector('.hamburger'),
+        dropdownMenu = document.querySelector('.dropdown__menu'),
+        authBlock = document.querySelector('.header__auth');
+
+    // Функція для перевірки розширення вікна та обробки блоку .header__auth
+    const handleAuthBlock = () => {
+        if (authBlock) {
+            if (window.innerWidth <= 768) {
+                menu.appendChild(authBlock);
+                authBlock.style.display = 'none';
+            } else {
+                document.querySelector('.container').appendChild(authBlock);
+                authBlock.style.display = 'flex';
+            }
+        }
+    };
+
+    // Викликаємо функцію при завантаженні сторінки
+    handleAuthBlock();
+
+    // Додаємо обробник для реагування на зміну розміру вікна
+    window.addEventListener('resize', () => {
+        handleAuthBlock();
+    });
 
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('_active');
         menu.classList.toggle('_active');
+
+        // Додаємо видалення _active та переміщення елементів для .header__auth
+        if (authBlock) {
+            if (hamburger.classList.contains('_active')) {
+                menu.appendChild(authBlock);
+                authBlock.style.display = 'flex';
+            } else {
+                document.querySelector('.container').appendChild(authBlock);
+                authBlock.style.display = 'none';
+            }
+        }
+
+        // Перевіряємо, чи dropdownMenu не є null перед роботою з ним
+        if (dropdownMenu) {
+            // Додаємо видалення _active та переміщення елементів для .dropdown__menu
+            if (hamburger.classList.contains('_active')) {
+                menu.appendChild(dropdownMenu);
+                dropdownMenu.style.display = 'block';
+            } else {
+                document.querySelector('.container').appendChild(dropdownMenu);
+                dropdownMenu.style.display = 'none';
+            }
+        }
     });
 
     menuItem.forEach(item => {
         item.addEventListener('click', () => {
             hamburger.classList.toggle('_active');
             menu.classList.toggle('_active');
+
+            if (authBlock) {
+                authBlock.classList.remove('_active');
+                document.querySelector('.container').appendChild(authBlock);
+                authBlock.style.display = 'none';
+            }
+
+            if (dropdownMenu) {
+                dropdownMenu.style.display = 'none';
+            }
         });
     });
 });
-
 
