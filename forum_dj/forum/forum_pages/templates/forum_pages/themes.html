@@ -13,18 +13,20 @@
     <div class="divider"></div>
     <a href="{% url 'create-theme' %}"><button class="btn btn-primary">Створити тему</button></a>
     {% for theme in themes %}
-        <div class="user__wrapper">
-            <div class="user__line"></div>
-            <div class="user__data">
-                <div class="user__photo"><a href="#"><img src="{{request.user.avatar.url}}" class="side__panel-photo" alt=""></a></div>
-                <div class="user__name">@{{ theme.user.username }}</div>
-                <div class="user__time">{{ theme.created|timesince }} тому</div>
-                {% if request.user == theme.user %}
-                    <a href="{% url 'delete-theme' theme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
-                {% endif %}
+        <div class="user__wrapper-interface">
+            <div class="user__line-interface"></div>
+            <div class="user__data-interface">
+                <div class="user__photo-interface"><a href="#"><img src="{{request.user.avatar.url}}" class="side__panel-photo" alt=""></a></div>
+                <div class="user__name-interface">@{{ theme.user.username }}</div>
+                <div class="user__time-interface">{{ theme.created|timesince }} тому</div>
             </div>
-            <div class="user__text"><a href="{% url 'theme' theme.user.username theme.id %}">{{ theme.title }}</a></div>
-            <div class="user__name">{{ theme.main_text }}</div>
+            <div class="user__content-interface">
+                <div class="user__title-interface"><a href="{% url 'theme' theme.user.username theme.id %}">{{ theme.title }}</a></div>
+                <div class="user__text-interface">{{ theme.main_text }}</div>
+            </div>
+            {% if request.user == theme.user %}
+                    <a href="{% url 'delete-theme' theme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
+            {% endif %}
         </div>
     {% endfor %}
 </div>

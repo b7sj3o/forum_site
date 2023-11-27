@@ -33,17 +33,21 @@
                 {% endif %}
                 <div class="sandbox__info">
                     {% for message in messages  %}
-                        <div class="user__wrapper">
-                            <div class="user__line"></div>
-                            <div class="user__data">
-                                <div class="user__photo"><a href="#"><img src="{% static 'forum_pages/img/forum_logo.png'%}" class="side__panel-photo" alt=""></a></div>
-                                <div class="user__name">@{{ message.user.username }}</div>
-                                <div class="user__time">{{ message.created|timesince }} тому</div>
+                        <div class="user__wrapper-interface">
+                            <div class="user__line-interface"></div>
+                            <div class="user__theme-interface">
+                                <div class="user__photo-interface"><a href="#"><img src="{{request.user.avatar.url}}" class="side__panel-photo" alt=""></a></div>
+                                <div class="user__name-interface">@{{ message.user.username }}</div>
+                                <div class="user__time-interface">{{ message.created|timesince }} тому</div>
+                            </div>
+                            <div class="user__theme-wrapper">
+                                <div class="user__text-interface">{{ message.main_text }}</div>
                                 {% if request.user == message.user %}
-                                    <a href="{% url 'delete-message' message.id %}">Delete</a>
+                                        <div class="user__delete-interface">
+                                            <a href="{% url 'delete-message' message.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
+                                        </div>
                                 {% endif %}
                             </div>
-                            <div class="user__text">{{ message.main_text }}</div>
                         </div>
                     {% endfor %}
                 </div>

@@ -82,41 +82,42 @@ footer {
 .title__container {
     text-align: center;
 }
-.user {
-    &__line {
+.user{
+    &__line-interface{
         background-color: rgb(80, 79, 79, 0.5);
         height: 100%;
         width: 2px;
         float: left;
         margin: 0 10px 0 0;
     }
-    &__name{
+    &__text-interface{
+        max-width: 60%;
         word-wrap: break-word;
-        &:hover{
-            color: #257580;
-        }
     }
-    &__title {
+    &__title-interface{
         font-size: 44px;
         color: black;
         font-weight: 700;
     }
-    &__wrapper {
+    &__wrapper-interface{
+        display: flex;
+        align-items: center;
         width: 100%;
         background-color: rgba(203, 203, 203, 0.297);
         padding: 25px;
         margin-top: 20px;
-    }
-    &__data {
-        display: flex;
-        align-items: center;
-        gap: 10px;
         img{
             width: 20px;
         }
-        
     }
-    &__time {
+    &__data-interface{
+        display: flex;
+        align-items: center;
+        width: 40%;
+        gap: 50px;
+        margin-right: 20px;
+    }
+    &__time-interface{
         font-size: 18px;
         font-weight: 700;
     }
@@ -124,17 +125,36 @@ footer {
         margin-left: auto;
         order: 1; 
     }
-    &__photo {
+    &__photo-interface{
         img {
             width: 30px;
             border-radius: 100%;
         }
     }
-    &__text {
-        word-wrap: break-word;
-        margin-top: 10px;
+    &__content-interface{
+        width: 60%;
+        display: flex;
+        gap: 10%;
+        align-items: center;
+    }
+    &__title-interface{
         font-size: 20px;
         font-weight: 700;
         color: #0d6efd;
+        width: 20%;
+        word-wrap: break-word;
+    }
+    &__theme-interface{
+        display: flex;
+        align-items: center;
+        width: 40%;
+        gap: 50px;
+        margin-right: 20px;
+    }
+    &__theme-wrapper{
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }

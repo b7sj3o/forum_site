@@ -116,6 +116,7 @@
     &__first {
         width: 50%;
         display: inline-flex;
+        align-items: center;
     }
     &__second {
         width: 50%;
@@ -124,7 +125,7 @@
         flex-direction: row;
         margin-right: 10px;
     }
-    &__name {
+    &__nickname {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

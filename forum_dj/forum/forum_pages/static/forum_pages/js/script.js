@@ -111,3 +111,12 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.getElementById("openBtn").addEventListener("click", function() {
+    document.getElementById("edit").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+});
+
+function closeOverlay() {
+    document.getElementById("edit").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
