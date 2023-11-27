@@ -3,28 +3,27 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    name = models.CharField(max_length=100, null=True, unique=True)
+    username = models.CharField(max_length=100, null=True, unique=True)
     email = models.EmailField(null=True, unique=True)
     telegram = models.CharField(max_length=200, null=True, blank=True)  
 
-    avatar = models.ImageField(null=True, default='avatars/default_avatar.png', upload_to='avatars')
+    avatar = models.ImageField(null=True, default='avatars/default_avatar.png', upload_to='forum_pages/img/avatars')
 
-    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
 class Advertisements(models.Model):
     title = models.CharField('Тайтл', max_length=50)
     text = models.TextField('Повідомлення')
+    name = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     time = models.DateTimeField('Час', auto_now_add=True)
-    name = models.TextField('Нік користувача')
 
 
     def __str__(self) -> str:
         return f"{self.title} - {self.name}"
     
     class Meta:
-        verbose_name = 'Реклама'
-        verbose_name_plural = 'Реклами'
+        verbose_name = 'Оголошення'
+        verbose_name_plural = 'Оголошення'
 
 class MainTextBanner(models.Model):
     title = models.CharField('Тайтл', max_length=100)
@@ -38,7 +37,7 @@ class MainTextBanner(models.Model):
         verbose_name_plural = 'Головний текст зверху'
 
 class MainPictureBanner(models.Model):
-    image = models.ImageField('Фото', upload_to='banners')
+    image = models.ImageField('Фото', upload_to='forum_pages/img/banners')
 
     class Meta:
         verbose_name = 'Головний банер зверху'

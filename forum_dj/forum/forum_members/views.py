@@ -24,18 +24,16 @@ def logout_user(request):
     return redirect('home')
 
 def register_user(request):
+    form = RegisterUserForm()
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data['email']
-            password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=password)
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
             login(request, user)
-            messages.success(request, 'Ви успішно зареєструвались')
             return redirect('home')
+        else:
+            messages.error(request, 'An error occurred during registration')
 
-    else:
-        form = RegisterUserForm()
-    
     return render(request, 'forum_members/register.html', {'form': form})

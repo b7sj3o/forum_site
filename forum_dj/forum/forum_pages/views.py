@@ -3,16 +3,22 @@ from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData,
 from django.contrib.auth.decorators import login_required
 import random
 from .forms import UserForm
+from django.db.models import Q
+
 
 # -------------- RENDER --------------
 
 
 def index(request):
     advertisements = Advertisements.objects.all().order_by('-id')
-    chosen_product = MainTextBanner.objects.get()
 
-    main_banners = MainPictureBanner.objects.all()
-    main_banner = random.choice(main_banners)
+    try:
+        chosen_product = MainTextBanner.objects.get()
+        main_banners = MainPictureBanner.objects.all()
+        main_banner = random.choice(main_banners)
+    except:
+        chosen_product = None
+        main_banner = None
 
     last_messages = SandboxMessage.objects.all().order_by('-id')[:5]
     return render(request, 'forum_pages/index.html', {
@@ -91,14 +97,13 @@ def deleteTheme(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(username=pk)
+    cuser = user
     user_messages = len(Themes.objects.filter(user=user))
 
     last_themes = ThemeMessage.objects.filter(user=user).order_by('-created')
     messages_amount = len(last_themes)
 
     user_forms = UserForm(instance=request.user)
-    for forms in user_forms:
-        print(forms.value())
     if request.method == 'POST':
         form = UserForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -106,11 +111,37 @@ def userProfile(request, pk):
             return redirect('user-profile', pk=request.user.username)
         # else:
             # return redirect('home')
+        
 
     context = {
+        'cuser': cuser,
         'user_messages': user_messages,
         'user_forms': user_forms,
         'last_themes': last_themes,
         'messages_amount': messages_amount
     }
     return render(request, 'forum_pages/user-profile.html', context)
+
+
+def search(request):
+    q = request.GET.get('q', '')
+    keywords = q.split()
+
+    query = Q()
+
+    for keyword in keywords:
+        query |= Q(title__icontains=keyword) | Q(main_text__icontains=keyword)
+
+    themes = Themes.objects.filter(query).order_by('-created')
+
+    themes_count = themes.count()
+    if not themes_count:
+        themes_count = 0
+
+    context = {
+        'themes': themes,
+        'themes_count': themes_count,
+        'is_searched': True
+    }
+
+    return render(request, 'forum_pages/themes.html', context)
