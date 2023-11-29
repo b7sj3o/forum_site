@@ -3,11 +3,12 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    username = models.CharField(max_length=100, null=True, unique=True)
-    email = models.EmailField(null=True, unique=True)
-    telegram = models.CharField(max_length=200, null=True, blank=True)  
+    username = models.CharField(max_length=100, null=True, unique=True, verbose_name='Ваш нікнейм')
+    email = models.EmailField(null=True, unique=True, verbose_name='Ваш E-mail')
+    telegram = models.CharField(max_length=200, null=True, blank=True, verbose_name='Ваш телеграм нікнейм')  
+    is_show_telegram = models.BooleanField(default=True, verbose_name='Показувати телеграм')
+    avatar = models.ImageField(null=True, default='forum_pages/img/avatars/default_avatar.png', upload_to='forum_pages/img/avatars', verbose_name='Фото профілю')
 
-    avatar = models.ImageField(null=True, default='avatars/default_avatar.png', upload_to='forum_pages/img/avatars')
 
     REQUIRED_FIELDS = []
 

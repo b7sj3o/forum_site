@@ -15,6 +15,20 @@
     gap: 20px; }
     .header__auth a {
       font-size: 18px; }
+  .user__adv-title {
+    font-size: 20px; }
+  .user__box-footer {
+    gap: 20px;
+    height: 40px; }
+    .user__box-footer h3 {
+      font-size: 14px;
+      margin-bottom: 0; }
+  .user__box-header {
+    padding-top: 30px; }
+    .user__box-header button {
+      font-size: 14px; }
+    .user__box-header h1 {
+      font-size: 36px; }
   .main-title-text {
     font-size: 22px; }
   .first__advertisment-title a {
@@ -41,6 +55,27 @@
     font-size: 14px; }
   .side__panel {
     align-self: center; }
+  hr {
+    margin: 0rem 0; }
+  .user__wrapper {
+    padding: 15px; }
+  .user__data {
+    align-items: center;
+    gap: 20px; }
+  .user__named {
+    font-size: 14px; }
+  .user__time {
+    font-size: 14px; }
+  .user__text {
+    font-size: 14px; }
+  .user__nickname {
+    font-size: 14px; }
+  .user__box-footer {
+    gap: 0; }
+    .user__box-footer #user__message-amount {
+      margin-left: 20px; }
+    .user__box-footer h3 {
+      font-size: 12px; }
   .header__links {
     position: fixed;
     flex-direction: column;
@@ -140,9 +175,21 @@
     transition: 0.6s all; }
     .dropdown-content a {
       color: wheat;
-      background-color: #474747; } }
+      background-color: #474747; }
+  .form__wrapper {
+    display: block;
+    margin: 0 auto; }
+  .search-container input {
+    height: 35px;
+    width: 340px; }
+    .search-container input::placeholder {
+      font-size: 14px; }
+  .search-container button {
+    height: 35px; }
+    .search-container button img {
+      width: 30px; } }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 680px) {
   .content {
     gap: 15px; }
   .side__panel-userinfo {
@@ -168,8 +215,6 @@
     font-size: 14px; }
   .first__advertisment-text {
     font-size: 12px; }
-  .header__logo img {
-    width: 40px; }
   .header__auth {
     margin: 0;
     text-align: center; }
@@ -193,7 +238,19 @@
     width: 80px;
     padding: 0 6px; }
   .searchButton img {
-    width: 20px; } }
+    width: 30px; }
+  .user__wrapper {
+    padding-left: 0;
+    padding-right: 0; }
+  .user__text {
+    width: 35%; }
+  .user__box-header button {
+    font-size: 12px; }
+  .user__box-header h1 {
+    font-size: 32px;
+    margin-top: 10px; }
+  .user__box-footer h3 {
+    font-size: 10px; } }
 
 @media screen and (max-width: 480px) {
   .first__advertisment-title {
@@ -232,6 +289,34 @@
   .footer__logo img {
     width: 30px; }
   .footer__contactus {
-    gap: 20px; } }
+    gap: 20px; }
+  .search-container {
+    margin-bottom: 10px; }
+    .search-container input {
+      height: 25px;
+      width: 120px; }
+    .search-container button {
+      height: 25px; }
+      .search-container button img {
+        width: 25px;
+        padding: 5px; }
+  .hamburger {
+    top: 27px; }
+  .user__box-header button {
+    font-size: 10px; }
+  .user__box-header h1 {
+    font-size: 26px;
+    margin-top: 16px; }
+  .user__info {
+    width: 55%; }
+  .user__data {
+    width: 70%;
+    gap: 10;
+    justify-content: space-between; }
+  .user__text {
+    width: 40%;
+    margin: 0 auto; }
+  .user__nickname {
+    display: none; } }
 
 /*# sourceMappingURL=indexmedia.css.map */

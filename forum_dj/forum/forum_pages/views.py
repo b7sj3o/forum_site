@@ -76,6 +76,17 @@ def createTheme(request):
     context = {}
     return render(request, 'forum_pages/create-theme.html', context)
 
+def createAdvertisment(request):
+    if request.method == "POST":
+            advert = Advertisements.objects.create(
+                name=request.user,
+                title=request.POST.get('title'),
+                text=request.POST.get('main_text')
+            )
+            return redirect('home')
+    context = {}
+    return render(request, 'forum_pages/create-advertisment.html', context)
+
 
 def deleteMessage(request, pk):
     referer = request.META.get('HTTP_REFERER', None)

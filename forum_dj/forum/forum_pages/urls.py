@@ -6,7 +6,9 @@ urlpatterns = [
     path('sandbox', views.sandbox, name='sandbox'),
     path('themes', views.themes, name='themes'),
     path('theme/<str:user>/<str:pk>/', views.theme, name='theme'),
+
     path('create-theme', views.createTheme, name='create-theme'),
+    path('create-advertisment', views.createAdvertisment, name='create-advertisment'),
 
 
     path('delete-message/<str:pk>/', views.deleteMessage, name='delete-message'),

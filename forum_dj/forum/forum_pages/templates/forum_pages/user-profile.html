@@ -10,57 +10,81 @@
     }
 </style>
 
-<h1 class="fs-1 text-center">{{request.user.username}}</h1>
-<hr>
-<!-- {% if messages %}
-    <div class="alert alert-success mt-3" role="alert">
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    </div>
-{% else %}
-    <div class="alert alert-success mt-3" role="alert">
-        A simple success alert—check it out!
-    </div>
-{% endif %} -->
-<img src="{{ request.user.avatar.url }}" alt="" style="width: 100px; border-radius: 100%;">
-<h3>Нікнейм: {{ request.user.username }}</h3>
-<h3>Дата приєднання: {{ request.user.date_joined|date:"d.m.Y" }}</h3>
-<h3>Кількість створених тем: {{ user_messages }}</h3>
-<h3>Кількість написаних повідомлень: {{ messages_amount }}</h3>
+<div class="container">
+    <div class="user__box">
+        <div class="user__box-header">
+            <img src="{{ cuser.avatar.url }}" alt="">
+            {% if request.user.username == cuser.username %}
+                <h1>Вітаємо,{{ cuser.username }}</h1>
+                <button class="open-btn" id="openBtn">Змінити профіль</button>
 
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    {% for forms in user_forms %}
-        <h1>{{ form.errors }}</h1>
-        <label for="">{{ forms.label}}</label>
-        {% if 'Telegram' in forms.label %}
-        <input type="text" name="telegram" value="@{{forms.value}}" maxlength="200" class="form-control w-25" id="id_telegram">
-        {% else %}
-            {{ forms }}
-        {% endif %}
-   
-    {% endfor %}
-    <input type="submit" value="Update" class="btn btn-primary mt-2">
-</form>
-<hr>
-<br>
-<h1>Останні повідомлення</h1>
-{% for theme in last_themes %}  
-<div class="user__wrapper">
-    <div class="user__line"></div>
-    <div class="user__data">
-        <div class="user__named">Нікнейм - @{{ theme.user.username }}</div>
-        <div class="user__time">{{ theme.created|timesince }} тому</div>
-        <br>
+            {% else %}
+                <h1>{{ cuser.username }}</h1>
+            {% endif %}
+        </div>
+        <!-- ТУТ ДОБАВИТИ СТИЛІ -->
+        <div class="bg-body-secondary">
+            {% if cuser.is_show_telegram %}
+                {{ cuser.telegram }}
+            {% endif %}
+            {{ cuser.email }}
+        </div>
+        <div class="user__box-footer">
+            <h3>Дата приєднання: {{ cuser.date_joined|date:"d.m.Y" }}</h3>
+            <h3 id="user__message-amount">Кількість створених тем: {{ user_messages }}</h3>
+            <h3>Кількість написаних повідомлень: {{ messages_amount }}</h3>
+        </div>
     </div>
-    <div class="user__text"><a href="#">Тема - {{ theme.theme }}</a></div>
-    <div class="user__name">Повідомлення - {{ theme.main_text }}</div>
     <hr>
+    <br>
+        {% if request.user.username == cuser.username %}
+            <div class="user__adv-title">Ваша активність</div>
+        {% else %}
+            <div class="user__adv-title">Активність {{ cuser.username }}</div>
+        {% endif %}
+        <div class="user__adv">
+            {% for theme in last_themes %}  
+                <div class="user__wrapper">
+                    <div class="user__line"></div>
+                    <div class="user__data">
+                        <div class="user__named">@{{ theme.user.username }}</div>
+                        <div class="user__time">{{ theme.created|timesince }}</div>
+                        <br>
+                    </div>
+                    <div class="user__info">
+                        <div class="user__text"><a href="#">{{ theme.theme }}</a></div>
+                        <div class="user__nickname">{{ theme.main_text }}</div>
+                    </div>
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
 </div>
-{% endfor %}
-
-
-
+<div class="overlay" id="overlay">
+    <div class="modal" id="edit">
+        <div class="modal__close" onclick="closeOverlay()">&times;</div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for form in user_forms %}
+                <h1>{{ form.errors }}</h1>
+                {% if form.name == 'avatar' %}
+                    <label for="">{{ form.label}}</label>
+                    <img src="{{ form.value.url }}" alt="Avatar" style="width: 50px;">
+                    {{ form }}
+                <!-- ТУТ ЗРОБИ ЯК Я ТОБІ СКИНУВ (чекбокс) -->
+                {% elif form.name == 'is_show_telegram' %}
+                    <div class="form-check d-flex align-items-center w-75">
+                        <label for="">{{ form.label }}</label>
+                        {{ form }}
+                    </div>
+                {% else %}
+                        <label for="">{{ form.label}}</label>
+                        {{ form }}
+                {% endif %}
+            {% endfor %}
+            <input type="submit" value="Update" class="btn btn-primary mt-2">
+        </form>
+        
+    </div>
+</div>
 {% endblock %}

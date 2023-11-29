@@ -13,7 +13,7 @@
                     {% for i in messages %}
                         <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
                             {{ i }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -24,14 +24,14 @@
                             <div class="first__advertisment-text">{{ chosen_product.text }}</div>
                         </section>
                         <div class="divider"></div>
-
-                        <section class="first__banner">
+                        <section class="first__banner"> 
                             <a href="#">
                                 <img src="{{ main_banner.image.url }}" alt="Banner">
                             </a>
                         </section>
                         <div class="divider"></div>
-                        <a href="{% url 'create-theme' %}"><button class="btn btn-primary w-50 mb-3">Створити тему</button></a>
+                        <a href="{% url 'create-theme' %}"><button class="btn btn-primary w-100 mb-3">Створити тему</button></a>
+                        <a href="{% url 'create-advertisment' %}"><button class="btn btn-primary w-100 mb-3">Створити оголошення</button></a>
                         <div class="advertisments__title">Оголошення</div>
                         <section class="advertisments">
                             {% for i in advertisements %}
@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="advert__second">
                                         <li class="advert__time">{{ i.time|timesince }} тому</li>
-                                        <li class="advert__name"><a href="">{{ i.name }}</a></li>
+                                        <li class="advert__name"><a href="{% url 'user-profile' i.name %}">@{{ i.name }}</a></li>
                                     </div>
                                 </ul>
                             {% endfor %}
@@ -136,9 +136,9 @@
                             <div class="side__panel-message">
                                 {% for i in last_messages %}
                                     <div class="side__panel-userinfo">
-                                        <a href="#"><img src="{{request.user.avatar.url}}" class="side__panel-photo" alt=""></a>
+                                        <a href="#"><img src="{{i.user.avatar.url}}" class="side__panel-photo" alt=""></a>
                                         <div class="side__panel-userData">
-                                            <div class="side__panel-author">{{ i.user.username }}</div>
+                                            <div class="side__panel-author"><a href="{% url 'user-profile' i.user.username %}">@{{ i.user.username }}</a></div>
                                             <div class="side__panel-time">{{ i.created|timesince }} тому</div>
                                             <div class="side__panel-text">{{ i.main_text }}</div>
                                         </div>

@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ClearableFileInput, ModelForm
 from .models import User
 from django.core.exceptions import ValidationError
 
@@ -6,7 +6,8 @@ from django.core.exceptions import ValidationError
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'telegram', 'avatar']
+        fields = ['username', 'email', 'telegram', 'avatar', 'is_show_telegram']
+        
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
@@ -15,6 +16,8 @@ class UserForm(ModelForm):
         self.fields['email'].widget.attrs['class'] = 'form-control w-25'
         self.fields['telegram'].widget.attrs['class'] = 'form-control w-25'
         self.fields['avatar'].widget.attrs['class'] = 'form-control w-25'
+        self.fields['is_show_telegram'].widget.attrs['class'] = 'form-check-input'
+        self.fields['is_show_telegram'].widget.attrs['id'] = 'flexCheckChecked'
 
     def clean_username(self):
         username = self.cleaned_data['username']

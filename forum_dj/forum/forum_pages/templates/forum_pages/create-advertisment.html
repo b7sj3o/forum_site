@@ -15,13 +15,13 @@
             <div class="title__container">
                 <label for="title" class="form__name">Заголовок</label>
                 <input type="text" id="title" class="sandbox__text" name="title" required />
-                <label for="main_text" class="form__name">Основне питання</label>
+                <label for="main_text" class="form__name">Основний текст</label>
                 <textarea type="text" id="main_text" class="sandbox__text" name="main_text" required ></textarea>
             </div>
-            <input type="submit" class="sandbox__button" value="Створити тему" class="submit-inp">
+            <input type="submit" class="sandbox__button" value="Створити оголошення" class="submit-inp">
         </form>
 {% else %}
-    <div class="alert alert-warning w-100 fs-4" role="alert">Щоб створювати теми ви повинні <a href="{% url 'login' %}">увійти в акаунт</a></div>
+    <div class="alert alert-warning w-100 fs-4" role="alert">Щоб створювати оголошення ви повинні <a href="{% url 'login' %}">увійти в акаунт</a></div>
 {% endif %} 
    </div>
 {% endblock %}
