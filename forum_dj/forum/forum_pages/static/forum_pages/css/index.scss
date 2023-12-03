@@ -51,24 +51,24 @@
     box-shadow: 1px -5px 10px 0 rgba(0.2, 0.2, 0.2, 0.2);
     border-radius: 10px;
     align-self: start;
-
     &-body {
         padding: 20px 10px 0px 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-
     &-userinfo {
         display: flex;
-        gap: 20px;
+        gap: 25px;
         a {
             width: 30px;
             height: 30px;
         }
     }
     &-author {
-        color: rgb(0, 0, 0);
+        a{
+            color: rgb(0, 0, 0);
+        }
     }
     &-time {
         color: rgb(0, 0, 0);
@@ -82,8 +82,8 @@
         font-size: 15px;
     }
     &-photo {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         border-radius: 100%;
     }
     .divider {

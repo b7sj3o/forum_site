@@ -107,8 +107,12 @@
             padding: 5px;
         }
         &__data{
-            align-items: center;
-            gap: 20px;
+            gap: 5px;
+        }
+        &__photo{
+            img{
+                width: 30px;
+            }
         }
         &__named{
             font-size: 14px;
@@ -120,7 +124,7 @@
             font-size: 14px;
         }
         &__nickname{
-            font-size: 14px;
+            font-size: 17px;
         }
     }
     .user__box{
@@ -256,7 +260,6 @@
         
     }
     .footer{
-        margin-top: 20px;
         &__links{
             display: none;
             a{
@@ -288,6 +291,11 @@
         a{
             color: wheat;
             background-color: rgb(71, 71, 71);
+        }
+    }
+    .modal{
+        form{
+            margin-top: 20px;
         }
     }
     .form__wrapper{
