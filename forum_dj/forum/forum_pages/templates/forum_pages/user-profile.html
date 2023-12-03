@@ -23,11 +23,16 @@
             {% endif %}
         </div>
         <!-- ТУТ ДОБАВИТИ СТИЛІ -->
-        <div class="bg-body-secondary">
-            {% if cuser.is_show_telegram %}
-                {{ cuser.telegram }}
-            {% endif %}
-            {{ cuser.email }}
+        <div class="show-wrapper">
+            <h3 class="show-tg-text">
+                {% if cuser.is_show_telegram %}
+                    Telegram:
+                    {{ cuser.telegram }}
+                {% endif %}
+            </h3>
+            <h3 class="show-email-text">
+                Email:{{ cuser.email }}
+            </h3>
         </div>
         <div class="user__box-footer">
             <h3>Дата приєднання: {{ cuser.date_joined|date:"d.m.Y" }}</h3>
@@ -52,8 +57,8 @@
                         <br>
                     </div>
                     <div class="user__info">
-                        <div class="user__text"><a href="#">{{ theme.theme }}</a></div>
-                        <div class="user__nickname">{{ theme.main_text }}</div>
+                        <div class="user__nickname"><a href="#">{{ theme.theme }}</a></div>
+                        <div class="user__text">{{ theme.main_text }}</div>
                     </div>
                     <hr>
                 </div>
@@ -73,16 +78,18 @@
                     {{ form }}
                 <!-- ТУТ ЗРОБИ ЯК Я ТОБІ СКИНУВ (чекбокс) -->
                 {% elif form.name == 'is_show_telegram' %}
-                    <div class="form-check d-flex align-items-center w-75">
+                    <div  class="form-check d-flex justify-content-center  align-items-center w-75">
                         <label for="">{{ form.label }}</label>
-                        {{ form }}
+                        <div class="checkbox__wrapper">
+                            {{ form }}
+                        </div>
                     </div>
                 {% else %}
                         <label for="">{{ form.label}}</label>
                         {{ form }}
                 {% endif %}
             {% endfor %}
-            <input type="submit" value="Update" class="btn btn-primary mt-2">
+            <input type="submit" value="Update" class="btn btn-primary mt-2 border-0 mb-30px">
         </form>
         
     </div>

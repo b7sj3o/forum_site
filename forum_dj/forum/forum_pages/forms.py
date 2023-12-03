@@ -16,8 +16,8 @@ class UserForm(ModelForm):
         self.fields['email'].widget.attrs['class'] = 'form-control w-25'
         self.fields['telegram'].widget.attrs['class'] = 'form-control w-25'
         self.fields['avatar'].widget.attrs['class'] = 'form-control w-25'
-        self.fields['is_show_telegram'].widget.attrs['class'] = 'form-check-input'
-        self.fields['is_show_telegram'].widget.attrs['id'] = 'flexCheckChecked'
+        # self.fields['is_show_telegram'].widget.attrs['class'] = 'form-check-input'
+        # self.fields['is_show_telegram'].widget.attrs['id'] = 'flexCheckChecked'
 
     def clean_username(self):
         username = self.cleaned_data['username']

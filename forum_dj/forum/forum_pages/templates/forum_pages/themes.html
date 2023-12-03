@@ -17,16 +17,20 @@
             <div class="user__line-interface"></div>
             <div class="user__data-interface">
                 <div class="user__photo-interface"><a href="#"><img src="{{theme.user.avatar.url}}" class="side__panel-photo" alt=""></a></div>
-                <div class="user__name-interface"><a href="{% url 'user-profile' theme.user.username %}">@{{ theme.user.username }}</a></div>
-                <div class="user__time-interface">{{ theme.created|timesince }} тому</div>
+                <div class="user__information">
+                    <div class="user__name-interface"><a href="{% url 'user-profile' theme.user.username %}">@{{ theme.user.username }}</a></div>
+                    <div class="user__time-interface">{{ theme.created|timesince }} тому</div>
+                </div>
+                {% if request.user.username == theme.user.username or request.user.username == 'admin' %}
+                    <div class="user__delete-interface">
+                        <a href="{% url 'delete-theme' theme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
+                    </div>
+                {% endif %}
             </div>
             <div class="user__content-interface">
                 <div class="user__title-interface"><a href="{% url 'theme' theme.user.username theme.id %}">{{ theme.title }}</a></div>
                 <div class="user__text-interface">{{ theme.main_text }}</div>
             </div>
-            {% if request.user.username == theme.user.username or request.user.username == 'admin' %}
-                    <a href="{% url 'delete-theme' theme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
-            {% endif %}
         </div>
     {% endfor %}
 </div>

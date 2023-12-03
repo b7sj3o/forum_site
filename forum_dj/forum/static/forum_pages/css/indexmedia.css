@@ -19,7 +19,8 @@
     font-size: 20px; }
   .user__box-footer {
     gap: 20px;
-    height: 40px; }
+    height: 40px;
+    padding: 25px; }
     .user__box-footer h3 {
       font-size: 14px;
       margin-bottom: 0; }
@@ -28,7 +29,10 @@
     .user__box-header button {
       font-size: 14px; }
     .user__box-header h1 {
-      font-size: 36px; }
+      font-size: 36px;
+      margin-top: 5px; }
+    .user__box-header img {
+      width: 85px; }
   .main-title-text {
     font-size: 22px; }
   .first__advertisment-title a {
@@ -58,7 +62,7 @@
   hr {
     margin: 0rem 0; }
   .user__wrapper {
-    padding: 15px; }
+    padding: 5px; }
   .user__data {
     align-items: center;
     gap: 20px; }
@@ -181,13 +185,21 @@
     margin: 0 auto; }
   .search-container input {
     height: 35px;
-    width: 340px; }
+    width: 320px; }
     .search-container input::placeholder {
       font-size: 14px; }
   .search-container button {
     height: 35px; }
     .search-container button img {
-      width: 30px; } }
+      width: 30px; }
+  .modal {
+    width: 500px; }
+  .show-email-text, .show-tg-text {
+    font-size: 20px;
+    color: #212529;
+    font-weight: 700; }
+  .user__adv {
+    padding: 0px; } }
 
 @media screen and (max-width: 680px) {
   .content {
@@ -239,20 +251,23 @@
     padding: 0 6px; }
   .searchButton img {
     width: 30px; }
-  .user__wrapper {
-    padding-left: 0;
-    padding-right: 0; }
-  .user__text {
-    width: 35%; }
   .user__box-header button {
     font-size: 12px; }
   .user__box-header h1 {
     font-size: 32px;
     margin-top: 10px; }
   .user__box-footer h3 {
-    font-size: 10px; } }
+    font-size: 10px; }
+  .modal {
+    width: 300px; }
+    .modal form label {
+      font-size: 15px; }
+    .modal form input {
+      font-size: 14px; } }
 
 @media screen and (max-width: 480px) {
+  .btn-primary {
+    font-size: 11px; }
   .first__advertisment-title {
     margin-bottom: 5px; }
     .first__advertisment-title a {
@@ -290,16 +305,14 @@
     width: 30px; }
   .footer__contactus {
     gap: 20px; }
-  .search-container {
-    margin-bottom: 10px; }
-    .search-container input {
-      height: 25px;
-      width: 120px; }
-    .search-container button {
-      height: 25px; }
-      .search-container button img {
-        width: 25px;
-        padding: 5px; }
+  .search-container input {
+    height: 25px;
+    width: 120px; }
+  .search-container button {
+    height: 25px; }
+    .search-container button img {
+      width: 25px;
+      padding: 5px; }
   .hamburger {
     top: 27px; }
   .user__box-header button {
@@ -307,16 +320,7 @@
   .user__box-header h1 {
     font-size: 26px;
     margin-top: 16px; }
-  .user__info {
-    width: 55%; }
-  .user__data {
-    width: 70%;
-    gap: 10;
-    justify-content: space-between; }
-  .user__text {
-    width: 40%;
-    margin: 0 auto; }
   .user__nickname {
-    display: none; } }
+    max-width: 80%; } }
 
 /*# sourceMappingURL=indexmedia.css.map */

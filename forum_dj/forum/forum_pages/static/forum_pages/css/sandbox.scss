@@ -10,11 +10,6 @@ body {
     flex: 1; /* Робимо основну частину гнучкою, щоб вона займала залишок висоти */
 }
 
-footer {
-    padding: 10px;
-    margin-top: auto; /* Підняти футер внизу */
-    width: 100%;
-}
 .sandbox {
     &__inner {
         display: flex;
@@ -82,26 +77,25 @@ footer {
 .title__container {
     text-align: center;
 }
+
 .user{
     &__line-interface{
         background-color: rgb(80, 79, 79, 0.5);
-        height: 100%;
+        height: 105%;
         width: 2px;
         float: left;
         margin: 0 10px 0 0;
     }
     &__text-interface{
-        max-width: 60%;
+        font-size: 18px;
         word-wrap: break-word;
     }
     &__title-interface{
-        font-size: 44px;
-        color: black;
+        font-size: 20px;
         font-weight: 700;
+        color: black;
     }
     &__wrapper-interface{
-        display: flex;
-        align-items: center;
         width: 100%;
         background-color: rgba(203, 203, 203, 0.297);
         padding: 25px;
@@ -112,18 +106,15 @@ footer {
     }
     &__data-interface{
         display: flex;
+        gap: 2%;
         align-items: center;
-        width: 40%;
-        gap: 50px;
-        margin-right: 20px;
     }
-    &__time-interface{
-        font-size: 18px;
-        font-weight: 700;
-    }
-    &__delete{
+    &__delete-interface{
         margin-left: auto;
-        order: 1; 
+    }
+    &__information{
+        display: flex;
+        flex-direction: column;
     }
     &__photo-interface{
         img {
@@ -131,30 +122,31 @@ footer {
             border-radius: 100%;
         }
     }
+    &__time-interface{
+        font-size: 18px;
+    }
+    &__name-interface{
+        font-size: 18px;
+        font-weight: 500;
+        a{
+            color: black;
+        }
+    }
     &__content-interface{
-        width: 60%;
-        display: flex;
-        gap: 10%;
-        align-items: center;
+        margin-left: 5px;
     }
     &__title-interface{
-        font-size: 20px;
-        font-weight: 700;
-        color: #0d6efd;
-        width: 20%;
         word-wrap: break-word;
+        font-size: 32px;
+        font-weight: 700;
+        a{
+            color: black;
+        }
     }
     &__theme-interface{
         display: flex;
+        gap: 2%;
         align-items: center;
-        width: 40%;
-        gap: 50px;
-        margin-right: 20px;
-    }
-    &__theme-wrapper{
-        width: 60%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
     }
 }
+

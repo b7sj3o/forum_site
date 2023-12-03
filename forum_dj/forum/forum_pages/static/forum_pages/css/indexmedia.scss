@@ -36,6 +36,7 @@
         &-footer{
             gap: 20px;
             height: 40px;
+            padding: 25px;
             h3{
                 font-size: 14px;
                 margin-bottom: 0;
@@ -48,6 +49,10 @@
             }
             h1{
                 font-size: 36px;
+                margin-top: 5px;
+            }
+            img{
+                width: 85px;
             }
         }
     }
@@ -99,7 +104,7 @@
     }
     .user{
         &__wrapper{
-            padding: 15px;
+            padding: 5px;
         }
         &__data{
             align-items: center;
@@ -292,7 +297,7 @@
     .search-container{
         input{
             height: 35px;
-            width: 340px;
+            width: 320px;
             &::placeholder{
                 font-size: 14px;
             }
@@ -304,6 +309,17 @@
             }
         }
         
+    }
+    .modal{
+        width: 500px;
+    }
+    .show-email-text,.show-tg-text{
+        font-size: 20px;
+        color: #212529;
+        font-weight: 700;
+    }
+    .user__adv{
+        padding: 0px;
     }
 }
 @media screen and (max-width: 680px) {
@@ -391,15 +407,6 @@
             width: 30px;
         }
     }
-    .user{
-        &__wrapper{
-            padding-left: 0;
-            padding-right: 0;
-        }
-        &__text{
-            width: 35%;
-        }
-    }
     .user__box{
         &-header{
             button{
@@ -416,8 +423,22 @@
             }
         }
     }
+    .modal{
+        width: 300px;
+        form{
+            label{
+                font-size: 15px;
+            }
+            input{
+                font-size: 14px;
+            }
+        }
+    }
 }
 @media screen and (max-width: 480px)  {
+    .btn-primary{
+        font-size: 11px;
+    }
     .first__advertisment{
         &-title{
             a{
@@ -484,7 +505,7 @@
         }
     }
     .search-container{
-        margin-bottom: 10px;
+
         input{
             height: 25px;
             width: 120px;
@@ -512,21 +533,8 @@
                 }
             }
         }
-        &__info{
-            width: 55%;
-        }
-        &__data{
-            width: 70%;
-            gap: 10;
-            justify-content: space-between;
-        }
-        &__text{
-            width: 40%;
-            margin: 0 auto;
-        }
         &__nickname{
-            display: none;
+            max-width: 80%;
         }
     }
-    
 }
