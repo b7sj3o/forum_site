@@ -52,11 +52,16 @@ h6 {
     display: none;
 }
 .container_login {
-    max-width: 40%;
+    width: 30%;
     margin: 0 auto;
+    margin-top: 40px;
     padding: 0 15px;
     box-sizing: content-box;
     
+}
+.text-center{
+    margin-top: 55px!important;
+    margin-bottom: 0px !important;
 }
 .form_register {
     .helptext,ul,li{
@@ -305,13 +310,14 @@ h6 {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 700px;
-    min-height: 400px;
+    height: 80%;
     background-color: #f2f2f2;
     padding: 30px 0;
     form {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 40px;
         input {
             width: 70% !important;
         }
@@ -358,13 +364,23 @@ h6 {
     &__named{
         font-size: 20px;
         font-weight: 700;
-        color: #0d6efd;;
+        color: #000000;;
+    }
+    &__header{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    &__photo{
+        img{
+            width: 40px;
+        }
     }
     &__data{
         display: flex;
-        gap: 5px;
-        align-items: center;
-        margin-left: 10px;
+        flex-direction: column;
+
     }
     &__info{
         margin-left: 10px;
@@ -373,7 +389,7 @@ h6 {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 18px;
+        font-size: 24px;
         font-weight: 700;
         a{
             color: black;
@@ -389,15 +405,16 @@ h6 {
 }
 
 .alert{
-    text-align: center;
+    text-align: left;
+    margin-top: 30px;
 }
 .show-wrapper{
     text-align: center;
 }
 .show-email-text,.show-tg-text{
-    font-size: 30px;
+    font-size: 25px;
     color: #212529;
-    font-weight: 700;
+    font-weight: 500;
 }
 .checkbox__wrapper{
     width: 15px;

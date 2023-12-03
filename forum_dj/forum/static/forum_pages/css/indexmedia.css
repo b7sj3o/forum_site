@@ -64,8 +64,9 @@
   .user__wrapper {
     padding: 5px; }
   .user__data {
-    align-items: center;
-    gap: 20px; }
+    gap: 5px; }
+  .user__photo img {
+    width: 30px; }
   .user__named {
     font-size: 14px; }
   .user__time {
@@ -73,7 +74,7 @@
   .user__text {
     font-size: 14px; }
   .user__nickname {
-    font-size: 14px; }
+    font-size: 17px; }
   .user__box-footer {
     gap: 0; }
     .user__box-footer #user__message-amount {
@@ -160,17 +161,15 @@
       width: 100%; }
     .side__panel .divider {
       margin: 20px 0; }
-  .footer {
-    margin-top: 20px; }
-    .footer__links {
-      display: none; }
-      .footer__links a {
-        font-size: 14px; }
-    .footer__logo img {
-      width: 30px; }
-    .footer__contactus a img {
-      width: 30px;
-      height: 30px; }
+  .footer__links {
+    display: none; }
+    .footer__links a {
+      font-size: 14px; }
+  .footer__logo img {
+    width: 30px; }
+  .footer__contactus a img {
+    width: 30px;
+    height: 30px; }
   .dropdown-button {
     background-color: rgba(0, 0, 0, 0);
     transition: 0.6s all; }
@@ -180,6 +179,8 @@
     .dropdown-content a {
       color: wheat;
       background-color: #474747; }
+  .modal form {
+    margin-top: 20px; }
   .form__wrapper {
     display: block;
     margin: 0 auto; }

@@ -100,6 +100,9 @@ body {
         background-color: rgba(203, 203, 203, 0.297);
         padding: 25px;
         margin-top: 20px;
+        &:last-child{
+            margin-bottom: 30px;
+        }
         img{
             width: 20px;
         }
@@ -137,8 +140,8 @@ body {
     }
     &__title-interface{
         word-wrap: break-word;
-        font-size: 32px;
-        font-weight: 700;
+        font-size: 26px;
+        font-weight: 500;
         a{
             color: black;
         }
