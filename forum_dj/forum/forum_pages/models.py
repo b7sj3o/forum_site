@@ -50,13 +50,21 @@ class UserData(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
 class Themes(models.Model):
+    title = models.CharField(max_length=100, null=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+class SubThemes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    base_theme = models.ForeignKey(Themes, on_delete=models.CASCADE, null=True, related_name='subthemes')
     title = models.CharField(max_length=100, null=True)
     main_text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.title
+
 
 class BaseMessage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -71,8 +79,8 @@ class BaseMessage(models.Model):
     class Meta:
         abstract = True 
 
-class ThemeMessage(BaseMessage):
-    theme = models.ForeignKey(Themes, on_delete=models.CASCADE, null=True)
+class SubThemeMessage(BaseMessage):
+    subtheme = models.ForeignKey(SubThemes, on_delete=models.CASCADE, null=True, related_name='subtheme_messages')
 
 class SandboxMessage(BaseMessage):
     pass

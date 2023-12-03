@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, ThemeMessage, Themes, SandboxMessage, User
+from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, SubThemeMessage, Themes, SandboxMessage, User, SubThemes
 from django.contrib.auth.decorators import login_required
 import random
 from .forms import UserForm
@@ -11,6 +11,7 @@ from django.db.models import Q
 
 def index(request):
     advertisements = Advertisements.objects.all().order_by('-id')
+    themes = Themes.objects.all().order_by('-id')
 
     try:
         chosen_product = MainTextBanner.objects.get()
@@ -25,7 +26,8 @@ def index(request):
         'advertisements': advertisements,
         'chosen_product': chosen_product,
         'main_banner': main_banner,
-        'last_messages': last_messages
+        'last_messages': last_messages,
+        'themes': themes
     })
 
 
@@ -43,47 +45,75 @@ def sandbox(request):
     return render(request, 'forum_pages/sandbox.html', context)
 
 
-def themes(request):
-    themes = Themes.objects.all().order_by('-created')
-    context = {'themes': themes}
-    return render(request, 'forum_pages/themes.html', context)
+def allThemes(request):
+    themes = Themes.objects.all().order_by('-id')
+
+    context = {
+        'themes': themes
+    }
+    return render(request, 'forum_pages/allThemes.html', context)
 
 
-def theme(request, user, pk):
-    room = Themes.objects.get(id=pk)
-    room_messages = room.thememessage_set.all().order_by('-id')
+def subThemes(request, pk):
+    theme = Themes.objects.get(id=pk)
+    subthemes = theme.subthemes.all().order_by('-id')
+    for subtheme in subthemes:
+        print(subtheme.id)
+    # theme = Themes.objects.get(id=pk)
+    context = {
+        'theme': theme,
+        'subthemes': subthemes,
+    }
+    return render(request, 'forum_pages/subThemes.html', context)
+
+
+def subTheme(request, user, pk):
+    room = SubThemes.objects.get(id=pk)
+    room_messages = room.subtheme_messages.all().order_by('-id')
 
     if request.method == 'POST':
-        theme = ThemeMessage.objects.create(
+        theme = SubThemeMessage.objects.create(
             user=request.user,
-            theme=room,
+            subtheme=room,
             main_text=request.POST.get('main_text')
         )
-        return redirect('theme', user=request.user, pk=room.id)
+        return redirect('subtheme', user=room.user, pk=room.id)
 
     context = {'room_messages': room_messages, 'room': room}
-    return render(request, 'forum_pages/theme.html', context)
+    return render(request, 'forum_pages/subTheme.html', context)
 
 
-def createTheme(request):
+def createSubTheme(request, topic_id):
+    base_theme = Themes.objects.get(pk=topic_id)
     if request.method == "POST":
-        theme = Themes.objects.create(
+        theme = SubThemes.objects.create(
             user=request.user,
+            base_theme=base_theme,
             title=request.POST.get('title'),
             main_text=request.POST.get('main_text')
         )
-        return redirect('themes')
+        return redirect('subthemes', pk=topic_id)
     context = {}
     return render(request, 'forum_pages/create-theme.html', context)
 
+
+def deleteSubTheme(request, pk):
+    referer = request.META.get('HTTP_REFERER', None)
+
+    subtheme = SubThemes.objects.get(id=pk)
+    subtheme.delete()
+
+    return redirect(referer)
+
+
 def createAdvertisment(request):
     if request.method == "POST":
-            advert = Advertisements.objects.create(
-                name=request.user,
-                title=request.POST.get('title'),
-                text=request.POST.get('main_text')
-            )
-            return redirect('home')
+        advert = Advertisements.objects.create(
+            name=request.user,
+            title=request.POST.get('title'),
+            text=request.POST.get('main_text')
+        )
+        return redirect('home')
     context = {}
     return render(request, 'forum_pages/create-advertisment.html', context)
 
@@ -93,36 +123,29 @@ def deleteMessage(request, pk):
     if 'sandbox' in referer:
         message = SandboxMessage.objects.get(id=pk)
     else:
-        message = ThemeMessage.objects.get(id=pk)
+        message = SubThemeMessage.objects.get(id=pk)
     message.delete()
 
     return redirect(referer)
 
 
-def deleteTheme(request, pk):
-    theme = Themes.objects.get(id=pk)
-    theme.delete()
-
-    return redirect('themes')
-
-
 def userProfile(request, pk):
     user = User.objects.get(username=pk)
     cuser = user
-    user_messages = len(Themes.objects.filter(user=user))
+    user_messages = len(SubThemes.objects.filter(user=user))
 
-    last_themes = ThemeMessage.objects.filter(user=user).order_by('-created')
+    last_themes = SubThemeMessage.objects.filter(
+        user=user).order_by('-created')
     messages_amount = len(last_themes)
 
-    user_forms = UserForm(instance=request.user)
+    user_forms = UserForm(instance=user)
     if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES, instance=request.user)
+        form = UserForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('user-profile', pk=request.user.username)
+            return redirect('user-profile', pk=user.username)
         # else:
             # return redirect('home')
-        
 
     context = {
         'cuser': cuser,
@@ -143,16 +166,12 @@ def search(request):
     for keyword in keywords:
         query |= Q(title__icontains=keyword) | Q(main_text__icontains=keyword)
 
-    themes = Themes.objects.filter(query).order_by('-created')
-
-    themes_count = themes.count()
-    if not themes_count:
-        themes_count = 0
+    subthemes = SubThemes.objects.filter(query).order_by('-created')
 
     context = {
-        'themes': themes,
-        'themes_count': themes_count,
-        'is_searched': True
+        'subthemes': subthemes,
+        'is_searched': True,
+        'requested_words': q
     }
 
-    return render(request, 'forum_pages/themes.html', context)
+    return render(request, 'forum_pages/subThemes.html', context)

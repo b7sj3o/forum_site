@@ -4,7 +4,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
 
+
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -13,17 +16,24 @@ def login_user(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.success(request, ('Неправильний логін чи пароль. Спробуйте знову'))
+            messages.success(
+                request, ('Неправильний логін чи пароль. Спробуйте знову'))
             return redirect('login')
     else:
         return render(request, 'forum_members/login.html', {})
-    
+
+
 def logout_user(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     logout(request)
     messages.success(request, ('Ви вийшли з акаунту'))
     return redirect('home')
 
+
 def register_user(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     form = RegisterUserForm()
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)

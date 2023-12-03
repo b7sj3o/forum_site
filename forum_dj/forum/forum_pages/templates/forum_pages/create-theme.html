@@ -18,10 +18,10 @@
                 <label for="main_text" class="form__name">Основне питання</label>
                 <textarea type="text" id="main_text" class="sandbox__text" name="main_text" required ></textarea>
             </div>
-            <input type="submit" class="sandbox__button" value="Створити тему" class="submit-inp">
+            <input type="submit" class="sandbox__button" value="Створити підтему" class="submit-inp">
         </form>
 {% else %}
-    <div class="alert alert-warning w-100 fs-4" role="alert">Щоб створювати теми ви повинні <a href="{% url 'login' %}">увійти в акаунт</a></div>
+    <div class="alert alert-warning w-100 fs-4" role="alert">Щоб створювати підтеми ви повинні <a href="{% url 'login' %}">увійти в акаунт</a></div>
 {% endif %} 
    </div>
 {% endblock %}

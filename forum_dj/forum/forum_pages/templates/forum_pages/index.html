@@ -30,8 +30,7 @@
                             </a>
                         </section>
                         <div class="divider"></div>
-                        <a href="{% url 'create-theme' %}"><button class="btn btn-primary w-50 mb-3">Створити тему</button></a>
-                        <a href="{% url 'create-advertisment' %}"><button class="btn btn-primary w-50 mb-3">Створити оголошення</button></a>
+                        <a href="{% url 'create-advertisment' %}"><button class="btn btn-primary w-100 mb-3">Створити оголошення</button></a>
                         <div class="advertisments__title">Оголошення</div>
                         <section class="advertisments">
                             {% for i in advertisements %}
@@ -46,6 +45,15 @@
                                     </div>
                                 </ul>
                             {% endfor %}
+                        </section>
+                        <div class="divider"></div>
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Всі теми</div>
+                            <div class="adult__trafic-themes">
+                                {% for theme in themes %}
+                                    <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'subthemes' theme.id %}">{{ theme }}</a></div>
+                                {% endfor %}
+                            </div>
                         </section>
                         <div class="divider"></div>
 

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load sass_tags %}
+{% load static %}
+{% block style %}{% sass_src 'forum_pages/css/index.min.css' %}{% endblock %}
+
+{% block title %} Головна сторінка {% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="container">
+            <div class="content">
+                <div class="w-100">
+                    <section class="adult__trafic main__panel-section">
+                        <div class="adult__trafic-title main-title-text">Всі теми</div>
+                        <div class="adult__trafic-themes">
+                            {% for theme in themes %}
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'subthemes' theme.id %}">{{ theme }}</a></div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

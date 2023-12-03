@@ -4,15 +4,16 @@ from . import views
 urlpatterns = [
     path('', views.index, name='home'),
     path('sandbox', views.sandbox, name='sandbox'),
-    path('themes', views.themes, name='themes'),
-    path('theme/<str:user>/<str:pk>/', views.theme, name='theme'),
+    path('all-themes', views.allThemes, name='all-themes'),
+    path('subthemes/<str:pk>', views.subThemes, name='subthemes'),
+    path('subtheme/<str:user>/<str:pk>/', views.subTheme, name='subtheme'),
 
-    path('create-theme', views.createTheme, name='create-theme'),
+    path('create-subtheme/<str:topic_id>', views.createSubTheme, name='create-subtheme'),
     path('create-advertisment', views.createAdvertisment, name='create-advertisment'),
 
 
     path('delete-message/<str:pk>/', views.deleteMessage, name='delete-message'),
-    path('delete-theme/<str:pk>/', views.deleteTheme, name='delete-theme'),
+    path('delete-subtheme/<str:pk>/', views.deleteSubTheme, name='delete-subtheme'),
 
     path('user-profile/<str:pk>/', views.userProfile, name='user-profile'),
 

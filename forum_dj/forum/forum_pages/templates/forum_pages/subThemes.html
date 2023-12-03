@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load sass_tags %}
+{% load static %}
+{% block style %}{% sass_src 'forum_pages/css/sandbox.min.css' %}{% endblock %}
+
+{% block title %}Themes{% endblock %}
+
+{% block content %}
+
+<div class="sandbox__info container">
+    
+    {% if not is_searched %}
+        <div class="sandbox__title">Тема: {{ theme }}</div>
+        <div class="divider"></div>
+        <a href="{% url 'create-subtheme' theme.id %}"><button class="btn btn-primary">Створити підтему</button></a>
+    {% else %}
+        <div class="sandbox__title">Знайдені теми по запиту "{{ requested_words }}"</div>
+        <div class="divider"></div>
+    {% endif %}
+    {% for subtheme in subthemes %}
+        <div class="user__wrapper-interface">
+            <div class="user__line-interface"></div>
+            <div class="user__data-interface">
+                <div class="user__photo-interface"><a href="#"><img src="{{subtheme.user.avatar.url}}" class="side__panel-photo" alt=""></a></div>
+                <div class="user__information">
+                    <div class="user__name-interface"><a href="{% url 'user-profile' subtheme.user.username %}">@{{ subtheme.user.username }}</a></div>
+                    <div class="user__time-interface">{{ subtheme.created|timesince }} тому</div>
+                </div>
+                {% if request.user.username == subtheme.user.username or request.user.username == 'admin' %}
+                    <div class="user__delete-interface">
+                        <a href="{% url 'delete-subtheme' subtheme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="user__content-interface">
+                <div class="user__title-interface"><a href="{% url 'subtheme' subtheme.user.username subtheme.id %}">{{ subtheme.title }}</a></div>
+                <div class="user__text-interface">{{ subtheme.main_text }}</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+

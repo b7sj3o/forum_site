@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Advertisements, MainPictureBanner, MainTextBanner, ThemeMessage, Themes, User
+from .models import Advertisements, MainPictureBanner, MainTextBanner, SubThemeMessage, Themes, User, SubThemes
 
 admin.site.register(Advertisements)
 admin.site.register(MainTextBanner)
 admin.site.register(MainPictureBanner)
-admin.site.register(ThemeMessage)
+admin.site.register(SubThemeMessage)
 admin.site.register(Themes)
+admin.site.register(SubThemes)
 admin.site.register(User)
