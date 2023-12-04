@@ -7,6 +7,7 @@ urlpatterns = [
     path('all-themes', views.allThemes, name='all-themes'),
     path('subthemes/<str:pk>', views.subThemes, name='subthemes'),
     path('subtheme/<str:user>/<str:pk>/', views.subTheme, name='subtheme'),
+    path('advert-page', views.advertPage, name='advert-page'),
 
     path('create-subtheme/<str:topic_id>', views.createSubTheme, name='create-subtheme'),
     path('create-advertisment', views.createAdvertisment, name='create-advertisment'),

@@ -9,7 +9,13 @@ body {
 .container{
     flex: 1; /* Робимо основну частину гнучкою, щоб вона займала залишок висоти */
 }
-
+.link-subheader{
+    width: 100%;
+    text-align: center;
+}
+.btn-subheader{
+    width: 70% !important;
+}
 .sandbox {
     &__inner {
         display: flex;

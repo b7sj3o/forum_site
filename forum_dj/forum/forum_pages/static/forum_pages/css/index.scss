@@ -8,8 +8,13 @@
     background-color: $mainColor;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    a{
+        color: wheat;
+    }
 }
-
+.side__panel-title{
+    padding: 5px;
+}
 .content {
     display: flex;
     justify-content: space-between;

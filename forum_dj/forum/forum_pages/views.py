@@ -175,3 +175,7 @@ def search(request):
     }
 
     return render(request, 'forum_pages/subThemes.html', context)
+
+def advertPage(request):
+    context={}
+    return render(request, 'forum_pages/advertisment.html', context)

@@ -115,6 +115,21 @@ document.getElementById("openBtn").addEventListener("click", function() {
     document.getElementById("edit").style.display = "block";
     document.getElementById("overlay").style.display = "block";
 });
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeOverlay();
+    }
+});
+
+document.getElementById("overlay").addEventListener("click", function(event) {
+    if (event.target === this) {
+        closeOverlay();
+    }
+});
+
+document.querySelector(".modal__close").addEventListener("click", function() {
+    closeOverlay();
+});
 
 function closeOverlay() {
     document.getElementById("edit").style.display = "none";

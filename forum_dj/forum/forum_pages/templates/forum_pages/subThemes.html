@@ -13,7 +13,7 @@
     {% if not is_searched %}
         <div class="sandbox__title">Тема: {{ theme }}</div>
         <div class="divider"></div>
-        <a href="{% url 'create-subtheme' theme.id %}"><button class="btn btn-primary">Створити підтему</button></a>
+        <a class="link-subheader" href="{% url 'create-subtheme' theme.id %}"><button class="btn btn-primary btn-subheader">Створити підтему</button></a>
     {% else %}
         <div class="sandbox__title">Знайдені теми по запиту "{{ requested_words }}"</div>
         <div class="divider"></div>
