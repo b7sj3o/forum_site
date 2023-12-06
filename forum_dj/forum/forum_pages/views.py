@@ -179,3 +179,27 @@ def search(request):
 def advertPage(request):
     context={}
     return render(request, 'forum_pages/advertisment.html', context)
+
+def updateMessage(request, pk, pk2):
+    u_message = SubThemeMessage.objects.get(id=pk2)
+    room = SubThemes.objects.get(id=pk)
+    room_messages = room.subtheme_messages.all().order_by('-id')
+
+
+    if request.method == "POST":
+        u_message.main_text = request.POST.get('main_text')
+        u_message.save()
+        return redirect('subtheme', user=room.user.username, pk=pk)
+    
+
+    context = {
+        'room_messages': room_messages,
+        'room': room,
+        'is_update': True,
+        'u_message': u_message
+        }
+    
+    return render(request, 'forum_pages/subTheme.html', context)
+
+
+    message.save()

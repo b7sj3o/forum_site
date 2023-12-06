@@ -20,7 +20,7 @@
             <label for="main_text" class="form__name">Повідомлення</label>
             <textarea type="text" id="main_text" class="sandbox__text" name="main_text" required ></textarea>
         </div>
-        <input type="submit" class="sandbox__button" value="Зберегти дані" class="submit-inp">
+        <input type="submit" class="sandbox__button submit-inp" value="Зберегти дані">
     </form>
     <div class="divider"></div> 
     {% else %}
@@ -39,12 +39,21 @@
                 </div>
                 {% if request.user.username == message.user.username or request.user.username == 'admin' %}
                         <div class="user__delete-interface">
+                            <a href="{% url 'update-message' room.id message.id %}">Update</a>
                             <a href="{% url 'delete-message' message.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
                         </div>
                 {% endif %}
             </div>
             <div class="user__theme-wrapper">
-                <div class="user__text-interface user__text-interface2">{{ message.main_text }}</div>
+                {% if is_update and u_message == message %}
+                    <form action="{% url 'update-message' room.id message.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="main_text" id="" value="{{ message.main_text }}">
+                        <input type="submit" value="Підтвердити" class="btn btn-primary">
+                    </form>
+                {% else %}
+                    <div class="user__text-interface user__text-interface2">{{ message.main_text }}</div>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

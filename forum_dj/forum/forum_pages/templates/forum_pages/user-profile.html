@@ -4,11 +4,7 @@
 {% block content %}
 
 
-<style>
-    footer {
-        display: none;
-    }
-</style>
+
 
 <div class="container">
     <div class="user__box">
@@ -47,7 +43,7 @@
         {% else %}
             <div class="user__adv-title">Активність {{ cuser.username }}</div>
         {% endif %}
-        <div class="user__adv">
+        <div class="user__adv mb-5">
             {% for theme in last_themes %}  
                 <div class="user__wrapper">
                     <div class="user__line"></div>
@@ -59,7 +55,7 @@
                         </div>
                     </div>
                     <div class="user__info">
-                        <div class="user__nickname"><a href="#">{{ theme.theme }}</a></div>
+                        <div class="user__nickname"><small style="font-weight: 500;">Тема: </small><a href="#">{{ theme.subtheme }}</a></div>
                         <div class="user__text">{{ theme.main_text }}</div>
                     </div>
                     <hr>
