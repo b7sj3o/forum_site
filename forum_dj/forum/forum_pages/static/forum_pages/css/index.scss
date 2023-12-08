@@ -182,8 +182,9 @@
     background-color: #e7e7e7b4;
     border-top: #000 0.5px solid;
     font-size: 18px;
-
     a {
+        color: rgb(3, 23, 78);
+        font-weight: 700;
         transition: all 0.3s ease;
         &:hover {
             color: red;

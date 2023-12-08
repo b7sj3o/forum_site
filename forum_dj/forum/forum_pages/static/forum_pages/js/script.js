@@ -5,7 +5,7 @@ textContainers.forEach(textContainer => {
     textContainer.textContent = textContainer.textContent.slice(0, 100) + '...';
   }
 });
-// Отримуємо всі елементи dropdown на сторінці
+////Дропдаун HEADER
 var dropdowns = document.getElementsByClassName("dropdown");
 
 // Додаємо обробник події для закриття відкритого dropdown при кліку на вільне місце на сторінці
@@ -36,6 +36,36 @@ for (var i = 0; i < dropdowns.length; i++) {
         }
     });
 }
+//Дропдаун UPDATE
+var updateDropdowns = document.querySelectorAll(".update-dropdown");
+
+document.addEventListener("click", function (event) {
+    updateDropdowns.forEach(function (dropdown) {
+        var button = dropdown.querySelector(".dropdown-button");
+        var content = dropdown.querySelector(".dropdown-content");
+
+        if (content.style.display === "block" && !dropdown.contains(event.target)) {
+            content.style.display = "none";
+        }
+    });
+});
+
+updateDropdowns.forEach(function (dropdown) {
+    var button = dropdown.querySelector(".dropdown-button");
+    var content = dropdown.querySelector(".dropdown-content");
+
+    button.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
+});
+
+
+
 window.addEventListener('DOMContentLoaded', () => {
     const menu = document.querySelector('.header__links'),
         menuItem = document.querySelectorAll('.header__link'),

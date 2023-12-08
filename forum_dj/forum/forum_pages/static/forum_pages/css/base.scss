@@ -144,7 +144,37 @@ h6 {
         }
     }
 }
-
+.search-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    input {
+        height: 40px;
+        width: 250px;
+        border-radius: 10px 0 0 10px;
+        padding: 10px;
+        background: #ac99d885;
+        border: none;
+        &::placeholder {
+            color: black;
+        }
+        &:focus {
+            outline: none !important;
+        }
+    }
+    button {
+        height: 40px;
+        background: transparent;
+        border-radius: 0px 10px 10px 0px;
+        background: #13151a;
+        padding: 0 5px;
+        img {
+            width: 30px;
+            padding: 5px;
+        }
+    }
+}
 .divider {
     margin: 20px 0;
     width: 100%;
@@ -208,37 +238,6 @@ h6 {
     border-top-right-radius: 5px;
     a{
         color: wheat;
-    }
-}
-.search-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    input {
-        height: 40px;
-        width: 250px;
-        border-radius: 10px 0 0 10px;
-        padding: 10px;
-        background: #ac99d885;
-        border: none;
-        &::placeholder {
-            color: black;
-        }
-        &:focus {
-            outline: none !important;
-        }
-    }
-    button {
-        height: 40px;
-        background: transparent;
-        border-radius: 0px 10px 10px 0px;
-        background: #13151a;
-        padding: 0 5px;
-        img {
-            width: 30px;
-            padding: 5px;
-        }
     }
 }
 .button__img-wrapper {
