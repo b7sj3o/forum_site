@@ -4,8 +4,6 @@
 {% block content %}
 
 
-
-
 <div class="container">
     <div class="user__box">
         <div class="user__box-header">
@@ -55,7 +53,7 @@
                         </div>
                     </div>
                     <div class="user__info">
-                        <div class="user__nickname"><small style="font-weight: 500;">Тема: </small><a href="#">{{ theme.subtheme }}</a></div>
+                        <div class="user__nickname"><small style="font-weight: 500;">Тема: </small><a href="{% url 'subtheme' theme.subtheme.user theme.subtheme.id %}">{{ theme.subtheme }}</a></div>
                         <div class="user__text">{{ theme.main_text }}</div>
                     </div>
                     <hr>
@@ -74,13 +72,13 @@
                     <label for="">{{ form.label}}</label>
                     <img src="{{ form.value.url }}" alt="Avatar" style="width: 50px;">
                     {{ form }}
-                <!-- ТУТ ЗРОБИ ЯК Я ТОБІ СКИНУВ (чекбокс) -->
                 {% elif form.name == 'is_show_telegram' %}
-                    <div  class="form-check d-flex justify-content-center  align-items-center w-75">
-                        <label for="">{{ form.label }}</label>
-                        <div class="checkbox__wrapper">
+                    <div class="telegram__container">
+                        <label class="checkbox-container">
+                            <span class="checkbox-label">{{ form.label }}</span>
                             {{ form }}
-                        </div>
+                            <span class="checkbox-checkmark"></span>
+                        </label>
                     </div>
                 {% else %}
                         <label for="">{{ form.label}}</label>
@@ -92,4 +90,5 @@
         
     </div>
 </div>
+
 {% endblock %}

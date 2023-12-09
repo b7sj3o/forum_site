@@ -15,10 +15,14 @@
         <div class="divider"></div>
         <a class="link-subheader" href="{% url 'create-subtheme' theme.id %}"><button class="btn btn-primary btn-subheader">Створити підтему</button></a>
     {% else %}
-        <div class="sandbox__title">Знайдені теми по запиту "{{ requested_words }}"</div>
+        {% if any_result %}
+            <div class="sandbox__title" style="word-break: break-all; font-weight: 100;">По запиту <small style="font-weight: 600;">"{{ requested_words }}"</small> нічого не знайдено</div>
+        {% else %}
+            <div class="sandbox__title" style="word-break: break-all; font-weight: 100;">Знайдені теми по запиту <small style="font-weight: 600;">"{{ requested_words }}"</small></div>
+        {% endif %}
         <div class="divider"></div>
     {% endif %}
-    {% for subtheme in subthemes %}
+    {% for subtheme, messages in combined_data %}
         <div class="user__wrapper-interface">
             <div class="user__line-interface"></div>
             <div class="user__data-interface">
@@ -27,7 +31,10 @@
                     <div class="user__name-interface"><a href="{% url 'user-profile' subtheme.user.username %}">@{{ subtheme.user.username }}</a></div>
                     <div class="user__time-interface">{{ subtheme.created|timesince }} тому</div>
                 </div>
+                <div class="user__time-interface">Повідомлень в темі: <b style="font-size: 24px;">{{ messages }}</b></div>
+
                 {% if request.user.username == subtheme.user.username or request.user.username == 'admin' %}
+
                     <div class="user__delete-interface">
                         <a href="{% url 'delete-subtheme' subtheme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
                     </div>

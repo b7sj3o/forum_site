@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, SubThemeMessage, Themes, SandboxMessage, User, SubThemes
 from django.contrib.auth.decorators import login_required
-import random
 from .forms import UserForm
 from django.db.models import Q
 
@@ -15,8 +14,7 @@ def index(request):
 
     try:
         chosen_product = MainTextBanner.objects.get()
-        main_banners = MainPictureBanner.objects.all()
-        main_banner = random.choice(main_banners)
+        main_banner = MainPictureBanner.objects.all()[0]
     except:
         chosen_product = None
         main_banner = None
@@ -33,6 +31,7 @@ def index(request):
 
 def sandbox(request):
     messages = SandboxMessage.objects.all().order_by('-created')
+    main_banner = MainPictureBanner.objects.all()[0]
 
     if request.method == 'POST':
         message = SandboxMessage.objects.create(
@@ -41,7 +40,10 @@ def sandbox(request):
         )
         return redirect('sandbox')
 
-    context = {'messages': messages}
+    context = {
+        'messages': messages,
+        'main_banner': main_banner
+        }
     return render(request, 'forum_pages/sandbox.html', context)
 
 
@@ -57,12 +59,14 @@ def allThemes(request):
 def subThemes(request, pk):
     theme = Themes.objects.get(id=pk)
     subthemes = theme.subthemes.all().order_by('-id')
-    for subtheme in subthemes:
-        print(subtheme.id)
-    # theme = Themes.objects.get(id=pk)
+    messages_amount = [len(i.subtheme_messages.all()) for i in subthemes]
+    
+    combined_data = zip(subthemes, messages_amount)
+
     context = {
         'theme': theme,
         'subthemes': subthemes,
+        'combined_data': combined_data
     }
     return render(request, 'forum_pages/subThemes.html', context)
 
@@ -134,8 +138,7 @@ def userProfile(request, pk):
     cuser = user
     user_messages = len(SubThemes.objects.filter(user=user))
 
-    last_themes = SubThemeMessage.objects.filter(
-        user=user).order_by('-created')
+    last_themes = SubThemeMessage.objects.filter(user=user).order_by('-created')
     messages_amount = len(last_themes)
 
     user_forms = UserForm(instance=user)
@@ -144,8 +147,6 @@ def userProfile(request, pk):
         if form.is_valid():
             form.save()
             return redirect('user-profile', pk=user.username)
-        # else:
-            # return redirect('home')
 
     context = {
         'cuser': cuser,
@@ -167,11 +168,12 @@ def search(request):
         query |= Q(title__icontains=keyword) | Q(main_text__icontains=keyword)
 
     subthemes = SubThemes.objects.filter(query).order_by('-created')
-
+    any_result = True if not len(subthemes) else False
     context = {
         'subthemes': subthemes,
         'is_searched': True,
-        'requested_words': q
+        'requested_words': q, 
+        'any_result': any_result
     }
 
     return render(request, 'forum_pages/subThemes.html', context)
@@ -201,5 +203,22 @@ def updateMessage(request, pk, pk2):
     
     return render(request, 'forum_pages/subTheme.html', context)
 
+def updateMessageSandbox(request, pk):
+    u_message = SandboxMessage.objects.get(id=pk)
+    messages = SandboxMessage.objects.all().order_by('-id')
+    main_banner = MainPictureBanner.objects.all()[0]
 
-    message.save()
+    if request.method == "POST":
+        u_message.main_text = request.POST.get('main_text')
+        u_message.save()
+        return redirect('sandbox')
+    
+
+    context = {
+        'messages': messages,
+        'is_update': True,
+        'u_message': u_message,
+        'main_banner': main_banner
+        }
+    
+    return render(request, 'forum_pages/sandbox.html', context)

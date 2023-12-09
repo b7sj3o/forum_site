@@ -22,8 +22,8 @@
                     <input type="submit" class="sandbox__button" value="Зберегти дані" class="submit-inp">
                 </form>
                 <section class="first__banner">
-                    <a href="#">
-                        <img src="{{ main_banner.image.url }}" alt="Banner">
+                    <a href="#" style="width: 1000px; height: 100px;">
+                        <img src="{{ main_banner.image.url }}" alt="Banner" style="width: 1180px; height: 200px; object-fit: cover; object-position: center; margin: 20px 0;">
                     </a>
                 </section>
                 <div class="divider"></div> 
@@ -42,13 +42,31 @@
                                     <div class="user__time-interface">{{ message.created|timesince }} тому</div>
                                 </div>
                                 {% if request.user.username == message.user.username or request.user.username == 'admin' %}
-                                        <div class="user__delete-interface">
-                                            <a href="{% url 'delete-message' message.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
+                                    <div class="user__delete-interface">
+                                        <div class="update-dropdown">
+                                            <button class="dropdown-button">
+                                                <img src="{% static 'forum_pages/img/icons/three-dots.svg' %}" alt="Update Icon">
+                                            </button>
+                                            <div class="dropdown-content">
+                                                <a href="{% url 'update-message-sandbox' message.id %}">Update</a>
+                                                <a href="{% url 'delete-message' message.id %}">
+                                                    <span>Delete</span>
+                                                </a>
+                                            </div>
                                         </div>
+                                    </div>
                                 {% endif %}
                             </div>
                             <div class="user__theme-wrapper">
-                                <div class="user__text-interface">{{ message.main_text }}</div>
+                                {% if is_update and u_message == message %}
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <input type="text" value="{{ message.main_text }}" name="main_text">
+                                        <input type="submit" value="Підтвердити" class="btn btn-primary">
+                                    </form>
+                                {% else %}
+                                    <div class="user__text-interface">{{ message.main_text }}</div>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}

@@ -419,8 +419,56 @@ h6 {
     color: #212529;
     font-weight: 500;
 }
-.checkbox__wrapper{
-    width: 15px;
-    height: 10px;
-    margin-left: 100px;
+
+
+// ------------------ CHECKBOX ----------------- //
+.checkbox-container {
+    width: 100%;
+    position: relative;
+    padding-right: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
 }
+  
+.checkbox-label {
+    margin-right: 10px;
+}
+  
+.checkbox-container {
+    input {
+        position: absolute;
+        opacity: 0;
+    }
+
+}
+  
+.checkbox-checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+  
+.checkbox-container {
+    position: relative;
+  
+    input:checked + .checkbox-checkmark::before {
+      content: '\2713'; // то галочка
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      font-weight: 900;
+      color: #ea2910;
+    }
+  }
+  
+  

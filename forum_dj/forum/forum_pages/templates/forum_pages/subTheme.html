@@ -46,14 +46,11 @@
                             <div class="dropdown-content">
                                 <a href="{% url 'update-message' room.id message.id %}">Update</a>
                                 <a href="{% url 'delete-message' message.id %}">
-                                    <!-- Text for delete -->
                                     <span>Delete</span>
                                 </a>
                             </div>
                         </div>
                     </div>
-                
-                    
                 {% endif %}
             </div>
             <div class="user__theme-wrapper">
