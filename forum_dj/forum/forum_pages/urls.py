@@ -3,10 +3,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='home'),
-    path('sandbox', views.sandbox, name='sandbox'),
+    path('sandbox&page=<str:page>', views.sandbox, name='sandbox'),
     path('all-themes', views.allThemes, name='all-themes'),
-    path('subthemes/<str:pk>', views.subThemes, name='subthemes'),
-    path('subtheme/<str:user>/<str:pk>/', views.subTheme, name='subtheme'),
+    path('subthemes/&subthemeId=<str:pk>&page=<str:page>', views.subThemes, name='subthemes'),
+    path('subtheme/&user=<str:user>&subthemeId=<str:pk>&page=<str:page>', views.subTheme, name='subtheme'),
     path('advert-page', views.advertPage, name='advert-page'),
 
     path('create-subtheme/<str:topic_id>', views.createSubTheme, name='create-subtheme'),

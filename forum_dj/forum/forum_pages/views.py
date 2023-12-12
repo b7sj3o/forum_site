@@ -29,21 +29,34 @@ def index(request):
     })
 
 
-def sandbox(request):
+def sandbox(request, page):
+    page = int(page)
+    referer = request.META.get('HTTP_REFERER', None)
+
     messages = SandboxMessage.objects.all().order_by('-created')
+    messages_per_page = messages[page*10-10:page*10]
+
     main_banner = MainPictureBanner.objects.all()[0]
+
+    pages_amount = len(messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
+    pages_list_amount = [x for x in range(1, pages_amount+1)]
+
+    if page < 1 or page > pages_amount:
+        return redirect(referer)
 
     if request.method == 'POST':
         message = SandboxMessage.objects.create(
             user=request.user,
             main_text=request.POST.get('main_text')
         )
-        return redirect('sandbox')
+        return redirect('sandbox', page=page)
 
     context = {
-        'messages': messages,
-        'main_banner': main_banner
-        }
+        'messages': messages_per_page,
+        'main_banner': main_banner,
+        'pages_amount': pages_list_amount,
+        'current_page': page
+    }
     return render(request, 'forum_pages/sandbox.html', context)
 
 
@@ -56,24 +69,51 @@ def allThemes(request):
     return render(request, 'forum_pages/allThemes.html', context)
 
 
-def subThemes(request, pk):
+def subThemes(request, pk, page):
+    page = int(page)
+    referer = request.META.get('HTTP_REFERER', None)
+
     theme = Themes.objects.get(id=pk)
     subthemes = theme.subthemes.all().order_by('-id')
+    subthemes_per_page = subthemes[page*10-10:page*10]
+
     messages_amount = [len(i.subtheme_messages.all()) for i in subthemes]
-    
-    combined_data = zip(subthemes, messages_amount)
+
+    combined_data = zip(subthemes_per_page, messages_amount)
+
+    pages_amount = len(
+        subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
+    pages_list_amount = [x for x in range(1, pages_amount+1)]
+
+    if page < 1 or page > pages_amount:
+        return redirect(referer)
 
     context = {
         'theme': theme,
-        'subthemes': subthemes,
-        'combined_data': combined_data
+        'subthemes': subthemes_per_page,
+        'combined_data': combined_data,
+        'pages_amount': pages_list_amount,
+        'current_page': page,
+        'pk': pk
     }
     return render(request, 'forum_pages/subThemes.html', context)
 
 
-def subTheme(request, user, pk):
+def subTheme(request, user, pk, page):
+    referer = request.META.get('HTTP_REFERER', None)
+    page = int(page)
+
     room = SubThemes.objects.get(id=pk)
     room_messages = room.subtheme_messages.all().order_by('-id')
+
+    messages_per_page = room_messages[page*10-10:page*10]
+
+    pages_amount = len(
+        room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
+    pages_list_amount = [x for x in range(1, pages_amount+1)]
+
+    if page < 1 or page > pages_amount:
+        return redirect(referer)
 
     if request.method == 'POST':
         theme = SubThemeMessage.objects.create(
@@ -81,9 +121,16 @@ def subTheme(request, user, pk):
             subtheme=room,
             main_text=request.POST.get('main_text')
         )
-        return redirect('subtheme', user=room.user, pk=room.id)
+        return redirect('subtheme', user=user, pk=pk, page=page)
 
-    context = {'room_messages': room_messages, 'room': room}
+    context = {
+        'room_messages': messages_per_page,
+        'room': room,
+        'user': user,
+        'pk': pk,
+        'pages_amount': pages_list_amount,
+        'current_page': page
+    }
     return render(request, 'forum_pages/subTheme.html', context)
 
 
@@ -96,7 +143,7 @@ def createSubTheme(request, topic_id):
             title=request.POST.get('title'),
             main_text=request.POST.get('main_text')
         )
-        return redirect('subthemes', pk=topic_id)
+        return redirect('subthemes', pk=topic_id, page=1)
     context = {}
     return render(request, 'forum_pages/create-theme.html', context)
 
@@ -138,7 +185,8 @@ def userProfile(request, pk):
     cuser = user
     user_messages = len(SubThemes.objects.filter(user=user))
 
-    last_themes = SubThemeMessage.objects.filter(user=user).order_by('-created')
+    last_themes = SubThemeMessage.objects.filter(
+        user=user).order_by('-created')
     messages_amount = len(last_themes)
 
     user_forms = UserForm(instance=user)
@@ -169,42 +217,44 @@ def search(request):
 
     subthemes = SubThemes.objects.filter(query).order_by('-created')
     messages_amount = [len(i.subtheme_messages.all()) for i in subthemes]
-    
+
     combined_data = zip(subthemes, messages_amount)
     any_result = True if not len(subthemes) else False
+
     context = {
         'combined_data': combined_data,
         'is_searched': True,
-        'requested_words': q, 
+        'requested_words': q,
         'any_result': any_result
     }
 
     return render(request, 'forum_pages/subThemes.html', context)
 
+
 def advertPage(request):
-    context={}
+    context = {}
     return render(request, 'forum_pages/advertisment.html', context)
+
 
 def updateMessage(request, pk, pk2):
     u_message = SubThemeMessage.objects.get(id=pk2)
     room = SubThemes.objects.get(id=pk)
     room_messages = room.subtheme_messages.all().order_by('-id')
 
-
     if request.method == "POST":
         u_message.main_text = request.POST.get('main_text')
         u_message.save()
         return redirect('subtheme', user=room.user.username, pk=pk)
-    
 
     context = {
         'room_messages': room_messages,
         'room': room,
         'is_update': True,
         'u_message': u_message
-        }
-    
+    }
+
     return render(request, 'forum_pages/subTheme.html', context)
+
 
 def updateMessageSandbox(request, pk):
     u_message = SandboxMessage.objects.get(id=pk)
@@ -215,13 +265,12 @@ def updateMessageSandbox(request, pk):
         u_message.main_text = request.POST.get('main_text')
         u_message.save()
         return redirect('sandbox')
-    
 
     context = {
         'messages': messages,
         'is_update': True,
         'u_message': u_message,
         'main_banner': main_banner
-        }
-    
+    }
+
     return render(request, 'forum_pages/sandbox.html', context)

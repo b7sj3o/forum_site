@@ -66,6 +66,59 @@
             </div>
         </div>
     {% endfor %}
+
+    <style>
+        .subthemes__pages{
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+        }
+        .subtheme__page{
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            background-color: rgba(135, 135, 198, 0.675);
+            border-radius: 50%;
+            transition: all .3s ease;
+            cursor: pointer;
+            color: #000;
+
+            
+        }
+
+        .subtheme__page__arrow {
+            font-size: 34px;
+        }
+
+
+        .subtheme__page:hover {
+            background-color: rgba(135, 135, 198, 0.827);
+        }
+        .page__selected {
+            background-color: rgb(224, 139, 139);
+        }
+    </style>
+
+    <div class="subthemes__pages">
+        <div>
+            {% with new_page=current_page|add:"-1" %}
+                <a href="{% url 'subtheme' user=user pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">&lt;</a>
+            {% endwith %}
+        </div>{% for page in pages_amount %}
+            <div>
+                
+                <a href="{% url 'subtheme' user=user pk=pk page=page %}" class="subtheme__page {% if page == current_page %}page__selected{% endif %}">{{page}}</a>
+            </div>
+        {% endfor %}
+        <div>
+            {% with new_page=current_page|add:"1" %}
+                <a href="{% url 'subtheme' user=user pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">></a>
+            {% endwith %}
+        </div>
+    </div>
 </div>
 
 {% endblock %}

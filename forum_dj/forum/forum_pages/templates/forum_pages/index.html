@@ -51,7 +51,7 @@
                             <div class="adult__trafic-title main-title-text">Всі теми</div>
                             <div class="adult__trafic-themes">
                                 {% for theme in themes %}
-                                    <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'subthemes' theme.id %}">{{ theme }}</a></div>
+                                    <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'subthemes' theme.id 1 %}">{{ theme }}</a></div>
                                 {% endfor %}
                             </div>
                         </section>
@@ -70,7 +70,7 @@
                         <section class="adult__trafic main__panel-section">
                             <div class="adult__trafic-title main-title-text">Пісочниця</div>
                             <div class="adult__trafic-themes">
-                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'sandbox' %}">Пісочниця - про все та ні про що</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'sandbox' page=1 %}">Пісочниця - про все та ні про що</a></div>
                             </div>
                         </section>
                         <div class="divider"></div>
@@ -139,7 +139,7 @@
                         <div class="divider"></div>
                     </div>
                     <div class="side__panel">
-                        <div class="side__panel-title main-title-text"><a href="{% url 'sandbox' %}">Останні повідомлення</a></div>
+                        <div class="side__panel-title main-title-text"><a href="{% url 'sandbox' page=1 %}">Останні повідомлення</a></div>
                         <div class="side__panel-body">
                             <div class="side__panel-message">
                                 {% for i in last_messages %}

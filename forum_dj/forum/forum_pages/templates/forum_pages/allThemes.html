@@ -15,7 +15,7 @@
                         <div class="adult__trafic-title main-title-text">Всі теми</div>
                         <div class="adult__trafic-themes">
                             {% for theme in themes %}
-                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'subthemes' theme.id %}">{{ theme }}</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'subthemes' theme.id 1 %}">{{ theme }}</a></div>
                             {% endfor %}
                         </div>
                     </section>
