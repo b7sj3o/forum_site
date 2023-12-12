@@ -168,9 +168,12 @@ def search(request):
         query |= Q(title__icontains=keyword) | Q(main_text__icontains=keyword)
 
     subthemes = SubThemes.objects.filter(query).order_by('-created')
+    messages_amount = [len(i.subtheme_messages.all()) for i in subthemes]
+    
+    combined_data = zip(subthemes, messages_amount)
     any_result = True if not len(subthemes) else False
     context = {
-        'subthemes': subthemes,
+        'combined_data': combined_data,
         'is_searched': True,
         'requested_words': q, 
         'any_result': any_result
