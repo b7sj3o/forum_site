@@ -98,8 +98,10 @@ body {
     }
     &__title-interface{
         font-size: 20px;
-        font-weight: 700;
         color: black;
+        a{
+            font-weight: 700;
+        }
     }
     &__theme-wrapper{
         margin-top: 10px;
@@ -169,7 +171,7 @@ body {
     border: none;
     cursor: pointer;
     padding: 5px;
-    background-color: white;
+    background-color: inherit;
 }
 
 .update-dropdown .dropdown-button img {

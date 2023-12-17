@@ -3,7 +3,7 @@
     font-size: 20px; }
   .user__box-footer {
     gap: 20px;
-    height: 40px;
+    height: 63px;
     padding: 25px; }
     .user__box-footer h3 {
       font-size: 14px;
@@ -87,13 +87,10 @@
       margin: 20px 0; }
   .modal form {
     margin-top: 20px; }
-  .form__wrapper {
-    display: block;
-    margin: 0 auto; }
   .modal {
     width: 500px; }
   .show-email-text, .show-tg-text {
-    font-size: 20px;
+    font-size: 15px;
     color: #212529;
     font-weight: 700; }
   .user__adv {
@@ -169,7 +166,7 @@
   .user__box-header button {
     font-size: 10px; }
   .user__box-header h1 {
-    font-size: 26px;
+    font-size: 22px;
     margin-top: 16px; }
   .user__nickname {
     max-width: 80%; } }

@@ -7,7 +7,7 @@
     .user__box{
         &-footer{
             gap: 20px;
-            height: 40px;
+            height: 63px;
             padding: 25px;
             h3{
                 font-size: 14px;
@@ -148,15 +148,11 @@
             margin-top: 20px;
         }
     }
-    .form__wrapper{
-        display: block;
-        margin: 0 auto;
-    }
     .modal{
         width: 500px;
     }
     .show-email-text,.show-tg-text{
-        font-size: 20px;
+        font-size: 15px;
         color: #212529;
         font-weight: 700;
     }
@@ -288,7 +284,7 @@
                     font-size: 10px;
                 }
                 h1{
-                    font-size: 26px;
+                    font-size: 22px;
                     margin-top: 16px;
                 }
             }

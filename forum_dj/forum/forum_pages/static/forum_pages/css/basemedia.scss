@@ -29,6 +29,10 @@
     }
 }    
 @media screen and (max-width: 980px) {
+    .form__wrapper{
+        display: block;
+        margin: 0px auto;
+    }
     .header__links {
         position: fixed;
         flex-direction: column;
@@ -242,7 +246,7 @@
 
         input{
             height: 25px;
-            width: 120px;
+            width: 140px;
         }
         button{
             height: 25px;

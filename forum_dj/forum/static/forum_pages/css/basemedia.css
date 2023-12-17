@@ -17,6 +17,9 @@
       font-size: 18px; } }
 
 @media screen and (max-width: 980px) {
+  .form__wrapper {
+    display: block;
+    margin: 0px auto; }
   .header__links {
     position: fixed;
     flex-direction: column;
@@ -147,7 +150,7 @@
     gap: 20px; }
   .search-container input {
     height: 25px;
-    width: 120px; }
+    width: 140px; }
   .search-container button {
     height: 25px; }
     .search-container button img {
