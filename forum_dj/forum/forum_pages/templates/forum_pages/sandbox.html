@@ -10,23 +10,26 @@
     <div class="sandbox__wrapper">
         <div class="container">
             <div class="sandbox__inner">
+                
                 <div class="sandbox__title">Обговорення</div>
                 <div class="divider"></div>
+                <section class="first__banner">
+                    <a href="#">
+                        <img src="{{ main_banner.image.url }}" alt="Banner" style="width: 1180px; height: 200px; object-fit: cover; object-position: center; margin: 20px 0;">
+                    </a>
+                </section>
                 {% if request.user.is_authenticated %}
-                <form class="sandbox__form" method="POST" action="">
+                <form class="sandbox__form w-100" method="POST" action="">
                     {% csrf_token %}
                     <div class="title__container">
                         <label for="main_text" class="form__name">Залишити повідомлення</label>
                         <textarea type="text" id="main_text" class="sandbox__text" name="main_text" required ></textarea>
                     </div>
-                    <input type="submit" class="sandbox__button" value="Зберегти дані" class="submit-inp">
+                    <div class="d-flex justify-content-center">
+                        <input type="submit" class="sandbox__button w-50" value="Зберегти дані" class="submit-inp">
+                    </div>
                 </form>
-                <section class="first__banner">
-                    <a href="#" style="width: 1000px; height: 100px;">
-                        <img src="{{ main_banner.image.url }}" alt="Banner" style="width: 1180px; height: 200px; object-fit: cover; object-position: center; margin: 20px 0;">
-                    </a>
-                </section>
-                <div class="divider"></div> 
+                
                 {% else %}
                 <div class="alert alert-warning w-100 fs-4" role="alert">Щоб залишати повідомлення ви повинні <a href="{% url 'login' %}">увійти в акаунт</a></div>
                 
@@ -48,7 +51,7 @@
                                                 <img src="{% static 'forum_pages/img/icons/three-dots.svg' %}" alt="Update Icon">
                                             </button>
                                             <div class="dropdown-content">
-                                                <a href="{% url 'update-message-sandbox' message.id %}">Update</a>
+                                                <a href="{% url 'update-message-sandbox' message.id current_page %}">Update</a>
                                                 <a href="{% url 'delete-message' message.id %}">
                                                     <span>Delete</span>
                                                 </a>

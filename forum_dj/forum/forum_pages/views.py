@@ -39,10 +39,13 @@ def sandbox(request, page):
 
     main_banner = MainPictureBanner.objects.all()[0]
 
-    pages_amount = len(messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
-    pages_list_amount = [x for x in range(1, pages_amount+1)]
+    if not messages_per_page:
+        pages_amount = 1
+    else:
+        pages_amount = len(messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
+    pages_list_amount = list(range(1, pages_amount+1))
 
-    if page > pages_amount:
+    if page > pages_amount and pages_amount:
         return redirect(referer)
 
     if request.method == 'POST':
@@ -83,7 +86,7 @@ def subThemes(request, pk, page):
 
     pages_amount = len(
         subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
-    pages_list_amount = [x for x in range(1, pages_amount+1)]
+    pages_list_amount = list(range(1, pages_amount+1))
 
     if page > pages_amount and pages_amount:
         return redirect(referer)
@@ -110,7 +113,7 @@ def SearchedsubThemes(request, page, q):
         query |= Q(title__icontains=keyword) | Q(main_text__icontains=keyword)
     subthemes = SubThemes.objects.filter(query).order_by('-created')
 
-    any_result = True if not len(subthemes) else False
+    any_result = not len(subthemes)
 
     subthemes_per_page = subthemes[page*10-10:page*10]
     pages_amount = len(subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
@@ -144,7 +147,7 @@ def subTheme(request, pk, page):
     else:
         pages_amount = len(room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
 
-    pages_list_amount = [x for x in range(1, pages_amount+1)]
+    pages_list_amount = list(range(1, pages_amount+1))
     if page > pages_amount and pages_amount:
         return redirect(referer)
 
@@ -257,7 +260,7 @@ def updateMessage(request, pk, mes, page):
 
     messages_per_page = room_messages[page*10-10:page*10]
     pages_amount = len(room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
-    pages_list_amount = [x for x in range(1, pages_amount+1)]
+    pages_list_amount = list(range(1, pages_amount+1))
 
     u_message = SubThemeMessage.objects.get(id=mes)
     
@@ -279,21 +282,29 @@ def updateMessage(request, pk, mes, page):
     return render(request, 'forum_pages/subTheme.html', context)
 
 
-def updateMessageSandbox(request, pk):
+def updateMessageSandbox(request, pk, page):
+    messages = SandboxMessage.objects.all().order_by('-created')
+    messages_per_page = messages[page*10-10:page*10]
+
+    pages_amount = len(messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
+    pages_list_amount = list(range(1, pages_amount+1))
+
+    
     u_message = SandboxMessage.objects.get(id=pk)
-    messages = SandboxMessage.objects.all().order_by('-id')
     main_banner = MainPictureBanner.objects.all()[0]
 
     if request.method == "POST":
         u_message.main_text = request.POST.get('main_text')
         u_message.save()
-        return redirect('sandbox')
+        return redirect('sandbox', page=page)
 
     context = {
-        'messages': messages,
+        'messages': messages_per_page,
+        'pages_amount': pages_list_amount,
+        'current_page': page,
         'is_update': True,
         'u_message': u_message,
-        'main_banner': main_banner
+        'main_banner': main_banner,
     }
 
     return render(request, 'forum_pages/sandbox.html', context)

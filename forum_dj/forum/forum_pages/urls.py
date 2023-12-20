@@ -14,7 +14,7 @@ urlpatterns = [
     path('create-advertisment', views.createAdvertisment, name='create-advertisment'),
 
     path('update-message/&subthemeId=<str:pk>&messageId<str:mes>&page=<int:page>', views.updateMessage, name='update-message'),
-    path('update-message-sandbox/<str:pk>/', views.updateMessageSandbox, name='update-message-sandbox'),
+    path('update-message-sandbox&messageId=<str:pk>&page=<int:page>', views.updateMessageSandbox, name='update-message-sandbox'),
     path('delete-message/<str:pk>/', views.deleteMessage, name='delete-message'),
     path('delete-subtheme/<str:pk>/', views.deleteSubTheme, name='delete-subtheme'),
 
