@@ -44,7 +44,7 @@
                                 <img src="{% static 'forum_pages/img/icons/three-dots.svg' %}" alt="Update Icon">
                             </button>
                             <div class="dropdown-content">
-                                <a href="{% url 'update-message' room.id message.id %}">Update</a>
+                                <a href="{% url 'update-message' room.id message.id current_page %}">Update</a>
                                 <a href="{% url 'delete-message' message.id %}">
                                     <span>Delete</span>
                                 </a>
@@ -55,9 +55,9 @@
             </div>
             <div class="user__theme-wrapper">
                 {% if is_update and u_message == message %}
-                    <form action="{% url 'update-message' room.id message.id %}" method="POST">
+                    <form action="{% url 'update-message' room.id message.id current_page %}" method="POST">
                         {% csrf_token %}
-                        <input type="text" name="main_text" id="" value="{{ message.main_text }}">
+                        <input type="text" name="main_text" id="" value="{{ message.main_text }}" required>
                         <input type="submit" value="Підтвердити" class="btn btn-primary">
                     </form>
                 {% else %}
@@ -105,17 +105,16 @@
     <div class="subthemes__pages">
         <div>
             {% with new_page=current_page|add:"-1" %}
-                <a href="{% url 'subtheme' user=user pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">&lt;</a>
+                <a href="{% url 'subtheme' pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">&lt;</a>
             {% endwith %}
         </div>{% for page in pages_amount %}
             <div>
-                
-                <a href="{% url 'subtheme' user=user pk=pk page=page %}" class="subtheme__page {% if page == current_page %}page__selected{% endif %}">{{page}}</a>
+                <a href="{% url 'subtheme' pk=pk page=page %}" class="subtheme__page {% if page == current_page %}page__selected{% endif %}">{{page}}</a>
             </div>
         {% endfor %}
         <div>
             {% with new_page=current_page|add:"1" %}
-                <a href="{% url 'subtheme' user=user pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">></a>
+                <a href="{% url 'subtheme' pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">></a>
             {% endwith %}
         </div>
     </div>

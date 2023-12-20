@@ -60,6 +60,7 @@ class SubThemes(models.Model):
     base_theme = models.ForeignKey(Themes, on_delete=models.CASCADE, null=True, related_name='subthemes')
     title = models.CharField(max_length=100, null=True)
     main_text = models.TextField()
+    count = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:

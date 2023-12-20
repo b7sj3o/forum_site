@@ -30,8 +30,9 @@ def index(request):
 
 
 def sandbox(request, page):
-    page = int(page)
     referer = request.META.get('HTTP_REFERER', None)
+    if page < 1:
+        return redirect(referer)
 
     messages = SandboxMessage.objects.all().order_by('-created')
     messages_per_page = messages[page*10-10:page*10]
@@ -41,7 +42,7 @@ def sandbox(request, page):
     pages_amount = len(messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
     pages_list_amount = [x for x in range(1, pages_amount+1)]
 
-    if page < 1 or page > pages_amount:
+    if page > pages_amount:
         return redirect(referer)
 
     if request.method == 'POST':
@@ -72,26 +73,24 @@ def allThemes(request):
 def subThemes(request, pk, page):
     page = int(page)
     referer = request.META.get('HTTP_REFERER', None)
-
+    if page < 1:
+        return redirect(referer)
+    
     theme = Themes.objects.get(id=pk)
     subthemes = theme.subthemes.all().order_by('-id')
     subthemes_per_page = subthemes[page*10-10:page*10]
 
-    messages_amount = [len(i.subtheme_messages.all()) for i in subthemes]
-
-    combined_data = zip(subthemes_per_page, messages_amount)
 
     pages_amount = len(
         subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
     pages_list_amount = [x for x in range(1, pages_amount+1)]
 
-    if page < 1 or page > pages_amount:
+    if page > pages_amount and pages_amount:
         return redirect(referer)
 
     context = {
         'theme': theme,
         'subthemes': subthemes_per_page,
-        'combined_data': combined_data,
         'pages_amount': pages_list_amount,
         'current_page': page,
         'pk': pk
@@ -99,21 +98,56 @@ def subThemes(request, pk, page):
     return render(request, 'forum_pages/subThemes.html', context)
 
 
-def subTheme(request, user, pk, page):
+def SearchedsubThemes(request, page, q):
     referer = request.META.get('HTTP_REFERER', None)
-    page = int(page)
+    if page < 1:
+        return redirect(referer)
+
+
+    keywords = q.split()
+    query = Q()
+    for keyword in keywords:
+        query |= Q(title__icontains=keyword) | Q(main_text__icontains=keyword)
+    subthemes = SubThemes.objects.filter(query).order_by('-created')
+
+    any_result = True if not len(subthemes) else False
+
+    subthemes_per_page = subthemes[page*10-10:page*10]
+    pages_amount = len(subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
+    pages_list_amount = [x for x in range(1, pages_amount+1)]
+
+    if page > pages_amount and pages_amount:
+        return redirect(referer)
+
+    context = {
+        'subthemes': subthemes_per_page,
+        'pages_amount': pages_list_amount,
+        'current_page': page,
+        'any_result': any_result,
+        'requested_words': q
+    }
+    return render(request, 'forum_pages/searched-subthemes.html', context)
+
+
+def subTheme(request, pk, page):
+    referer = request.META.get('HTTP_REFERER', None)
+    if page < 1:
+        return redirect(referer)
 
     room = SubThemes.objects.get(id=pk)
     room_messages = room.subtheme_messages.all().order_by('-id')
 
     messages_per_page = room_messages[page*10-10:page*10]
 
-    pages_amount = len(
-        room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
-    pages_list_amount = [x for x in range(1, pages_amount+1)]
+    if not messages_per_page:
+        pages_amount = 1
+    else:
+        pages_amount = len(room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
 
-    if page < 1 or page > pages_amount:
+    pages_list_amount = [x for x in range(1, pages_amount+1)]
+    if page > pages_amount and pages_amount:
         return redirect(referer)
+
 
     if request.method == 'POST':
         theme = SubThemeMessage.objects.create(
@@ -121,12 +155,11 @@ def subTheme(request, user, pk, page):
             subtheme=room,
             main_text=request.POST.get('main_text')
         )
-        return redirect('subtheme', user=user, pk=pk, page=page)
+        return redirect('subtheme', pk=pk, page=page)
 
     context = {
         'room_messages': messages_per_page,
         'room': room,
-        'user': user,
         'pk': pk,
         'pages_amount': pages_list_amount,
         'current_page': page
@@ -207,28 +240,10 @@ def userProfile(request, pk):
 
 
 def search(request):
-    q = request.GET.get('q', '')
-    keywords = q.split()
-
-    query = Q()
-
-    for keyword in keywords:
-        query |= Q(title__icontains=keyword) | Q(main_text__icontains=keyword)
-
-    subthemes = SubThemes.objects.filter(query).order_by('-created')
-    messages_amount = [len(i.subtheme_messages.all()) for i in subthemes]
-
-    combined_data = zip(subthemes, messages_amount)
-    any_result = True if not len(subthemes) else False
-
-    context = {
-        'combined_data': combined_data,
-        'is_searched': True,
-        'requested_words': q,
-        'any_result': any_result
-    }
-
-    return render(request, 'forum_pages/subThemes.html', context)
+    q = request.GET.get('q')
+    if not q:
+        return redirect(request.META.get('HTTP_REFERER', None))
+    return redirect('searched-subthemes', page=1, q=q) 
 
 
 def advertPage(request):
@@ -236,21 +251,29 @@ def advertPage(request):
     return render(request, 'forum_pages/advertisment.html', context)
 
 
-def updateMessage(request, pk, pk2):
-    u_message = SubThemeMessage.objects.get(id=pk2)
+def updateMessage(request, pk, mes, page):
     room = SubThemes.objects.get(id=pk)
     room_messages = room.subtheme_messages.all().order_by('-id')
 
+    messages_per_page = room_messages[page*10-10:page*10]
+    pages_amount = len(room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
+    pages_list_amount = [x for x in range(1, pages_amount+1)]
+
+    u_message = SubThemeMessage.objects.get(id=mes)
+    
     if request.method == "POST":
         u_message.main_text = request.POST.get('main_text')
         u_message.save()
-        return redirect('subtheme', user=room.user.username, pk=pk)
+        return redirect('subtheme', pk=pk, page=page)
 
     context = {
-        'room_messages': room_messages,
+        'room_messages': messages_per_page,
         'room': room,
+        'pages_amount': pages_list_amount,
         'is_update': True,
-        'u_message': u_message
+        'u_message': u_message,
+        'current_page': page,
+        'pk': pk
     }
 
     return render(request, 'forum_pages/subTheme.html', context)

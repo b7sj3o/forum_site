@@ -10,19 +10,15 @@
 
 <div class="sandbox__info container">
     
-    {% if not is_searched %}
-        <div class="sandbox__title">Тема: {{ theme }}</div>
+    {% if any_result %}
+        <div class="sandbox__title" style="word-break: break-all; font-weight: 100;">По запиту <small style="font-weight: 600;">"{{ requested_words }}"</small> нічого не знайдено</div>
         <div class="divider"></div>
-        <a class="link-subheader" href="{% url 'create-subtheme' theme.id %}"><button class="btn btn-primary btn-subheader">Створити підтему</button></a>
+        <a href="{% url 'home' %}" class="btn btn-primary w-50 mt-3 fs-5">Повернутись на головну сторінку</a>
+        
     {% else %}
-        {% if any_result %}
-            <div class="sandbox__title" style="word-break: break-all; font-weight: 100;">По запиту <small style="font-weight: 600;">"{{ requested_words }}"</small> нічого не знайдено</div>
-        {% else %}
-            <div class="sandbox__title" style="word-break: break-all; font-weight: 100;">Знайдені теми по запиту <small style="font-weight: 600;">"{{ requested_words }}"</small></div>
-        {% endif %}
+        <div class="sandbox__title" style="word-break: break-all; font-weight: 100;">Знайдені теми по запиту <small style="font-weight: 600;">"{{ requested_words }}"</small></div>
         <div class="divider"></div>
-    {% endif %}
-    {% for subtheme in subthemes %}
+        {% for subtheme in subthemes %}
         <div class="user__wrapper-interface">
             <div class="user__line-interface"></div>
             <div class="user__data-interface">
@@ -34,7 +30,6 @@
                 <div class="user__time-interface">Повідомлень в темі: <b style="font-size: 24px;">{{ subtheme.count }}</b></div>
 
                 {% if request.user.username == subtheme.user.username or request.user.username == 'admin' %}
-
                     <div class="user__delete-interface">
                         <a href="{% url 'delete-subtheme' subtheme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
                     </div>
@@ -45,65 +40,63 @@
                 <div class="user__text-interface">{{ subtheme.main_text }}</div>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
 
-    <style>
-        .subthemes__pages{
-            display: flex;
-            gap: 20px;
-            padding: 20px 0;
-        }
-        .subtheme__page{
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            background-color: rgba(135, 135, 198, 0.675);
-            border-radius: 50%;
-            transition: all .3s ease;
-            cursor: pointer;
-            color: #000;
+        <style>
+            .subthemes__pages{
+                display: flex;
+                gap: 20px;
+                padding: 20px 0;
+            }
+            .subtheme__page{
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
+                background-color: rgba(135, 135, 198, 0.675);
+                border-radius: 50%;
+                transition: all .3s ease;
+                cursor: pointer;
+                color: #000;
 
-            
-        }
+                
+            }
 
-        .subtheme__page__arrow {
-            font-size: 34px;
-        }
+            .subtheme__page__arrow {
+                font-size: 34px;
+            }
 
 
-        .subtheme__page:hover {
-            background-color: rgba(135, 135, 198, 0.827);
-        }
-        .page__selected {
-            background-color: rgb(224, 139, 139);
-        }
-    </style>
-    
-    {% if not is_searched %}
+            .subtheme__page:hover {
+                background-color: rgba(135, 135, 198, 0.827);
+            }
+            .page__selected {
+                background-color: rgb(224, 139, 139);
+            }
+        </style>
+        
         <div class="divider"></div>
         <div class="subthemes__pages">
             <div>
                 {% with new_page=current_page|add:"-1" %}
-                    <a href="{% url 'subthemes' pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">&lt;</a>
+                    <a href="{% url 'searched-subthemes' page=new_page q=requested_words %}" class="subtheme__page subtheme__page__arrow">&lt;</a>
                 {% endwith %}
             </div>
             {% for page in pages_amount %}
                 <div>
-                        <a href="{% url 'subthemes' pk=pk page=page %}" class="subtheme__page {% if page == current_page %}page__selected{% endif %}">{{page}}</a>
+                        <a href="{% url 'searched-subthemes' page=page q=requested_words %}" class="subtheme__page {% if page == current_page %}page__selected{% endif %}">{{page}}</a>
                 </div>
             {% endfor %}
             <div>
                 {% with new_page=current_page|add:"1" %}
-                    <a href="{% url 'subthemes' pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">></a>
+                    <a href="{% url 'searched-subthemes' page=new_page q=requested_words %}" class="subtheme__page subtheme__page__arrow">></a>
                 {% endwith %}
             </div>
         </div>
-    {% endif %}
+        {% endif %}
+    
 </div>
 
 {% endblock %}
-
-
