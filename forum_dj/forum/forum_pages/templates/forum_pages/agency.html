@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load sass_tags %}
+{% load static %}
+{% block style %}{% sass_src 'forum_pages/css/index.min.css' %}{% endblock %}
+
+{% block title %} Головна сторінка {% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="container">
+            <div class="content">
+                <div class="w-100">
+                    <section class="adult__trafic main__panel-section agency__panel-section">
+                        <div class="adult__trafic-title main-title-text agency__main-title agency agency-title-text">Топ агенства</div>
+                    </section>
+                    <div class="agency__wrapper">
+                        <div class="agency__title">Ступайте до нашої групи</div>
+                        <div class="agency__box">
+                            <div class="agency__info">
+                                <div class="user__photo-interface agency__photo"><a href="#"><img src="{% static 'forum_pages/img/icons/forum_logo.png'%}" class="side__panel-photo" alt=""></a></div>
+                                <div class="agency__data">
+                                    <div class="agency__username"><a href="">VCXVXCVXCV</a></div>
+                                    <div class="agency__time">312321321</div>
+                                </div>
+                                <div class="agency__name">PARI MATCH</div>
+                            </div>
+                            <div class="agency__banner"><a href="#"><img src="{% static 'forum_pages/img/banners/image_5_zGJXRnV.png'%}" alt=""></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

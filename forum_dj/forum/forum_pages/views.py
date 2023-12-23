@@ -248,6 +248,9 @@ def search(request):
         return redirect(request.META.get('HTTP_REFERER', None))
     return redirect('searched-subthemes', page=1, q=q) 
 
+def agencyPage(request):
+    context = {}
+    return render(request, 'forum_pages/agency.html', context)
 
 def advertPage(request):
     context = {}

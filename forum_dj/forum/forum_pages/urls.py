@@ -9,6 +9,7 @@ urlpatterns = [
     path('searched-subthemes/&page=<int:page>/&q=<str:q>', views.SearchedsubThemes, name='searched-subthemes'),
     path('subtheme&subthemeId=<str:pk>&page=<int:page>', views.subTheme, name='subtheme'),
     path('advert-page', views.advertPage, name='advert-page'),
+    path('agency', views.agencyPage, name='agency'),
 
     path('create-subtheme/<str:topic_id>', views.createSubTheme, name='create-subtheme'),
     path('create-advertisment', views.createAdvertisment, name='create-advertisment'),
