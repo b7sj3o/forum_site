@@ -1,12 +1,14 @@
-from django.shortcuts import render, redirect
-from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, SubThemeMessage, Themes, SandboxMessage, User, SubThemes
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, SubThemeMessage, Themes, SandboxMessage, User, SubThemes, TopAgency
 from django.contrib.auth.decorators import login_required
 from .forms import UserForm
 from django.db.models import Q
+from django.contrib import messages
 
 
 # -------------- RENDER --------------
 
+# ----------- READ -----------
 
 def index(request):
     advertisements = Advertisements.objects.all().order_by('-id')
@@ -42,7 +44,8 @@ def sandbox(request, page):
     if not messages_per_page:
         pages_amount = 1
     else:
-        pages_amount = len(messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
+        pages_amount = len(
+            messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
     pages_list_amount = list(range(1, pages_amount+1))
 
     if page > pages_amount and pages_amount:
@@ -78,14 +81,15 @@ def subThemes(request, pk, page):
     referer = request.META.get('HTTP_REFERER', None)
     if page < 1:
         return redirect(referer)
-    
+
     theme = Themes.objects.get(id=pk)
     subthemes = theme.subthemes.all().order_by('-id')
     subthemes_per_page = subthemes[page*10-10:page*10]
 
-
     pages_amount = len(
         subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
+    if not pages_amount:
+        pages_amount = 1
     pages_list_amount = list(range(1, pages_amount+1))
 
     if page > pages_amount and pages_amount:
@@ -106,7 +110,6 @@ def SearchedsubThemes(request, page, q):
     if page < 1:
         return redirect(referer)
 
-
     keywords = q.split()
     query = Q()
     for keyword in keywords:
@@ -116,7 +119,8 @@ def SearchedsubThemes(request, page, q):
     any_result = not len(subthemes)
 
     subthemes_per_page = subthemes[page*10-10:page*10]
-    pages_amount = len(subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
+    pages_amount = len(
+        subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
     pages_list_amount = [x for x in range(1, pages_amount+1)]
 
     if page > pages_amount and pages_amount:
@@ -145,12 +149,12 @@ def subTheme(request, pk, page):
     if not messages_per_page:
         pages_amount = 1
     else:
-        pages_amount = len(room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
+        pages_amount = len(
+            room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
 
     pages_list_amount = list(range(1, pages_amount+1))
     if page > pages_amount and pages_amount:
         return redirect(referer)
-
 
     if request.method == 'POST':
         theme = SubThemeMessage.objects.create(
@@ -170,27 +174,58 @@ def subTheme(request, pk, page):
     return render(request, 'forum_pages/subTheme.html', context)
 
 
-def createSubTheme(request, topic_id):
-    base_theme = Themes.objects.get(pk=topic_id)
-    if request.method == "POST":
-        theme = SubThemes.objects.create(
-            user=request.user,
-            base_theme=base_theme,
-            title=request.POST.get('title'),
-            main_text=request.POST.get('main_text')
-        )
-        return redirect('subthemes', pk=topic_id, page=1)
+def userProfile(request, pk):
+    user = User.objects.get(username=pk)
+    cuser = user
+    themes_amount = len(SubThemes.objects.filter(user=user))
+
+    last_themes = SubThemeMessage.objects.filter(
+        user=user).order_by('-created')[:10]
+    messages_amount = len(last_themes)
+
+    user_forms = UserForm(instance=user)
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile', pk=user.username)
+
+    context = {
+        'cuser': cuser,
+        'themes_amount': themes_amount,
+        'messages_amount': messages_amount,
+        'user_forms': user_forms,
+        'last_themes': last_themes,
+    }
+    return render(request, 'forum_pages/user-profile.html', context)
+
+
+def search(request):
+    q = request.GET.get('q')
+    if not q:
+        return redirect(request.META.get('HTTP_REFERER', None))
+    return redirect('searched-subthemes', page=1, q=q)
+
+
+def agencyPage(request):
+    agencies = TopAgency.objects.all().order_by('-id')
+    context = {
+        'agencies': agencies
+    }
+    return render(request, 'forum_pages/agency.html', context)
+
+
+def advertPage(request):
     context = {}
-    return render(request, 'forum_pages/create-theme.html', context)
+    return render(request, 'forum_pages/advertisment.html', context)
 
 
-def deleteSubTheme(request, pk):
-    referer = request.META.get('HTTP_REFERER', None)
+def adminPanel(request):
 
-    subtheme = SubThemes.objects.get(id=pk)
-    subtheme.delete()
+    context = {}
+    return render(request, 'forum_pages/admin-panel.html', context)
 
-    return redirect(referer)
+# -------- CREATE --------
 
 
 def createAdvertisment(request):
@@ -205,56 +240,73 @@ def createAdvertisment(request):
     return render(request, 'forum_pages/create-advertisment.html', context)
 
 
-def deleteMessage(request, pk):
-    referer = request.META.get('HTTP_REFERER', None)
-    if 'sandbox' in referer:
-        message = SandboxMessage.objects.get(id=pk)
-    else:
-        message = SubThemeMessage.objects.get(id=pk)
-    message.delete()
+def createSubTheme(request, topic_id):
+    base_theme = Themes.objects.get(pk=topic_id)
+    if request.method == "POST":
+        theme = SubThemes.objects.create(
+            user=request.user,
+            base_theme=base_theme,
+            title=request.POST.get('title'),
+            main_text=request.POST.get('main_text')
+        )
+        return redirect('subthemes', pk=topic_id, page=1)
+    context = {}
+    return render(request, 'forum_pages/create-subtheme.html', context)
 
-    return redirect(referer)
 
-
-def userProfile(request, pk):
-    user = User.objects.get(username=pk)
-    cuser = user
-    user_messages = len(SubThemes.objects.filter(user=user))
-
-    last_themes = SubThemeMessage.objects.filter(
-        user=user).order_by('-created')
-    messages_amount = len(last_themes)
-
-    user_forms = UserForm(instance=user)
+def createAgency(request):
     if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect('user-profile', pk=user.username)
+        username = request.POST.get('username')
+        user = User.objects.filter(username=username).first()
 
-    context = {
-        'cuser': cuser,
-        'user_messages': user_messages,
-        'user_forms': user_forms,
-        'last_themes': last_themes,
-        'messages_amount': messages_amount
-    }
-    return render(request, 'forum_pages/user-profile.html', context)
+        if not user:
+            messages.success(request, ('Користувача з таким іменем не існує'))
+            return redirect('create-agency')
 
+        TopAgency.objects.create(
+            user=user,
+            title=request.POST.get('title'),
+            name=request.POST.get('name'),
+            banner=request.FILES.get('banner')
+        )
+        return redirect('agency')
 
-def search(request):
-    q = request.GET.get('q')
-    if not q:
-        return redirect(request.META.get('HTTP_REFERER', None))
-    return redirect('searched-subthemes', page=1, q=q) 
-
-def agencyPage(request):
     context = {}
-    return render(request, 'forum_pages/agency.html', context)
+    return render(request, 'forum_pages/create-agency.html', context)
 
-def advertPage(request):
-    context = {}
-    return render(request, 'forum_pages/advertisment.html', context)
+
+def createTheme(request):
+    if request.POST:
+        Themes.objects.create(
+            title=request.POST.get('title')
+        )
+        return redirect('all-themes')
+    return render(request, 'forum_pages/create-theme.html')
+
+
+def createMessageAdvert(request):
+    if request.POST:
+        MainTextBanner.objects.all().delete()
+
+        MainTextBanner.objects.create(
+            title=request.POST.get('title'),
+            text=request.POST.get('text')
+        )
+        return redirect('home')
+    return render(request, 'forum_pages/create-message-advert.html')
+
+
+def createBanner(request):
+    if request.POST:
+        MainPictureBanner.objects.all().delete()
+
+        MainPictureBanner.objects.create(
+            image=request.FILES.get('image')
+        )
+        return redirect('home')
+    return render(request, 'forum_pages/create-banner.html')
+
+# -------- UPDATE --------
 
 
 def updateMessage(request, pk, mes, page):
@@ -262,11 +314,12 @@ def updateMessage(request, pk, mes, page):
     room_messages = room.subtheme_messages.all().order_by('-id')
 
     messages_per_page = room_messages[page*10-10:page*10]
-    pages_amount = len(room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
+    pages_amount = len(
+        room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
     pages_list_amount = list(range(1, pages_amount+1))
 
     u_message = SubThemeMessage.objects.get(id=mes)
-    
+
     if request.method == "POST":
         u_message.main_text = request.POST.get('main_text')
         u_message.save()
@@ -289,10 +342,10 @@ def updateMessageSandbox(request, pk, page):
     messages = SandboxMessage.objects.all().order_by('-created')
     messages_per_page = messages[page*10-10:page*10]
 
-    pages_amount = len(messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
+    pages_amount = len(
+        messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
     pages_list_amount = list(range(1, pages_amount+1))
 
-    
     u_message = SandboxMessage.objects.get(id=pk)
     main_banner = MainPictureBanner.objects.all()[0]
 
@@ -311,3 +364,34 @@ def updateMessageSandbox(request, pk, page):
     }
 
     return render(request, 'forum_pages/sandbox.html', context)
+
+
+# -------- DELETE --------
+
+def deleteSubTheme(request, pk):
+    referer = request.META.get('HTTP_REFERER', None)
+
+    subtheme = SubThemes.objects.get(id=pk)
+    subtheme.delete()
+
+    return redirect(referer)
+
+
+def deleteMessage(request, pk):
+    referer = request.META.get('HTTP_REFERER', None)
+    if 'sandbox' in referer:
+        message = SandboxMessage.objects.get(id=pk)
+    else:
+        message = SubThemeMessage.objects.get(id=pk)
+    message.delete()
+
+    return redirect(referer)
+
+
+def deleteTheme(request, pk):
+    referer = request.META.get('HTTP_REFERER', None)
+
+    theme = Themes.objects.get(id=pk)
+    theme.delete()
+
+    return redirect(referer)

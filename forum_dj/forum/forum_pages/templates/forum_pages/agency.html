@@ -9,26 +9,26 @@
 {% block content %}
     <div class="wrapper">
         <div class="container">
+            <div class="text-center fs-1 fw-bold">Топ агенства</div>
             <div class="content">
-                <div class="w-100">
-                    <section class="adult__trafic main__panel-section agency__panel-section">
-                        <div class="adult__trafic-title main-title-text agency__main-title agency agency-title-text">Топ агенства</div>
-                    </section>
-                    <div class="agency__wrapper">
-                        <div class="agency__title">Ступайте до нашої групи</div>
-                        <div class="agency__box">
-                            <div class="agency__info">
-                                <div class="user__photo-interface agency__photo"><a href="#"><img src="{% static 'forum_pages/img/icons/forum_logo.png'%}" class="side__panel-photo" alt=""></a></div>
-                                <div class="agency__data">
-                                    <div class="agency__username"><a href="">VCXVXCVXCV</a></div>
-                                    <div class="agency__time">312321321</div>
+                {% for agency in agencies %}
+                    <div class="w-100">
+                        <div class="agency__wrapper">
+                            <div class="agency__title">{{agency.title}}</div>
+                            <div class="agency__box">
+                                <div class="agency__info">
+                                    <div class="user__photo-interface agency__photo"><a href="#"><img src="{% static 'forum_pages/img/icons/forum_logo.png'%}" class="side__panel-photo" alt=""></a></div>
+                                    <div class="agency__data">
+                                        <div class="agency__username"><a href="{% url 'user-profile' agency.user.username %}">{{agency.user.username}}</a></div>
+                                        <div class="agency__time">{{agency.created}}</div>
+                                    </div>
+                                    <div class="agency__name">{{agency.name}}</div>
                                 </div>
-                                <div class="agency__name">PARI MATCH</div>
+                                <div class="agency__banner"><a href="#"><img src="{% static agency.banner %}" ></a></div>
                             </div>
-                            <div class="agency__banner"><a href="#"><img src="{% static 'forum_pages/img/banners/image_5_zGJXRnV.png'%}" alt=""></a></div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

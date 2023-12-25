@@ -38,6 +38,7 @@
                     <div class="user__time-interface">{{ message.created|timesince }} тому</div>
                 </div>
                 {% if request.user.username == message.user.username or request.user.username == 'admin' %}
+                    {% if not is_update %}
                     <div class="user__delete-interface">
                         <div class="update-dropdown">
                             <button class="dropdown-button">
@@ -51,6 +52,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 {% endif %}
             </div>
             <div class="user__theme-wrapper">

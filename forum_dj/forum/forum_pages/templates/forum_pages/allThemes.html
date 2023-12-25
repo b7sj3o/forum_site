@@ -14,8 +14,14 @@
                     <section class="adult__trafic main__panel-section">
                         <div class="adult__trafic-title main-title-text">Всі теми</div>
                         <div class="adult__trafic-themes">
+                            
                             {% for theme in themes %}
-                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'subthemes' theme.id 1 %}">{{ theme }}</a></div>
+                                <div class="d-flex justify-content-sm-between " style="background-color: rgba(231,231,231,.7); border: 1px solid #000;">
+                                    <div class="fs-5 fw-bold m-lg-1"><a href="{% url 'subthemes' theme.id 1 %}" style="color: #000">{{ theme }}</a></div>
+                                    {% if request.user.username == 'admin' %}
+                                        <a href="{% url 'delete-theme' theme.id %}" class="m-lg-1" style="color: #000">Видалити</a>
+                                    {% endif %}
+                                </div>
                             {% endfor %}
                         </div>
                     </section>

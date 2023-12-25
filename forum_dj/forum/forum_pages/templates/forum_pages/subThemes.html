@@ -82,26 +82,24 @@
         }
     </style>
     
-    {% if not is_searched %}
-        <div class="divider"></div>
-        <div class="subthemes__pages">
-            <div>
-                {% with new_page=current_page|add:"-1" %}
-                    <a href="{% url 'subthemes' pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">&lt;</a>
-                {% endwith %}
-            </div>
-            {% for page in pages_amount %}
-                <div>
-                        <a href="{% url 'subthemes' pk=pk page=page %}" class="subtheme__page {% if page == current_page %}page__selected{% endif %}">{{page}}</a>
-                </div>
-            {% endfor %}
-            <div>
-                {% with new_page=current_page|add:"1" %}
-                    <a href="{% url 'subthemes' pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">></a>
-                {% endwith %}
-            </div>
+    <div class="divider"></div>
+    <div class="subthemes__pages">
+        <div>
+            {% with new_page=current_page|add:"-1" %}
+                <a href="{% url 'subthemes' pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">&lt;</a>
+            {% endwith %}
         </div>
-    {% endif %}
+        {% for page in pages_amount %}
+            <div>
+                <a href="{% url 'subthemes' pk=pk page=page %}" class="subtheme__page {% if page == current_page %}page__selected{% endif %}">{{page}}</a>
+            </div>
+        {% endfor %}
+        <div>
+            {% with new_page=current_page|add:"1" %}
+                <a href="{% url 'subthemes' pk=pk page=new_page %}" class="subtheme__page subtheme__page__arrow">></a>
+            {% endwith %}
+        </div>
+    </div>
 </div>
 
 {% endblock %}
