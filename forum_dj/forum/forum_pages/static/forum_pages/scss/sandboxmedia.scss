@@ -111,6 +111,12 @@
         &__title-interface{
             font-size: 20px;
         }
+        &__number-interface{
+            font-size: 16px;
+            b{
+                font-size: 18px;
+            }
+        }
         &__data-interface{
             gap: 20px;
         }
@@ -153,6 +159,11 @@
         margin: 7px 0;
     }
     .user{
+        &__rightWrapper{
+            img{
+                width: 18px;
+            }
+        }
         &__name-interface{
             font-size: 12px;
         }
@@ -161,6 +172,12 @@
         }
         &__title-interface{
             font-size: 18px;
+        }
+        &__number-interface{
+            font-size: 12px;
+            b{
+                font-size: 16px;
+            }
         }
         &__text-interface{
             font-size: 12px;
@@ -173,11 +190,13 @@
                 }
             }
         }
-        &__wrapper-interface{
-            padding: 10px;
-            img{
-                width: 18px;
-            }
+    }
+    
+}
+@media screen and (max-width: 480px)  {
+    .user{
+        &__number-interface{
+            display: none;
         }
     }
     

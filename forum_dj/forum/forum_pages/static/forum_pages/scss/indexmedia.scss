@@ -134,7 +134,6 @@
     }
     .user__box{
         &-footer{
-            gap: 0;
             #user__message-amount{
                 margin-left: 20px;
             }
@@ -208,6 +207,9 @@
     }
 }
 @media screen and (max-width: 680px) {
+    .justify-content-sm-between {
+        justify-content: space-between!important;
+    }
     .content{
         gap: 15px;
     }

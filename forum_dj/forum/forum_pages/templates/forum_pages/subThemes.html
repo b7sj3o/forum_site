@@ -31,14 +31,16 @@
                     <div class="user__name-interface"><a href="{% url 'user-profile' subtheme.user.username %}">@{{ subtheme.user.username }}</a></div>
                     <div class="user__time-interface">{{ subtheme.created|timesince }} тому</div>
                 </div>
-                <div class="user__time-interface">Повідомлень в темі: <b style="font-size: 24px;">{{ subtheme.count }}</b></div>
+                <div class="user__rightWrapper">
+                    <div class="user__number-interface">Повідомлень в темі: <b>{{ subtheme.count }}</b></div>
 
-                {% if request.user.username == subtheme.user.username or request.user.username == 'admin' %}
+                    {% if request.user.username == subtheme.user.username or request.user.username == 'admin' %}
 
-                    <div class="user__delete-interface">
-                        <a href="{% url 'delete-subtheme' subtheme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
-                    </div>
-                {% endif %}
+                        <div class="user__delete-interface">
+                            <a href="{% url 'delete-subtheme' subtheme.id %}"><img src="{% static 'forum_pages/img/icons/trash.png'%}" alt="#"></a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
             <div class="user__content-interface">
                 <div class="user__title-interface"><a href="{% url 'subtheme' subtheme.id 1 %}">{{ subtheme.title }}</a></div>

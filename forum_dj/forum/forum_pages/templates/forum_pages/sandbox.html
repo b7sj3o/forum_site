@@ -10,14 +10,12 @@
     <div class="sandbox__wrapper">
         <div class="container">
             <div class="sandbox__inner">
-                
                 <div class="sandbox__title">Обговорення</div>
-                <div class="divider"></div>
-                <section class="first__banner">
+                <div class="sandbox__first-banner">
                     <a href="#">
-                        <img src="{{ main_banner.image.url }}" alt="Banner" style="width: 1180px; height: 200px; object-fit: cover; object-position: center; margin: 20px 0;">
+                        <img src="{{ main_banner.image.url }}" alt="Banner">
                     </a>
-                </section>
+                </div>
                 {% if request.user.is_authenticated %}
                 <form class="sandbox__form w-100" method="POST" action="">
                     {% csrf_token %}
@@ -26,7 +24,7 @@
                         <textarea type="text" id="main_text" class="sandbox__text" name="main_text" required ></textarea>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <input type="submit" class="sandbox__button w-50" value="Зберегти дані" class="submit-inp">
+                        <input type="submit" class="sandbox__button " value="Зберегти дані" class="submit-inp">
                     </div>
                 </form>
                 
