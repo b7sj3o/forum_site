@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load sass_tags %}
+{% load static %}
+{% block style %}{% sass_src 'forum_pages/css/index.min.css' %}{% endblock %}
+
+{% block title %} Головна сторінка {% endblock %}
+
+{% block content %}
+    {{advert.title}}
+    <img src="{% static advert.image %}" alt="">
+    {{advert.detailed_text}}
+    {{advert.link}}
+{% endblock %}

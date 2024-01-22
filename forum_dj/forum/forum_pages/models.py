@@ -29,6 +29,9 @@ class Advertisements(models.Model):
 class MainTextBanner(models.Model):
     title = models.CharField('Тайтл', max_length=100)
     text = models.TextField('Повідомлення')
+    detailed_text = models.TextField('Детальний опис')
+    image = models.ImageField('Фото', upload_to='forum_pages/img/banners')
+    link = models.URLField()
 
     def __str__(self) -> str:
         return self.title
@@ -38,7 +41,13 @@ class MainTextBanner(models.Model):
         verbose_name_plural = 'Головний текст зверху'
 
 class MainPictureBanner(models.Model):
+    title = models.CharField('Тайтл', max_length=100)
+    detailed_text = models.TextField('Детальний опис')
     image = models.ImageField('Фото', upload_to='forum_pages/img/banners')
+    link = models.URLField()
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = 'Головний банер зверху'
@@ -90,8 +99,11 @@ class TopAgency(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=50)
-    banner = models.ImageField(upload_to='forum_pages/img/top_agency')
+    image = models.ImageField(upload_to='forum_pages/img/top_agency')
+    detailed_text = models.TextField('Детальний опис')
+    link = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self) -> str:
         return self.name

@@ -225,6 +225,26 @@ def adminPanel(request):
     context = {}
     return render(request, 'forum_pages/admin-panel.html', context)
 
+def policy(request):
+    return render(request, 'forum_pages/policy.html')
+
+def advertisementPage(request, pk, adv_type):
+    advert = None
+    print(pk)
+    try:
+        if adv_type == 'first_advertisment':
+            advert = MainTextBanner.objects.get(id=pk)
+        elif adv_type == 'second_advertisment':
+            advert = MainPictureBanner.objects.get(id=pk)
+        elif adv_type == 'third_advertisment':
+            advert = TopAgency.objects.get(id=pk)
+    except:
+        ...
+
+    context = {
+        'advert': advert # TITLE, IMAGE, DETAILED_TEXT, LINK
+    }
+    return render(request, 'forum_pages/advertisment_page.html', context)
 # -------- CREATE --------
 
 

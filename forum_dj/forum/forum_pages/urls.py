@@ -10,6 +10,8 @@ urlpatterns = [
     path('subtheme&subthemeId=<str:pk>&page=<int:page>', views.subTheme, name='subtheme'),
     path('advert-page', views.advertPage, name='advert-page'),
     path('agency', views.agencyPage, name='agency'),
+    path('policy', views.policy, name='policy'),
+    path('advertisement-page/<str:pk>/<str:adv_type>', views.advertisementPage, name='advertisement-page'),
 
     path('create-theme', views.createTheme, name='create-theme'),
     path('create-subtheme/<str:topic_id>', views.createSubTheme, name='create-subtheme'),

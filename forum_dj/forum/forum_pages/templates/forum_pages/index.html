@@ -20,12 +20,12 @@
                 <div class="content">
                     <div class="main__panel">
                         <section class="first__advertisment">
-                            <div class="first__advertisment-title"><a href="#">{{ chosen_product.title }}</a></div>
+                            <div class="first__advertisment-title"><a href="{% url 'advertisement-page' chosen_product.id 'first_advertisment' %}">{{ chosen_product.title }}</a></div>
                             <div class="first__advertisment-text">{{ chosen_product.text }}</div>
                         </section>
                         <div class="divider"></div>
                         <section class="first__banner"> 
-                            <a href="#">
+                            <a href="{% url 'advertisement-page' main_banner.id 'second_advertisment' %}">
                                 <img src="{% static main_banner.image %}" alt="Banner">
                             </a>
                         </section>

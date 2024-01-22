@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="agency__name">{{agency.name}}</div>
                                 </div>
-                                <div class="agency__banner"><a href="#"><img src="{% static agency.banner %}" ></a></div>
+                                <div class="agency__banner"><a href="{% url 'advertisement-page' agency.id 'third_advertisment' %}"><img src="{% static agency.banner %}" ></a></div>
                             </div>
                         </div>
                     </div>
