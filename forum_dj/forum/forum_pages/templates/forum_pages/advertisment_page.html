@@ -2,13 +2,23 @@
 
 {% load sass_tags %}
 {% load static %}
-{% block style %}{% sass_src 'forum_pages/css/index.min.css' %}{% endblock %}
+{% block style %}{% sass_src 'forum_pages/css/base.min.css' %}{% endblock %}
 
 {% block title %} Головна сторінка {% endblock %}
 
 {% block content %}
-    {{advert.title}}
-    <img src="{% static advert.image %}" alt="">
-    {{advert.detailed_text}}
-    {{advert.link}}
+    <div class="container">
+        <div class="advPage__wrapper">
+            <div class="advPage__first-block">
+                <span class="advPage__title">{{advert.title}}</span>
+                <img class="advPage__img" src="{% static advert.image %}" alt="">
+            </div>
+            <div class="advPage__second-block">
+                <div class="advPage__text">{{advert.detailed_text}}</div>
+                <div class="advPage__link">
+                    <a href="#">{{advert.link}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
