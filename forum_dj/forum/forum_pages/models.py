@@ -8,7 +8,9 @@ class User(AbstractUser):
     telegram = models.CharField(max_length=200, null=True, blank=True, verbose_name='Ваш телеграм нікнейм')  
     is_show_telegram = models.BooleanField(default=True, verbose_name='Показувати телеграм')
     avatar = models.ImageField(null=True, default='forum_pages/img/avatars/default_avatar.png', upload_to='forum_pages/img/avatars', verbose_name='Фото профілю')
-
+    
+    is_blocked = models.BooleanField(default=False, blank=True)
+    ban_reason = models.TextField(null=True, blank=True)
 
     REQUIRED_FIELDS = []
 

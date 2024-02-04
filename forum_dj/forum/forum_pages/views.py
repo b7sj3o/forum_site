@@ -1,12 +1,12 @@
+from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, SubThemeMessage, Themes, SandboxMessage, User, SubThemes, TopAgency
 from django.contrib.auth.decorators import login_required
 from .forms import UserForm
 from django.db.models import Q
 from django.contrib import messages
-
-
-# -------------- RENDER --------------
+from django.views.generic import ListView
+import json
 
 # ----------- READ -----------
 
@@ -225,8 +225,10 @@ def adminPanel(request):
     context = {}
     return render(request, 'forum_pages/admin-panel.html', context)
 
+
 def policy(request):
     return render(request, 'forum_pages/policy.html')
+
 
 def advertisementPage(request, pk, adv_type):
     advert = None
@@ -245,6 +247,16 @@ def advertisementPage(request, pk, adv_type):
         'advert': advert # TITLE, IMAGE, DETAILED_TEXT, LINK
     }
     return render(request, 'forum_pages/advertisment_page.html', context)
+
+
+class SearchUserList(ListView):
+    model = User
+    template_name = 'forum_pages/ban-user.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['qs_json'] = json.dumps(list(User.objects.values('username')))
+        return context
 # -------- CREATE --------
 
 
@@ -415,3 +427,18 @@ def deleteTheme(request, pk):
     theme.delete()
 
     return redirect(referer)
+
+def banUser(request):
+    if request.POST:
+        username = request.POST.get('username')
+        ban_reason = request.POST.get('main_text')
+
+        user = User.objects.get(username=username)
+
+        user.is_blocked = True
+        user.ban_reason = ban_reason
+        user.save()
+
+        messages.success(request, "Користувача успішно заблоковано")
+
+    return redirect('home')
