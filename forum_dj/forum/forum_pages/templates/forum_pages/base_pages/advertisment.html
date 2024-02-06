@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'forum_pages/css/advertisment.min.css' %}">
+<link rel="stylesheet" href="{% static 'forum_pages/css/advertismentmedia.min.css' %}">
+{% endblock %}
+
+{% block title %}Реклама{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="text-center fs-1 fw-bold">Реклама</div>
+        <div class="container">
+            <div class="advertisment___wrapper">
+                <div class="advertisment-block gradient-border">
+                    <div class="advertisment-img">
+                        <img src="{% static 'forum_pages/img/avatars/example.png'%}"  alt="">
+                    </div>
+                    <div class="advertisment__content">
+                        <h3 class="advertisment__title">Пости</h3>
+                        <div class="advertisment__text">Прорекламуйте ваш пост закріпив його зверху серед інших!</div>
+                    </div>
+                </div>
+                <div class="advertisment-block gradient-border">
+                    <div class="advertisment-img">
+                        <img src="{% static 'forum_pages/img/avatars/example.png'%}"  alt="">
+                    </div>
+                    <div class="advertisment__content">
+                        <h3 class="advertisment__title">Банери</h3>
+                        <div class="advertisment__text">Додайте банер ваших послуг чи постів, користувачі зможуть дізнатись про вас більше</div>
+                    </div>
+                </div>
+                <div class="advertisment-block gradient-border">
+                    <div class="advertisment-img">
+                        <img src="{% static 'forum_pages/img/avatars/example.png'%}"  alt="">
+                    </div>
+                    <div class="advertisment__content">
+                        <h3 class="advertisment__title">Топ-Агенства</h3>
+                        <div class="advertisment__text">Стати партнером нашої платформи та отримати вкладку у розділі Топ-Агенства</div>
+                    </div>
+                </div>
+            </div>
+            <div class="advertisment__link">
+                <span>Для детальної інформації звертайтесь до <a href="#">“ссылка на начало чата с админ профилем”</a></span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

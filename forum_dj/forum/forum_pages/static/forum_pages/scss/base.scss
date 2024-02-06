@@ -15,7 +15,8 @@ $mainColor: rgb(76, 76, 150);
 a {
     text-decoration: none;
 }
-body,html{
+body,
+html {
     height: 100%;
 }
 
@@ -57,14 +58,15 @@ h6 {
     margin-top: 40px;
     padding: 0 15px;
     box-sizing: content-box;
-    
 }
-.text-center{
-    margin-top: 20px!important;
+.text-center {
+    margin-top: 20px !important;
     margin-bottom: 0px !important;
 }
 .form_register {
-    .helptext,ul,li{
+    .helptext,
+    ul,
+    li {
         display: none;
     }
 }
@@ -236,7 +238,7 @@ h6 {
 .dropdown-button {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    a{
+    a {
         color: wheat;
     }
 }
@@ -323,7 +325,6 @@ h6 {
         margin-top: 10px;
         input {
             width: 70% !important;
-
         }
         label {
             margin-top: 10px;
@@ -358,38 +359,37 @@ h6 {
     }
 }
 
-.user{
-    &__time{
+.user {
+    &__time {
         font-size: 16px;
     }
-    &__named{
+    &__named {
         font-size: 20px;
         font-weight: 700;
-        color: #000000;;
+        color: #000000;
     }
-    &__wrapper{
+    &__wrapper {
         margin-bottom: 40px;
-        &:last-child{
+        &:last-child {
             margin-bottom: 10px;
         }
     }
-    &__header{
+    &__header {
         display: flex;
         gap: 10px;
         align-items: center;
         margin-bottom: 10px;
     }
-    &__photo{
-        img{
+    &__photo {
+        img {
             width: 40px;
         }
     }
-    &__data{
+    &__data {
         display: flex;
         flex-direction: column;
-
     }
-    &__info{
+    &__info {
         margin-left: 10px;
     }
     &__nickname {
@@ -398,7 +398,7 @@ h6 {
         text-overflow: ellipsis;
         font-size: 24px;
         font-weight: 700;
-        a{
+        a {
             color: black;
         }
     }
@@ -411,19 +411,19 @@ h6 {
     }
 }
 
-.alert{
+.alert {
     text-align: left;
     margin-top: 30px;
 }
-.show-wrapper{
+.show-wrapper {
     text-align: center;
 }
-.show-email-text,.show-tg-text{
+.show-email-text,
+.show-tg-text {
     font-size: 25px;
     color: #212529;
     font-weight: 500;
 }
-
 
 // ------------------ CHECKBOX ----------------- //
 .checkbox-container {
@@ -435,19 +435,18 @@ h6 {
     display: flex;
     align-items: center;
 }
-  
+
 .checkbox-label {
     margin-right: 10px;
 }
-  
+
 .checkbox-container {
     input {
         position: absolute;
         opacity: 0;
     }
-
 }
-  
+
 .checkbox-checkmark {
     position: absolute;
     top: 0;
@@ -458,44 +457,43 @@ h6 {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-  
+
 .checkbox-container {
     position: relative;
-  
+
     input:checked + .checkbox-checkmark::before {
-      content: '\2713'; // то галочка
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 16px;
-      font-weight: 900;
-      color: #ea2910;
+        content: "\2713"; // то галочка
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+        font-weight: 900;
+        color: #ea2910;
     }
-  }
-  
-.advPage{
-    &__wrapper{
+}
+
+.advPage {
+    &__wrapper {
         display: flex;
         margin-top: 40px;
         width: 100%;
-
     }
-    &__title{
+    &__title {
         font-size: 40px;
         font-weight: 700;
         text-align: center;
         margin-bottom: 30px;
     }
-    &__first-block{
+    &__first-block {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 40%;
     }
-    &__second-block{
+    &__second-block {
         width: 60%;
         text-align: center;
         display: flex;
@@ -503,7 +501,7 @@ h6 {
         flex-direction: column;
         align-items: center;
     }
-    &__link{
+    &__link {
         width: fit-content;
         margin-top: 30px;
         height: 50px;
@@ -514,29 +512,28 @@ h6 {
         border-top-right-radius: 10px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        a{
+        a {
             text-align: center;
             color: wheat;
-            transition: all .3s ease-in-out;
-            &:hover{
+            transition: all 0.3s ease-in-out;
+            &:hover {
                 color: #0d6efd;
             }
         }
     }
-    &__text{
+    &__text {
         font-size: 25px;
         font-weight: 500;
         max-height: 600px;
         overflow: hidden;
         text-overflow: ellipsis;
         margin-top: 20px;
-
     }
-    &__img{
+    &__img {
         width: 400px;
         height: 400px;
         object-fit: cover;
         object-position: center;
         margin-bottom: 40px;
     }
-}  
+}

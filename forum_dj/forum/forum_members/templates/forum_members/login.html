@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
-{% load sass_tags %}
 {% load static %}
-{% block style %}{% sass_src 'forum_pages/css/sandbox.min.css' %}{% endblock %}
+{% block style %}{% static 'forum_pages/css/sandbox.min.css' %}{% endblock %}
 
 {% block title %}Login{% endblock %}
 

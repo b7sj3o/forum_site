@@ -18,6 +18,7 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('admin-panel', views.adminPanel, name='admin-panel'),
     path('user-profile/<str:pk>/', views.userProfile, name='user-profile'),
+    path('banlist/<str:assoc>/', views.blacklist, name='banlist'),
 
     # ------------ CREATE ------------
     path('create-theme', views.createTheme, name='create-theme'),
@@ -32,7 +33,7 @@ urlpatterns = [
     path('update-message-sandbox&messageId=<str:pk>&page=<int:page>', views.updateMessageSandbox, name='update-message-sandbox'),
 
     # ------------ DELETE ------------
-    path('delete-message/<str:pk>/', views.deleteMessage, name='delete-message'),
+    path('delete-message/<str:pk>/<int:subtheme_id>/', views.deleteMessage, name='delete-message'),
     path('delete-theme/<str:pk>/', views.deleteTheme, name='delete-theme'),
     path('delete-subtheme/<str:pk>/', views.deleteSubTheme, name='delete-subtheme'),
     path('ban-user', views.banUser, name='ban-user'),

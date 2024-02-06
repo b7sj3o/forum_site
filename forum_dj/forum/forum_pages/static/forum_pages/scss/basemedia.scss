@@ -119,9 +119,10 @@
         margin-right: 40px;
     }
     .search-container {
+        width: 70vw;
         input {
             height: 35px;
-            width: 320px;
+            width: 100%;
             &::placeholder {
                 font-size: 14px;
             }

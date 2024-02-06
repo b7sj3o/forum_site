@@ -1,14 +1,55 @@
-from typing import Any
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Advertisements, MainPictureBanner, MainTextBanner, UserData, SubThemeMessage, Themes, SandboxMessage, User, SubThemes, TopAgency
-from django.contrib.auth.decorators import login_required
-from .forms import UserForm
 from django.db.models import Q
 from django.contrib import messages
 from django.views.generic import ListView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 import json
+from typing import Any, Optional
+
+from .models import (Advertisements,
+                     MainPictureBanner,
+                     MainTextBanner,
+                     # UserData,
+                     SubThemeMessage,
+                     Themes,
+                     SandboxMessage,
+                     User,
+                     SubThemes,
+                     TopAgency,
+                     BaseTheme
+                     )
+from .forms import UserForm
+
 
 # ----------- READ -----------
+
+def pagination(request, page, className, pk=None):
+    referer = request.META.get('HTTP_REFERER', None)
+    if page < 1:
+            return redirect(referer)
+    
+    theme = ''
+    if className == SubThemes:
+        theme = className.objects.get(id=pk)
+        themes = theme.subtheme_messages.all().order_by('-id')
+    elif pk:
+        theme = className.objects.get(id=pk)
+        themes = theme.subthemes.all().order_by('-id')
+    else:
+        themes = className.objects.all().order_by('-id')
+
+    themes_per_page = themes[page*10-10:page*10]
+    pages_amount = len(themes) // 10 if len(themes) % 10 == 0 else len(themes) // 10 + 1
+
+    if not pages_amount:
+        pages_amount = 1
+    
+    pages_list_amount = list(range(1, pages_amount+1))
+
+    if page > pages_amount and pages_amount:
+        return redirect(referer)
+    return theme, themes_per_page, pages_list_amount
 
 def index(request):
     advertisements = Advertisements.objects.all().order_by('-id')
@@ -22,7 +63,8 @@ def index(request):
         main_banner = None
 
     last_messages = SandboxMessage.objects.all().order_by('-id')[:5]
-    return render(request, 'forum_pages/index.html', {
+
+    return render(request, 'forum_pages/base_pages/index.html', {
         'advertisements': advertisements,
         'chosen_product': chosen_product,
         'main_banner': main_banner,
@@ -32,23 +74,12 @@ def index(request):
 
 
 def sandbox(request, page):
-    referer = request.META.get('HTTP_REFERER', None)
-    if page < 1:
-        return redirect(referer)
-
-    messages = SandboxMessage.objects.all().order_by('-created')
-    messages_per_page = messages[page*10-10:page*10]
-
     main_banner = MainPictureBanner.objects.all()[0]
+    referer = request.META.get('HTTP_REFERER', None)
 
-    if not messages_per_page:
-        pages_amount = 1
-    else:
-        pages_amount = len(
-            messages) // 10 if len(messages) % 10 == 0 else len(messages) // 10 + 1
-    pages_list_amount = list(range(1, pages_amount+1))
-
-    if page > pages_amount and pages_amount:
+    try: 
+        _messages, messages_per_page, pages_list_amount = pagination(request, page, SandboxMessage)
+    except:
         return redirect(referer)
 
     if request.method == 'POST':
@@ -64,7 +95,7 @@ def sandbox(request, page):
         'pages_amount': pages_list_amount,
         'current_page': page
     }
-    return render(request, 'forum_pages/sandbox.html', context)
+    return render(request, 'forum_pages/base_pages/sandbox.html', context)
 
 
 def allThemes(request):
@@ -73,28 +104,18 @@ def allThemes(request):
     context = {
         'themes': themes
     }
-    return render(request, 'forum_pages/allThemes.html', context)
+    return render(request, 'forum_pages/base_pages/allThemes.html', context)
 
 
-def subThemes(request, pk, page):
-    page = int(page)
+def subThemes(request, pk, page):    
     referer = request.META.get('HTTP_REFERER', None)
-    if page < 1:
+
+    try: 
+        theme, subthemes_per_page, pages_list_amount = pagination(request, page, Themes, pk)
+    except:
         return redirect(referer)
 
-    theme = Themes.objects.get(id=pk)
-    subthemes = theme.subthemes.all().order_by('-id')
-    subthemes_per_page = subthemes[page*10-10:page*10]
-
-    pages_amount = len(
-        subthemes) // 10 if len(subthemes) % 10 == 0 else len(subthemes) // 10 + 1
-    if not pages_amount:
-        pages_amount = 1
-    pages_list_amount = list(range(1, pages_amount+1))
-
-    if page > pages_amount and pages_amount:
-        return redirect(referer)
-
+    print(subthemes_per_page[0].count)
     context = {
         'theme': theme,
         'subthemes': subthemes_per_page,
@@ -102,7 +123,7 @@ def subThemes(request, pk, page):
         'current_page': page,
         'pk': pk
     }
-    return render(request, 'forum_pages/subThemes.html', context)
+    return render(request, 'forum_pages/base_pages/subThemes.html', context)
 
 
 def SearchedsubThemes(request, page, q):
@@ -125,6 +146,7 @@ def SearchedsubThemes(request, page, q):
 
     if page > pages_amount and pages_amount:
         return redirect(referer)
+        
 
     context = {
         'subthemes': subthemes_per_page,
@@ -133,27 +155,15 @@ def SearchedsubThemes(request, page, q):
         'any_result': any_result,
         'requested_words': q
     }
-    return render(request, 'forum_pages/searched-subthemes.html', context)
+    return render(request, 'forum_pages/base_pages/searched-subthemes.html', context)
 
 
 def subTheme(request, pk, page):
     referer = request.META.get('HTTP_REFERER', None)
-    if page < 1:
-        return redirect(referer)
 
-    room = SubThemes.objects.get(id=pk)
-    room_messages = room.subtheme_messages.all().order_by('-id')
-
-    messages_per_page = room_messages[page*10-10:page*10]
-
-    if not messages_per_page:
-        pages_amount = 1
-    else:
-        pages_amount = len(
-            room_messages) // 10 if len(room_messages) % 10 == 0 else len(room_messages) // 10 + 1
-
-    pages_list_amount = list(range(1, pages_amount+1))
-    if page > pages_amount and pages_amount:
+    try: 
+        room, messages_per_page, pages_list_amount = pagination(request, page, SubThemes, pk)
+    except:
         return redirect(referer)
 
     if request.method == 'POST':
@@ -162,6 +172,8 @@ def subTheme(request, pk, page):
             subtheme=room,
             main_text=request.POST.get('main_text')
         )
+        room.count += 1
+        room.save()
         return redirect('subtheme', pk=pk, page=page)
 
     context = {
@@ -171,17 +183,16 @@ def subTheme(request, pk, page):
         'pages_amount': pages_list_amount,
         'current_page': page
     }
-    return render(request, 'forum_pages/subTheme.html', context)
+    return render(request, 'forum_pages/base_pages/subTheme.html', context)
 
 
 def userProfile(request, pk):
     user = User.objects.get(username=pk)
-    cuser = user
+    
     themes_amount = len(SubThemes.objects.filter(user=user))
-
-    last_themes = SubThemeMessage.objects.filter(
-        user=user).order_by('-created')[:10]
-    messages_amount = len(last_themes)
+    messages_by_user = SubThemeMessage.objects.filter(user=user).order_by('-created')
+    messages_amount = len(messages_by_user)
+    last_themes = messages_by_user[:10]
 
     user_forms = UserForm(instance=user)
     if request.method == 'POST':
@@ -191,13 +202,13 @@ def userProfile(request, pk):
             return redirect('user-profile', pk=user.username)
 
     context = {
-        'cuser': cuser,
+        'cuser': user,
         'themes_amount': themes_amount,
         'messages_amount': messages_amount,
         'user_forms': user_forms,
         'last_themes': last_themes,
     }
-    return render(request, 'forum_pages/user-profile.html', context)
+    return render(request, 'forum_pages/base_pages/user-profile.html', context)
 
 
 def search(request):
@@ -212,22 +223,22 @@ def agencyPage(request):
     context = {
         'agencies': agencies
     }
-    return render(request, 'forum_pages/agency.html', context)
+    return render(request, 'forum_pages/base_pages/top-agency.html', context)
 
 
 def advertPage(request):
     context = {}
-    return render(request, 'forum_pages/advertisment.html', context)
+    return render(request, 'forum_pages/base_pages/advertisment.html', context)
 
 
 def adminPanel(request):
 
     context = {}
-    return render(request, 'forum_pages/admin-panel.html', context)
+    return render(request, 'forum_pages/base_pages/admin-panel.html', context)
 
 
 def policy(request):
-    return render(request, 'forum_pages/policy.html')
+    return render(request, 'forum_pages/base_pages/policy.html')
 
 
 def advertisementPage(request, pk, adv_type):
@@ -244,14 +255,23 @@ def advertisementPage(request, pk, adv_type):
         ...
 
     context = {
-        'advert': advert # TITLE, IMAGE, DETAILED_TEXT, LINK
+        'advert': advert  # TITLE, IMAGE, DETAILED_TEXT, LINK
     }
-    return render(request, 'forum_pages/advertisment_page.html', context)
+    return render(request, 'forum_pages/base_pages/advertisment_page.html', context)
+
+
+def blacklist(request, assoc):
+    themes = BaseTheme.objects.filter(assoc=assoc)
+
+    context = {
+        'themes': themes
+    }
+    return render(request, 'forum_pages/base_pages/blacklist.html', context)
 
 
 class SearchUserList(ListView):
     model = User
-    template_name = 'forum_pages/ban-user.html'
+    template_name = 'forum_pages/create/ban-user.html'
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -269,7 +289,7 @@ def createAdvertisment(request):
         )
         return redirect('home')
     context = {}
-    return render(request, 'forum_pages/create-advertisment.html', context)
+    return render(request, 'forum_pages/create/create-advertisment.html', context)
 
 
 def createSubTheme(request, topic_id):
@@ -283,7 +303,7 @@ def createSubTheme(request, topic_id):
         )
         return redirect('subthemes', pk=topic_id, page=1)
     context = {}
-    return render(request, 'forum_pages/create-subtheme.html', context)
+    return render(request, 'forum_pages/create/create-subtheme.html', context)
 
 
 def createAgency(request):
@@ -304,7 +324,7 @@ def createAgency(request):
         return redirect('agency')
 
     context = {}
-    return render(request, 'forum_pages/create-agency.html', context)
+    return render(request, 'forum_pages/create/create-top-agency.html', context)
 
 
 def createTheme(request):
@@ -313,7 +333,7 @@ def createTheme(request):
             title=request.POST.get('title')
         )
         return redirect('all-themes')
-    return render(request, 'forum_pages/create-theme.html')
+    return render(request, 'forum_pages/create/create-theme.html')
 
 
 def createMessageAdvert(request):
@@ -325,7 +345,7 @@ def createMessageAdvert(request):
             text=request.POST.get('text')
         )
         return redirect('home')
-    return render(request, 'forum_pages/create-message-advert.html')
+    return render(request, 'forum_pages/create/create-message-advert.html')
 
 
 def createBanner(request):
@@ -336,7 +356,7 @@ def createBanner(request):
             image=request.FILES.get('image')
         )
         return redirect('home')
-    return render(request, 'forum_pages/create-banner.html')
+    return render(request, 'forum_pages/create/create-banner.html')
 
 # -------- UPDATE --------
 
@@ -367,7 +387,7 @@ def updateMessage(request, pk, mes, page):
         'pk': pk
     }
 
-    return render(request, 'forum_pages/subTheme.html', context)
+    return render(request, 'forum_pages/base_pages/subTheme.html', context)
 
 
 def updateMessageSandbox(request, pk, page):
@@ -395,7 +415,7 @@ def updateMessageSandbox(request, pk, page):
         'main_banner': main_banner,
     }
 
-    return render(request, 'forum_pages/sandbox.html', context)
+    return render(request, 'forum_pages/base_pages/sandbox.html', context)
 
 
 # -------- DELETE --------
@@ -409,12 +429,15 @@ def deleteSubTheme(request, pk):
     return redirect(referer)
 
 
-def deleteMessage(request, pk):
+def deleteMessage(request, pk, subtheme_id):
     referer = request.META.get('HTTP_REFERER', None)
     if 'sandbox' in referer:
         message = SandboxMessage.objects.get(id=pk)
     else:
         message = SubThemeMessage.objects.get(id=pk)
+        subtheme = SubThemes.objects.get(id=subtheme_id)
+        subtheme.count -= 1
+        subtheme.save()
     message.delete()
 
     return redirect(referer)
@@ -427,6 +450,7 @@ def deleteTheme(request, pk):
     theme.delete()
 
     return redirect(referer)
+
 
 def banUser(request):
     if request.POST:

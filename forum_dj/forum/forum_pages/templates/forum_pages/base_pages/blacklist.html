@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% for theme in themes %}
+<div>{{ theme.title }}</div>
+<div>{{ theme.text }}</div>
+<div>{{ theme.created }}</div>
+<div>{{ theme.user.username }}</div>
+<div>{{ theme.user.email }}</div>
+<div>{{ theme.user.telegram }}</div>
+<img src="{% static theme.user.avatar %}" width="100" alt="">
+
+{% endfor %}
+
+{% endblock %}

@@ -123,22 +123,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    menuItem.forEach(item => {
-        item.addEventListener('click', () => {
-            hamburger.classList.toggle('_active');
-            menu.classList.toggle('_active');
-
-            if (authBlock) {
-                authBlock.classList.remove('_active');
-                document.querySelector('.container').appendChild(authBlock);
-                authBlock.style.display = 'none';
-            }
-
-            if (dropdownMenu) {
-                dropdownMenu.style.display = 'none';
-            }
-        });
-    });
+    
 });
 
 document.getElementById("openBtn").addEventListener("click", function() {

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Create Theme{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="text-center fw-bold fs-1">Створити банер</div>
+        <div class="title__container">
+            <label class="fs-4 fw-bold">банер</label>
+            <input type="file" class="form form-control" name="image" required >
+        </div>
+        <input type="submit" class="btn btn-primary mt-3 mb-3" value="Створити і видалити минулий">
+    </form>
+</div>
+{% endblock %}
