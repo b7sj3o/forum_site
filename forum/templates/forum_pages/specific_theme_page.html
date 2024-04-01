@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+<style>
+    .specific__main__title {
+        text-align: center;
+        font-size: 48px;
+        font-weight: 800;
+    }
+</style>
+<!-- TODO тут потрібно зверстати фулл сторінку, по тиму subthemes.html, чисто теми повинні бути і лінк який веде кудись (макет бачиш)-->
+<div class="container">
+    <div class="container">
+        <div class="text-center fw-bold fs-1">Створити власне оголошення</div>
+        <form action="{% url 'create-specific-theme' assoc %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Створити" class="btn btn-primary mt-3 mb-3">
+        </form>
+        <hr>
+        <div class="specific__main">
+            <div class="specific__main__title">Всі оголошення</div>
+            {% for theme in themes %}
+                <hr>
+
+                <a href="{% url 'user-profile' theme.user.username %}">@{{theme.user.username}}</a>
+                <img src="{{theme.user.avatar.url}}" alt="" width="50">
+                <div>{{theme.title}}</div>
+                <div>{{theme.text}}</div>
+                <div>{{theme.created}}</div>
+                <a href="{{theme.link}}">LINK</a>
+
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

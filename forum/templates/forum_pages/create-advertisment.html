@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'forum_pages/css/sandbox.min.css' %}">
+{% endblock %}
+
+{% block title %}Create theme{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+   <div class="container sandbox__info">
+        <form method="POST" class="sandbox__form" action="">
+            {% csrf_token %}
+            <div class="text-center fw-bold fs-1">Створити оголошення</div>
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary mt-3 mb-3" value="Створити">
+        </form>
+{% else %}
+    <div class="alert alert-warning w-100 fs-4" role="alert">Щоб створювати оголошення ви повинні <a href="{% url 'login' %}">увійти в акаунт</a></div>
+{% endif %} 
+   </div>
+{% endblock %}

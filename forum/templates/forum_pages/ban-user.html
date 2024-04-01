@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'forum_pages/css/sandbox.min.css' %}">
+{% endblock %}
+
+{% block title %}Ban user{% endblock %}
+
+{% block content %}
+
+<style>
+    .users-box {
+        width: 100%;
+        margin: 20px 0;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .users-box option {
+    }
+</style>
+
+<div class="container sandbox__info">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="w-75 position-absolute z-3" style="left: 50%; transform: translateX(-50%)">
+                <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form class="sandbox__form" method="POST" action="{% url 'ban-user' %}">
+        {% csrf_token %}
+        <div class="sandbox__title text-center">Заблокувати користувача</div>
+        <div class="title__container">
+            <label for="title" class="form__name">Нікнейм користувача</label>
+            <input type="text" id="searchbar" class="form-control w-100" name="username" required />
+            <select name="" id="users-box" class="users-box form-select">
+                {% for item in object_list %}
+                <option value="" id="{{item}}">{{item}}</option>
+                {% endfor %}
+            </select><hr>
+            <label for="main_text" class="form__name">Причина бану</label>
+            <textarea type="text" id="main_text" class="form-control w-100" name="main_text" required ></textarea>
+        </div>
+        <input type="submit" class="sandbox__button" value="Заблокувати користувача" class="submit-inp">
+    </form>
+</div>
+<br>
+
+<script>
+    const data = '{{qs_json}}'
+    const rdata = JSON.parse(data.replace(/&quot;/g, '"'))
+
+    const input = document.getElementById('searchbar')
+    
+    let filteredData = [];
+    let box = document.querySelector('#users-box')
+
+    input.addEventListener('keyup', function(e) {
+        box.innerHTML = ""
+        filteredData = rdata.filter(info=> info['username'].toLowerCase().includes(e.target.value.toLowerCase()))
+
+        if (filteredData.length > 0) {
+            filteredData.forEach(item=> {
+                box.innerHTML += `<option value="" id="${item['username']}">${item['username']}</option>`
+            })
+        } else {
+            box.innerHTML = `<option value="">Користувача не знайдено</option>`
+        }
+    })
+
+    box.addEventListener('change', function(e) {
+        e.preventDefault()
+        const chosenUser = box.options[box.selectedIndex].textContent;
+
+        input.value = chosenUser
+    })
+
+    box.addEventListener('click', function(e) {
+        e.preventDefault()
+        const chosenUser = box.options[box.selectedIndex].textContent;
+
+        input.value = chosenUser
+    })
+</script>
+
+{% endblock %}

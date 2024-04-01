@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'forum_pages/css/home.min.css' %}">
+<link rel="stylesheet" href="{% static 'forum_pages/css/homemedia.min.css' %}">
+{% endblock %}
+
+{% block title %} Головна сторінка {% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="container">
+                <div class="content">
+                    <div class="main__panel">
+                        <section class="first__advertisment">
+                            {% if chosen_product %}
+                                <div class="first__advertisment-title"><a href="{% url 'advertisement-page' chosen_product.id 'first_advertisment' %}">{{ chosen_product.title }}</a></div>
+                                <div class="first__advertisment-text">{{ chosen_product.text }}</div>
+                            {% else %}
+                                <div class="first__advertisment-title"><a href="">Замовити рекламу</a></div>
+                                <div class="first__advertisment-text">Клацай на посилання, щоб твоя реклама з'явилась тут</div>
+                            {% endif %}
+                        </section>
+                        <div class="divider"></div>
+                        <section class="first__banner"> 
+                            <a href="{% url 'advertisement-page' main_banner.id 'second_advertisment' %}">
+                                <img src="{{main_banner.image.url}}" alt="Banner">
+                            </a>
+                        </section>
+                        <div class="divider"></div>
+                        <a href="{% url 'create-advertisment' %}"><button class="btn btn-primary w-100 mb-3">Створити оголошення</button></a>
+                        <div class="advertisments__title">Оголошення</div>
+                        <section class="advertisments">
+                            {% for i in advertisements %}
+                                <ul class="advert">
+                                    <div class="advert__first">
+                                        <li class="advert__kind">{{ i.title }}</li>
+                                        <li class="advert__text"><a href="#">{{ i.text }}</a></li>
+                                    </div>
+                                    <div class="advert__second">
+                                        <li class="advert__time">{{ i.time|timesince }} тому</li>
+                                        <li class="advert__name"><a href="{% url 'user-profile' i.name %}">@{{ i.name }}</a></li>
+                                    </div>
+                                </ul>
+                            {% endfor %}
+                        </section>
+                        <div class="divider"></div>
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Всі теми</div>
+                            <div class="adult__trafic-themes">
+                                {% for theme in themes %}
+                                    <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'subthemes' theme.id %}">{{ theme }}</a></div>
+                                {% endfor %}
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Все про Adult трафік</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Пошук трафіку</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Продаж трафіку</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Пропозиції по співпраці</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Пісочниця</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'sandbox' %}">Пісочниця - про все та ні про що</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Корисна інформація</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Корисна інформація</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Організація роботи агенства</div>
+                            <div class="adult__trafic-themes">
+                                {% for agency in agencies %}
+                                    <div class="d-flex justify-content-sm-between " style="background-color: rgba(231,231,231,.7); border-top: 1px solid #000;">
+                                        <div class="adult__trafic-theme main__panel-theme" style='background: none; border: 0;'><a href="{% url 'specific_theme_page' agency.title %}">{{agency.title}}</a></div>
+                                        {% if request.user.username == 'admin' %}
+                                            <a href="{% url 'delete-agency-job-org' agency.id %}" class="m-lg-1"><img src="{% static 'forum_pages/img/icons/trash.png'%}" class="delete-theme" alt="#"></a>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                                
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Бот-програми, розсилки</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'specific_theme_page' 'bot_spam' %}">Бот-програми, розсилки. Готові і під замовлення</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Чорний список</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'specific_theme_page' 'blacklist_scouts' %}">Чорний список скаутів</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'specific_theme_page' 'blacklist_agencies' %}">Чорний список брачних агенств</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'specific_theme_page' 'blacklist_translators' %}">Чорний список перекладачів</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Перекладачі і скаути</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'specific_theme_page' 'job_scouts' %}">Скаути, пропоную роботу для скаутів</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'specific_theme_page' 'job_translators_1' %}">Робота перекладачем у шлюбному агентстві досвід</a></div>
+                                <div class="adult__trafic-theme main__panel-theme"><a href="{% url 'specific_theme_page' 'job_translators_2' %}">Вакансіі та резюме для перекладачів (Оголошення)</a></div>
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+
+                        <section class="adult__trafic main__panel-section">
+                            <div class="adult__trafic-title main-title-text">Запрос на добавлення розділу та категорії</div>
+                            <div class="adult__trafic-themes">
+                                <div class="adult__trafic-theme main__panel-theme"><a href="#">Запросити</a></div> <!-- TODO link to some telegram -->
+                            </div>
+                        </section>
+                        <div class="divider"></div>
+                    </div>
+                    <!-- TODO забирай то геть, коли все в рядок -->
+                    <div class="side__panel">
+                        <div class="side__panel-title main-title-text"><a href="{% url 'sandbox' %}">Останні повідомлення</a></div>
+                        <div class="side__panel-body">
+                            <div class="side__panel-message">
+                                {% for i in last_messages %}
+                                    <div class="side__panel-userinfo">
+                                        <a href="#"><img src="{{i.user.avatar.url}}" class="side__panel-photo" alt=""></a>
+                                        <div class="side__panel-userData">
+                                            <div class="side__panel-author"><a href="{% url 'user-profile' i.user.username %}">@{{ i.user.username }}</a></div>
+                                            <div class="side__panel-time">{{ i.created|timesince }} тому</div>
+                                            <div class="side__panel-text">{{ i.main_text }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="{% static 'forum_pages/js/script.js'%}"></script>
+{% endblock %}

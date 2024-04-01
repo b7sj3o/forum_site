@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'forum_pages/css/top-agency.min.css' %}">
+{% endblock %}
+
+{% block title %} Головна сторінка {% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="container">
+            <div class="text-center fs-1 fw-bold">Топ агенства</div>
+            <div class="content">
+                {% for agency in agencies %}
+                    <div class="w-100">
+                        <div class="agency__wrapper">
+                            <div class="agency__title">{{agency.title}}</div>
+                            <div class="agency__box">
+                                <div class="agency__info">
+                                    <!-- TODO user__photo змінити розмір, тут через width='50' зроблено -->
+                                    <div class="user__photo-interface agency__photo"><a href="#"><img src="{{ agency.user.avatar.url }}" class="side__panel-photo" alt="" width='50'></a></div>
+                                    <div class="agency__data">
+                                        <div class="agency__username"><a href="{% url 'user-profile' agency.user.username %}">{{agency.user.username}}</a></div>
+                                        <div class="agency__time">{{agency.created}}</div>
+                                    </div>
+                                    <div class="agency__name">{{agency.name}}</div>
+                                </div>
+                                <div class="agency__banner"><a href="{{agency.link}}"><img src="{{agency.image.url}}"></a></div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

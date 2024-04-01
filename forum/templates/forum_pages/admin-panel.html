@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Admin Panel {% endblock %}
+
+{% block content %}
+<style>
+    .admin__title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+    }
+    
+    .container{
+        height: 100%;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+<div class="container">
+    <div class="admin__title">Admin Panel</div>
+    <div class="btns mt-4">
+        <div class="d-flex gap-3">
+            <a href="{% url 'create-theme' %}" class="btn btn-primary w-100">Створити тему</a>
+            <a href="{% url 'create-agency' %}" class="btn btn-primary w-100">Добавити топ-агенство</a>
+        </div>
+        <div class="d-flex gap-3 mt-3">
+            <a href="{% url 'create-message-advert' %}" class="btn btn-primary w-100">Створити рекламу текстом (головна)</a>
+            <a href="{% url 'create-banner' %}" class="btn btn-primary w-100">Створити рекламу банер (головна)</a>
+        </div>
+        <div class="d-flex gap-3 mt-3">
+            <a href="{% url 'create-agency-job-org' %}" class="btn btn-primary w-100">Створити організацію роботи агенства</a>            
+            <a href="{% url 'ban-user-page' %}" class="btn btn-primary w-100">Заблокувати користувача</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

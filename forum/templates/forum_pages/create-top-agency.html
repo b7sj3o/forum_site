@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Create top agency{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="text-center fw-bold fs-1">Добавити топ-агенство</div>
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary mt-3 mb-3" value="Добавити топ-агенство">
+    </form>
+</div>
+{% endblock %}
