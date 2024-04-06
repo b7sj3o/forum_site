@@ -191,11 +191,23 @@
             }
         }
     }
+    .adult__trafic{
+        &-theme{
+            a{
+                font-size: 16px;
+            }
+        }
+    }
 }
 @media screen and (max-width: 480px) {
     .user {
         &__number-interface {
             display: none;
+        }
+    }
+    .adult__trafic{
+        .delete-theme{
+            width: 18px;
         }
     }
 }

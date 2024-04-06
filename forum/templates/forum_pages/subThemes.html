@@ -2,13 +2,13 @@
 
 {% load static %}
 {% block style %}
-<link rel="stylesheet" href="{% static 'forum_pages/css/sandbox.min.css' %}">
+<link rel="stylesheet" href="{% static 'forum_pages/css/themes.min.css' %}">
+<link rel="stylesheet" href="{% static 'forum_pages/css/themesmedia.min.css' %}">
 {% endblock %}
 
 {% block title %}Themes{% endblock %}
 
 {% block content %}
-
 <div class="sandbox__info container">
     
     <div class="sandbox__title">Тема: {{ theme }}</div>
@@ -42,49 +42,6 @@
         </div>
     {% endfor %}
 
-    <style>
-        .subthemes__pages{
-            display: flex;
-            gap: 20px;
-            padding: 20px 0;
-        }
-        .subtheme__page{
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            background-color: rgba(135, 135, 198, 0.675);
-            border-radius: 50%;
-            transition: all .3s ease;
-            cursor: pointer;
-            color: #000;
-
-            
-        }
-
-        .subtheme__current-page {
-            display: flex;
-            align-items: center;
-            height: 50px;
-            font-size: 24px;
-            border: 1px solid #c1c1c1;
-            padding: 5px;
-        }
-
-        .subtheme__page__arrow {
-            font-size: 34px;
-        }
-
-
-        .subtheme__page:hover {
-            background-color: rgba(135, 135, 198, 0.827);
-        }
-        .page__selected {
-            background-color: rgb(224, 139, 139);
-        }
-    </style>
     
     <div class="divider"></div>
     <div class="subthemes__pages">

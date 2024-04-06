@@ -2,13 +2,23 @@
 
 {% load static %}
 {% block style %}
-<link rel="stylesheet" href="{% static 'forum_pages/css/sandbox.min.css' %}">
+<link rel="stylesheet" href="{% static 'forum_pages/css/themes.min.css' %}">
+<link rel="stylesheet" href="{% static 'forum_pages/css/themesmedia.min.css' %}">
 {% endblock %}
 
 {% block title %}messages{% endblock %}
 
 {% block content %}
-
+<style>
+    .wrapper{
+        min-height: 100vh;
+    }
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
 
 <div class="sandbox__info container">
     <div class="sandbox__title">{{ subtheme.title }}</div>

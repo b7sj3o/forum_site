@@ -1,10 +1,32 @@
+@media screen and (max-width: 1600px) {
+    .container {
+        max-width: 90%;
+    }
+    .header{
+        .container{
+            max-width: 95%;
+        }
+        &__links{
+            gap: 25px;
+            padding-left: 10px;
+        }
+        &__auth{
+            a{
+                padding: 5px 10px;
+            }
+        }
+        &__logo{
+            width: 100px;
+        }
+    }
+}
 @media screen and (max-width: 1200px) {
     .container {
         max-width: 90%;
     }
     .header {
         .container {
-            max-width: 90%;
+            max-width: 95%;
         }
         &__search {
             width: 120px;
@@ -21,9 +43,11 @@
             }
         }
         &__auth {
+            flex-direction: column;
             gap: 20px;
             a {
-                font-size: 18px;
+                font-size: 14px;
+                text-align: center;
             }
         }
     }
@@ -33,25 +57,54 @@
         display: block;
         margin: 0px auto;
     }
-    .header__links {
-        position: fixed;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        top: 0;
-        z-index: 3;
-        left: -100%;
-        width: 50%;
-        height: 100vh;
-        padding: 20px 15px;
-        background-color: rgba(0, 0, 0, 0.8);
-        transition: 0.6s all;
-
-        &._active {
-            left: 0;
+    .header__links{
+        a{
+            font-size: 18px;
+            text-align: left;
         }
-
-        .header__link {
+    }
+    .header{
+        &__logo {
+            img {
+                width: 120px;
+            }
+        }
+        &__auth {
+            gap: 10px;
+            margin-left: 40px;
+            margin-top: 30px;
+            a {
+                font-size: 14px;
+                padding: 5px 5px;
+            }
+        }
+        &__links {
+            gap: 24px;
+            a {
+                font-size: 18px;
+            }
+        }
+        &__links {
+            position: fixed;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            z-index: 3;
+            left: -100%;
+            width: 50%;
+            height: 100vh;
+            padding: 20px 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+            transition: 0.6s all;
+            &._active {
+                left: 0;
+            }
+        }
+        &__auth{
+            flex-direction: row;
+        }    
+        &__link{
             padding-right: 0;
             border: none;
             margin: 0;
@@ -94,32 +147,11 @@
             }
         }
     }
-    .header {
-        &__logo {
-            img {
-                width: 120px;
-            }
-        }
-        &__auth {
-            gap: 10px;
-            margin-left: 40px;
-            a {
-                font-size: 14px;
-                padding: 5px 5px;
-            }
-        }
-        &__links {
-            gap: 24px;
-            a {
-                font-size: 14px;
-            }
-        }
-    }
     .searchBox {
         margin-right: 40px;
     }
     .search-container {
-        width: 70vw;
+        width: 50vw;
         input {
             height: 35px;
             width: 100%;
@@ -168,6 +200,9 @@
     }
 }
 @media screen and (max-width: 680px) {
+    .container_login{
+        width: 80%;
+    }
     .header {
         &__auth {
             margin: 0;
@@ -214,8 +249,9 @@
             height: 25px;
         }
         &__logo {
-            img {
-                width: 100px;
+            width: 40px;
+            img{
+                width: 70px;
             }
         }
         &__search {
@@ -223,6 +259,11 @@
         }
         &__auth {
             flex-direction: column;
+            a{
+                color: wheat;
+                font-size: 18px;
+                text-align: center;
+            }
         }
     }
     .footer {
@@ -236,9 +277,9 @@
         }
     }
     .search-container {
+        width: 55vw;
         input {
             height: 25px;
-            width: 140px;
         }
         button {
             height: 25px;
@@ -249,6 +290,6 @@
         }
     }
     .hamburger {
-        top: 27px;
+        top: 25px;
     }
 }
