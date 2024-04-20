@@ -9,6 +9,16 @@
 
 
 {% block content %}
+    <style>
+        .container{
+            height: 100%;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
     <h1 class="text-center fw-medium mt-3 fs-1">Увійти в акаунт</h1>
         {% for message in messages %}
             <div class="container_login">

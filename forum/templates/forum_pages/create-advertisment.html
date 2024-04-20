@@ -9,6 +9,13 @@
 
 {% block content %}
 {% if request.user.is_authenticated %}
+    <style>
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
    <div class="container sandbox__info">
         <form method="POST" class="sandbox__form" action="">
             {% csrf_token %}

@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Функція для перевірки розширення вікна та обробки блоку .header__auth
     const handleAuthBlock = () => {
         if (authBlock) {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 980) {
                 menu.appendChild(authBlock);
                 authBlock.style.display = 'none';
             } else {

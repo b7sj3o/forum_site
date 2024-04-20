@@ -5,6 +5,16 @@
 {% block title %}Create Theme{% endblock %}
 
 {% block content %}
+<style>
+    .wrapper{
+        min-height: 100vh;
+    }
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
 <div class="container">
     <form method="POST" action="">
         {% csrf_token %}
