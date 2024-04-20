@@ -136,17 +136,21 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-document.getElementById("overlay").addEventListener("click", function(event) {
-    if (event.target === this) {
-        closeOverlay();
+document.getElementById("overlay").addEventListener("mousedown", function(e1) {
+    if (e1.target === this) {
+        this.addEventListener('mouseup', function(e2) {
+            if (e2.target === this) {
+                closeOverlay();
+            }
+        });
     }
 });
+
 
 document.querySelector(".modal__close").addEventListener("click", function() {
     closeOverlay();
 });
 
 function closeOverlay() {
-    document.getElementById("edit").style.display = "none";
     document.getElementById("overlay").style.display = "none";
 }

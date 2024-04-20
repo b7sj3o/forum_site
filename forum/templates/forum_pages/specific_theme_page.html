@@ -24,7 +24,11 @@
         </form>
         <hr>
         <div class="specific__main">
-            <div class="specific__main__title">Всі оголошення</div>
+            {% if themes %}
+                <div class="specific__main__title">Всі оголошення</div>
+            {% else %}
+                <div class="specific__main__title">Наразі нема оголошень</div>
+            {% endif %}
             {% for theme in themes %}
                 <hr>
 
@@ -33,7 +37,6 @@
                 <div>{{theme.title}}</div>
                 <div>{{theme.text}}</div>
                 <div>{{theme.created}}</div>
-                <a href="{{theme.link}}">LINK</a>
 
                 <hr>
             {% endfor %}

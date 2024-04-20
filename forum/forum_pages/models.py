@@ -141,7 +141,7 @@ class BaseTheme(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField('Заголовок', max_length=100)
     text = models.TextField('Основний текст')
-    link = models.URLField('Посилання')
+    # link = models.URLField('Посилання')
 
     created = models.DateField(auto_now_add=True)
 

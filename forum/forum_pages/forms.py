@@ -117,7 +117,8 @@ class SubThemeForm(ModelForm):
 class BaseThemeForm(ModelForm):
     class Meta:
         model = BaseTheme
-        fields = ['title', 'text', 'link']
+        # fields = ['title', 'text', 'link']
+        fields = ['title', 'text']
 
     def __init__(self, *args, **kwargs):
         super(BaseThemeForm, self).__init__(*args, **kwargs)

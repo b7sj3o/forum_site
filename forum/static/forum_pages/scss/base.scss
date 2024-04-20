@@ -1,4 +1,6 @@
 $mainColor: rgb(76, 76, 150);
+$footerHeight: 60px;
+
 *,
 *::before,
 *::after {
@@ -51,6 +53,9 @@ h6 {
     box-sizing: content-box;
 }
 
+.container2 {
+    min-height: calc(100vh - $footerHeight);
+}
 
 .hamburger {
     display: none;
@@ -115,8 +120,10 @@ h6 {
 }
 
 .footer {
-    padding: 10px 0;
+    height: $footerHeight;
     background-color: $mainColor;
+    display: flex;
+    align-items: center;
 
     .container {
         display: flex;
