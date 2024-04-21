@@ -220,9 +220,6 @@ def advertisementPage(request, pk, adv_type):
 
 
 def specific_theme_page(request, assoc):
-    if request.user.username != 'admin':
-        return redirect('home')
-
     form = BaseThemeForm()
     themes = BaseTheme.objects.filter(assoc=assoc)
 
