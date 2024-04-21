@@ -18,55 +18,11 @@
 </head>
 <body>
     <div class="wrapper">
-<<<<<<< HEAD
         <div class="container2">
             <header class="header">
                 <div class="container">
                     <div class="header__logo">
                         <a href="{% url 'home' %}"><img src="{% static 'forum_pages/img/icons/forum_logo.png'%}" alt=""></a>
-=======
-        <!-- TODO Чекни адаптив шапки, там через інше лого злітає все -->
-        <header class="header">
-            <div class="container header__container">
-                <div class="header__logo">
-                    <a href="{% url 'home' %}"><img src="{% static 'forum_pages/img/icons/forum_logo.png'%}" alt=""></a>
-                </div>
-                <nav class="header__links">
-                    <a href="{% url 'all-themes' %}" class="header__link">Теми</a>
-                    <a href="{% url 'agency' %}" class="header__link">Топ агенства</a>
-                    <a href="{% url 'advert-page' %}" class="header__link">Реклама</a>
-                    <a href="{% url 'policy' %}" class="header__link">Правила</a>
-                    {% if request.user.username == 'admin' %}
-                        <a href="{% url 'admin-panel' %}"class="header__link">Admin</a>
-                    {% endif %}
-                </nav>
-                <div class="form__wrapper">
-                    <!-- TODO зроби пошук може трохи меншим на планшетах -->
-                    <form method="GET" action="{% url 'searched-subthemes'%}">
-                        {% csrf_token %}
-                        <div class="search-container">
-                            <input type="text" name="q" placeholder="Пошук" autocomplete="off" maxlength="100" required>
-                            <button type="submit">
-                                <img src="{% static 'forum_pages/img/icons/search.svg'%}" alt="Search">
-                            </button>
-                        </div>
-                    </form>  
-                </div>        
-                {% if request.user.is_authenticated %}
-                <nav class="dropdown__menu">
-                    <div class="dropdown">
-                        <button class="dropdown-button">
-                            <!-- Зображення користувача -->
-                            <img src="{{request.user.avatar.url}}" alt="Аватар користувача">
-                
-                            <!-- Ім'я користувача -->
-                            <a href="#" class="user__name">{{request.user.username}}</a>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="{% url 'user-profile' request.user.username %}">Профіль</a>
-                            <a href="{% url 'logout' %}">Вийти</a>
-                        </div>
->>>>>>> f05c3f5db50c03cb9e909050619a7d3863fc8a7e
                     </div>
                     <nav class="header__links">
                         <a href="{% url 'all-themes' %}" class="header__link">Теми</a>
@@ -78,7 +34,6 @@
                         {% endif %}
                     </nav>
                     <div class="form__wrapper">
-                        <!-- TODO зроби пошук може трохи меншим на планшетах -->
                         <form method="GET" action="{% url 'searched-subthemes'%}">
                             {% csrf_token %}
                             <div class="search-container">
@@ -123,12 +78,7 @@
             </main>
         </div>
 
-<<<<<<< HEAD
         <footer class="footer">
-=======
-        <!-- TODO прижми підвал до низу -->
-        <footer class="footer ">
->>>>>>> f05c3f5db50c03cb9e909050619a7d3863fc8a7e
             <div class="container">
                 <div class="footer__logo">
                     <a href="#">
