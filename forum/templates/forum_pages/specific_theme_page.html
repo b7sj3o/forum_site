@@ -2,7 +2,12 @@
 
 {% load static %}
 
+{% block style %}
 
+<link rel="stylesheet" href="{% static 'forum_pages/css/specific.min.css' %}">
+<link rel="stylesheet" href="{% static 'forum_pages/css/specificmedia.min.css' %}">
+
+{% endblock %}
 
 {% block content %}
 
@@ -35,15 +40,19 @@
                 <div class="specific__main__title">Наразі нема оголошень</div>
             {% endif %}
             {% for theme in themes %}
-                <hr>
-
-                <a href="{% url 'user-profile' theme.user.username %}">@{{theme.user.username}}</a>
-                <img src="{{theme.user.avatar.url}}" alt="" width="50">
-                <div>{{theme.title}}</div>
-                <div>{{theme.text}}</div>
-                <div>{{theme.created}}</div>
-
-                <hr>
+                <div class="specific__theme-item">
+                    <div class="specific__theme-item-interface">
+                        <img src="{{theme.user.avatar.url}}" alt="" width="50" class="specific__theme-item-logo">
+                        <div class="specific__theme-item-data">
+                            <a href="{% url 'user-profile' theme.user.username %}" class="specific__theme-item-name">@{{theme.user.username}}</a>
+                            <div class="specific__theme-item-time">{{theme.created}}</div>
+                        </div>
+                    </div>
+                    <div class="specific__theme-item-textWrapper">
+                        <div class="specific__theme-item-title">{{theme.title}}</div>
+                        <div class="specific__theme-item-text">{{theme.text}}</div>
+                    </div>
+                </div>
             {% endfor %}
         </div>
     </div>

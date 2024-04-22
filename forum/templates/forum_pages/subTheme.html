@@ -28,7 +28,6 @@
         {% csrf_token %}
         <div class="sandbox__title">Залишити повідомлення</div>
         <div class="title__container">
-            <label for="main_text" class="form__name">Повідомлення</label>
             <textarea type="text" id="main_text" class="sandbox__text" name="main_text" required ></textarea>
         </div>
         <input type="submit" class="sandbox__button submit-inp" value="Зберегти дані">
@@ -70,8 +69,8 @@
                 {% if is_update and u_message == message %}
                     <form action="{% url 'update-message' subtheme.id message.id %}" method="POST">
                         {% csrf_token %}
-                        <input type="text" name="main_text" id="" value="{{ message.main_text }}" required>
-                        <input type="submit" value="Підтвердити" class="btn btn-primary">
+                        <input type="text" name="main_text" id="" value="{{ message.main_text }}" required class="update-input">
+                        <input type="submit" value="Підтвердити" class="btn btn-primary update-btn">
                     </form>
                 {% else %}
                     <div class="user__text-interface user__text-interface2">{{ message.main_text }}</div>
@@ -81,47 +80,79 @@
     {% endfor %}
 
     <style>
-        .subthemes__pages{
-            display: flex;
-            gap: 20px;
-            padding: 20px 0;
-        }
-        .subtheme__page{
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            background-color: rgba(135, 135, 198, 0.675);
-            border-radius: 50%;
-            transition: all .3s ease;
-            cursor: pointer;
-            color: #000;
+            .update-form {
+                margin-top: 20px;
+            }
 
-            
-        }
+            .update-input {
+                height: 30px;
+                padding: 0 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+                outline: none;
+                transition: border-color 0.3s;
+                margin-right: 10px;
+                &:focus{
+                    border-color: #007bff;
+                }
+            }
+            .update-btn {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s;
+                
+                &:hover{
+                    background-color: #0056b3;
+                }
+            }
 
-        .subtheme__current-page {
-            display: flex;
-            align-items: center;
-            height: 50px;
-            font-size: 24px;
-            border: 1px solid #c1c1c1;
-            padding: 5px;
-        }
+            .subthemes__pages{
+                display: flex;
+                gap: 20px;
+                padding: 20px 0;
+            }
+            .subtheme__page{
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
+                background-color: rgba(135, 135, 198, 0.675);
+                border-radius: 50%;
+                transition: all .3s ease;
+                cursor: pointer;
+                color: #000;
 
-        .subtheme__page__arrow {
-            font-size: 34px;
-        }
+                
+            }        
+
+            .subtheme__current-page {
+                display: flex;
+                align-items: center;
+                height: 50px;
+                font-size: 24px;
+                border: 1px solid #c1c1c1;
+                padding: 5px;
+            }
+
+            .subtheme__page__arrow {
+                font-size: 34px;
+            }
 
 
-        .subtheme__page:hover {
-            background-color: rgba(135, 135, 198, 0.827);
-        }
-        .page__selected {
-            background-color: rgb(224, 139, 139);
-        }
+            .subtheme__page:hover {
+                background-color: rgba(135, 135, 198, 0.827);
+            }
+            .page__selected {
+                background-color: rgb(224, 139, 139);
+            }
     </style>
 
     
